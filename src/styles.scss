@@ -1,0 +1,25 @@
+ 
+
+// Import Fuse core library
+@import "@fuse/scss/core";
+
+// Import app.theme.scss
+@import "app/app.theme";
+ 
+*{
+    box-sizing:border-box;
+
+}
+
+body , html   {
+    background-color: black;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.overlay-navbar{
+    background-color: rgba(61, 61, 61, 0.527)
+}
+

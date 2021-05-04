@@ -1,0 +1,259 @@
+@import "src/@fuse/scss/fuse";
+
+#academy-course {
+  .sidebar {
+    .steps {
+      padding: 10px 0;
+
+      .step {
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 16px;
+        cursor: pointer;
+
+        &.current {
+          .index {
+            span {
+              border: 2px solid;
+            }
+          }
+
+          .title {
+            font-weight: bold;
+          }
+        }
+
+        &.completed {
+          .index {
+            span {
+              border: 2px solid;
+            }
+          }
+        }
+
+        &.first {
+          .index {
+            &:before {
+              display: none;
+            }
+          }
+        }
+
+        &.last {
+          .index {
+            &:after {
+              display: none;
+            }
+          }
+        }
+
+        .index {
+          display: flex;
+          margin-right: 12px;
+
+          &:before,
+          &:after {
+            position: absolute;
+            display: block;
+            content: " ";
+            border-left: 1px solid;
+            width: 1px;
+            height: 50%;
+            left: 29px;
+            z-index: 8;
+          }
+
+          &:before {
+            top: 0;
+          }
+
+          &:after {
+            bottom: 0;
+          }
+
+          span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 28px;
+            min-width: 28px;
+            max-width: 28px;
+            height: 28px;
+            border-radius: 100%;
+            border: 2px solid;
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 10;
+          }
+        }
+
+        .title {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  .center {
+    position: relative;
+    overflow: hidden;
+
+    .header {
+      height: 72px;
+      min-height: 72px;
+      max-height: 72px;
+    }
+
+    .likeButton {
+      display: inline-block;
+      width: 100px;
+      align-content: center;
+      text-align: center;
+      border-right: 1px solid rgb(145, 138, 138);
+     
+      padding: 10px;
+    }
+
+    .likeButton:hover{
+        background-color: rgba(255, 255, 255, 0.377);
+        cursor: pointer
+    }
+
+    
+    @media (max-width: 720px) {
+      .novelName{
+        font-size: 12px;
+      }
+
+      .likeButton {
+        display: inline-block;
+        width: 30px;
+        align-content: center;
+        text-align: center;
+        border-right: 1px solid white;
+       font-size: 12px;
+        padding: 5px;
+      }
+  
+      .likeButton:hover{
+          background-color: rgba(255, 255, 255, 0.377);
+          cursor: pointer
+      }
+
+
+      .toolbarButtons{
+        font-size: 12px;
+        padding: 0
+      }
+  
+    }
+
+    .content {
+      position: relative;
+      display: flex;
+
+      .course-step {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 48px;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+
+        .bookDetails{
+          height: 500px;
+
+         
+
+          .bookCover{
+            height: 100%;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+          }
+         
+        }
+
+        .Topic h1{
+          font-size: 22px;text-align: center
+        }
+
+        .desc{
+          margin-top: -60px;
+        }
+
+
+        &.ng-animating {
+          overflow: hidden;
+        }
+
+        @media (max-width: 720px) {
+          padding: 10px;
+
+          .Topic{
+            height: 150px;
+            // height: 100px;
+            // font-size: 24px !important;;
+          }
+
+          .Main{
+            width: 100vw
+          }
+
+          .desc {
+            height: 250px;;
+            margin-top: 150px !important;;
+          }
+
+          .Topich1{
+            font-size: 12px;
+          }
+
+          .bookCOver{
+            height: 75vh
+          }
+
+        }
+
+        .course-step-content {
+          background-color: white;
+          // color: black;
+          padding: 24px;
+          max-width: 720px;
+          margin: 0 auto;
+          width: 100%;
+          border-radius: 8px;
+          @include mat-elevation(1);
+        }
+      }
+    }
+
+    .step-navigation {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      bottom: 32px;
+      max-width: 944px;
+      padding: 0 24px;
+      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+
+      .previous {
+        margin-right: auto;
+      }
+
+      .next,
+      .done {
+        margin-left: auto;
+      }
+    }
+  }
+}

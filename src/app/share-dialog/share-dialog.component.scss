@@ -1,0 +1,78 @@
+
+
+@import "src/@fuse/scss/fuse";
+
+
+.row{
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+  padding: 10px;
+  height: 500px; /* Should be removed. Only for demonstration */
+  @include mat-elevation(2);
+}
+
+
+.container{
+
+  display: flex;
+  height: 550px;
+  width: 100%;
+}
+
+.detail{
+  background-color: red;
+}
+
+.preview{
+  background-color: blue;
+}
+
+// .content{
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+//   height: 550px;
+//  width: 600px;
+// }
+
+.image{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+  // height: 100%;
+  
+}
+
+// .others{
+//   overflow: hidden;
+// }
+
+// video{
+//   -ms-flex-align: center;
+//   // margin-top: -500px;
+//   // margin-top: 20px;
+// }
+.artcile{
+  padding: 16px;
+  overflow: hidden;
+}
+
+// .details{
+//   margin: 20px;
+//   display: flex;
+// }
+
+// .preview{
+//   width: 450px;
+//   display: flex;
+ 
+//   height: 550px;
+//   overflow: hidden;
+//   @include mat-elevation(2);
+// }
+
+

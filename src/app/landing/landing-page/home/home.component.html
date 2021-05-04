@@ -1,0 +1,198 @@
+<div class="logo">
+
+    <a href="https://nautdrafter.bitbucket.org">
+        <div class="A">A</div>
+        <div class="rest">rtifex</div>
+    </a>
+
+</div>
+
+
+<div *ngIf="!false" class="main flexcontainer">
+
+
+
+    <div class="holder">
+
+        <div class="image-holder">
+
+            <div class="row">
+
+                <div class="card pane1" [style.background-image]='img1' [ngClass]="{'slideDown':open  } ">
+
+                    <img src="./assets/wallpaper/png-glare-8.png">
+
+                </div>
+
+                <div class="card pane2" [style.background-image]='img2' [ngClass]="{'slideUp':open  } ">
+
+                    <img src="./assets/wallpaper/png-glare-8.png">
+
+                </div>
+
+                <div class="card pane3" [style.background-image]='img3' [ngClass]="{'slideDown':open  } ">
+
+                    <img src="./assets/wallpaper/png-glare-8.png">
+
+                </div>
+
+                <div class="card pane4" [style.background-image]='img4' [ngClass]="{'slideUp':open  } ">
+
+                    <img src="./assets/wallpaper/png-glare-8.png">
+
+                </div>
+
+                <div class="card pane5" [style.background-image]='img5' [ngClass]="{'slideUp':open  } ">
+
+                    <img src="./assets/wallpaper/png-glare-8.png">
+
+                </div>
+
+                <div class="card pane6" [style.background-image]='img6' [ngClass]="{'slideDown':open  } ">
+
+                    <img src="./assets/wallpaper/png-glare-8.png">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- <div class="center-circle">
+
+        </div>
+         -->
+        <div class="center-circle">
+
+            <div class="card orange-c" [ngClass]="{'fadeOut':open  }">
+
+                <svg width="582" height="402" xmlns="http://www.w3.org/2000/svg" class="blob1">
+
+                    <g (click)="LetsGo()">
+                        <title>Layer 1</title>
+                        <ellipse ry="95.5" rx="95.5" id="svg_4" cy="175.45" cx="254" fill-opacity="null" stroke-opacity="null"
+                            class="goo1 " stroke-width="null" stroke="null" fill="#ff6622" />
+                        <ellipse ry="95.5" rx="95.5" id="svg_4" cy="175.45" cx="254" fill-opacity="null" stroke-opacity="null"
+                            class="goo2 " stroke-width="null" stroke="null" fill="#ff6622" />
+                        <ellipse ry="95.5" rx="95.5" id="svg_4" cy="175.45" cx="254" fill-opacity="null" stroke-opacity="null"
+                            class="goo3 " stroke-width="null" stroke="null" fill="#ff6622" />
+                        <ellipse ry="95.5" rx="95.5" id="svg_4" cy="170" cx="254" fill-opacity="null" stroke-opacity="null" id="goo"
+                            class="goo4 " stroke-width="null" stroke="null" fill="#ff6622" />
+                            <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="32"
+                            id="svg_1" y="200" x="200" stroke-opacity="null" stroke-width="0" stroke="null" fill="#ffff">
+                            
+                            Let's go!
+                  
+                        </text>
+                    </g>
+                </svg>
+
+                <!-- <svg style="fill:yellow"  xmlns="http://www.w3.org/2000/svg"  id="letsgo"  class="blob1" width="300" height="300">
+ 
+                    <g (click)="LetsGo()">
+                    
+                        <title>Let's Go</title>
+                    
+                            <circle id="Circle1" />
+                      
+                            <circle id="Circle2" />
+                      
+                            <circle id="Circle3" />
+                      
+                            <circle id="Circle4" />
+                      
+                            <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="39"
+                                id="svg_1" y="163.5" x="69.54688" stroke-opacity="null" stroke-width="0" stroke="null" fill="#ffff">
+                                
+                                Let's go!
+                      
+                            </text>
+
+                    </g>
+                    
+                </svg> -->
+
+            </div>
+
+            <div class="card blue-c" [ngClass]="{'fadeOut':open  }">
+                <svg width="582" height="402" xmlns="http://www.w3.org/2000/svg" class="blob2">
+
+                        <g (click)="JoinNow()">
+                            <title>Layer 1</title>
+                            <ellipse ry="95.5" rx="95.5" id="svg_4" cy="175.45" cx="254" fill-opacity="null" stroke-opacity="null"
+                                class="goo1 " stroke-width="null" stroke="null" fill="#446622" />
+                            <ellipse ry="95.5" rx="95.5" id="svg_4" cy="175.45" cx="254" fill-opacity="null" stroke-opacity="null"
+                                class="goo2 " stroke-width="null" stroke="null" fill="#446622" />
+                            <ellipse ry="95.5" rx="95.5" id="svg_4" cy="175.45" cx="254" fill-opacity="null" stroke-opacity="null"
+                                class="goo3 " stroke-width="null" stroke="null" fill="#446622" />
+                            <ellipse ry="95.5" rx="95.5" id="svg_4" cy="170.45" cx="254" fill-opacity="null" stroke-opacity="null" id="goo"
+                                class="goo4 " stroke-width="null" stroke="null" fill="#446622" />
+                                <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="32"
+                                id="svg_1" y="200.5" x="200" stroke-opacity="null" stroke-width="0" stroke="null" fill="#ffff">
+                                
+                                Join Now!
+                      
+                            </text>
+                        </g>
+                    </svg>
+                <!-- 
+                <svg class="blob2" width="300" height="300" xmlns="http://www.w3.org/2000/svg"  >   
+                  
+                    <g (click)="JoinNow()">
+                      
+                        <title>Join Now</title>
+                      
+                            <circle id="Circle5" />
+                      
+                            <circle id="Circle6" />
+                      
+                            <circle id="Circle7" />
+                      
+                            <circle id="Circle8" />
+                      
+                            <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="35" id="svg_2" y="162.5"
+                                x="80.57813" stroke-width="0" stroke="#000000" fill="#ffff">
+                                
+                                    Join now
+                            
+                            </text>
+
+                        </g>
+              
+                    </svg> -->
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="middle flexcontainer">
+
+    <a class="btn" href="#">
+
+        <i class="fab fa-facebook"></i>
+
+    </a>
+
+    <a class="btn" href="#">
+
+        <i class="fab fa-google"></i>
+
+    </a>
+
+    <a class="btn" href="#">
+
+        <i class="fab fa-instagram"></i>
+
+    </a>
+
+    <a class="btn" href="#">
+
+        <i class="fab fa-youtube"></i>
+
+    </a>
+
+</div>

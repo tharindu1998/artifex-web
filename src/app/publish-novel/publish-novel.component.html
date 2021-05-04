@@ -1,0 +1,69 @@
+<div>
+  <mat-toolbar class="accent-900" style="width: 100%">
+    <!-- <button mat-icon-button class="mr-0 mr-sm-16" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+  </button> -->
+    Ready to publish
+    <div class="actions" [@animate]="{value:'*',params:{delay:'200ms'}}">
+      <!-- <button style="margin-left: 400px;" mat-raised-button aria-label="Follow" >
+        <mat-icon class="s-16">photo_album</mat-icon> Create Comic
+      </button> -->
+      <!-- <button mat-raised-button aria-label="Send Message">
+        <mat-icon class="s-16">perm_media</mat-icon> Upload Novel
+      </button> -->
+    </div>
+  </mat-toolbar>
+  <mat-progress-bar *ngIf="uploading" mode="indeterminate"></mat-progress-bar>
+  <div>
+    <p style="padding: 5px;">Select page you want to preview in the artden :</p>
+    <div style="height: 300px;overflow-y: scroll" fusePerfectScrollbar *ngIf="data.chapterId">
+        <div class="pages" *ngFor="let mapDetails of mapPages[data.chapterId];let i=index">
+            <div style="width: 100%;cursor: pointer; " (click)="check(mapDetails)">
+              <div *ngIf="selected!==mapDetails" style="padding: 6px">
+                  <h4>Page {{i+1}} </h4>
+                  <mat-divider></mat-divider>
+              </div>
+              <div *ngIf="selected===mapDetails" style="background-color: rgba(230, 220, 220, 0.137);padding: 6px">
+                  <h4>Page {{i+1}} </h4>
+                  <mat-divider></mat-divider>
+              </div>
+              
+            </div>
+      
+          </div>
+    </div>
+    <div style="height: 300px;overflow-y: scroll" fusePerfectScrollbar *ngIf="data.comicId" >
+        <div class="pages" *ngFor="let comicPage of comicPages;let i=index">
+            <div style="width: 100%;cursor: pointer; " (click)="check(comicPage.id)">
+              <div *ngIf="selected!==comicPage.id" style="padding: 6px">
+                  <h4>Page {{i+1}} </h4>
+                  <mat-divider></mat-divider>
+              </div>
+              <div class="primary-100" *ngIf="selected===comicPage.id" style="padding: 6px">
+                  <h4>Page {{i+1}} </h4>
+                  <mat-divider></mat-divider>
+              </div>
+              
+            </div>
+      
+          </div>
+    </div>
+    <div>
+      <mat-form-field style="width: 100%; margin-top: 20px;" appearance="outline" pxfxFlex="100">
+        <mat-label *ngIf="data.chapterId">Who can see your writing when published</mat-label>
+        <mat-label *ngIf="data.comicId">Who can see your comic when published</mat-label>
+        <mat-select [(value)]="setVisible">
+          <!-- <mat-option>None</mat-option> -->
+          <mat-option value="PUBLIC">Public</mat-option>
+          <mat-option value="ONLY_FRIENDS">Friends only</mat-option>
+          <mat-option value="ONLY_ME">Only me</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <button [disabled]="!selected" mat-button mat-raised-button color='accent' (click)="publishToArtden()">Publish to
+        artden</button>
+    </div>
+  </div>
+</div>

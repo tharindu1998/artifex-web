@@ -1,0 +1,25 @@
+.slider {
+    transition: all .5s ease-in-out;
+    animation: slide-up-fade-in ease 1s;
+
+}
+
+@keyframes slide-up-fade-in{
+    0% {
+        opacity:0;
+        transform:  translate(0px,40px)  ;
+    }
+    100% {
+        opacity:1;
+        transform:  translate(0px,0px)  ;
+    }
+}
+
+div {}
+
+html {}
+
+* {
+    overflow: hidden;
+}
+

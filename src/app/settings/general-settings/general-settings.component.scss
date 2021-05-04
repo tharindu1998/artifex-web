@@ -1,0 +1,22 @@
+.div-bg{
+    background-color:#314853;
+}
+
+.space{
+    padding-left:20px;
+}
+
+.xxx{
+    background-color: #777e836c;
+}
+
+.cropper-container{
+    height: 100%;
+    min-width: 160px !important;
+    min-height: 250px !important;
+    // overflow: hidden;
+    object-fit: contain;
+    border-radius: 500px;
+    margin-bottom: 5px;
+    background-color: #2d323e;
+}

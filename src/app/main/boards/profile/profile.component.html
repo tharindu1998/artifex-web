@@ -1,0 +1,97 @@
+<div id="profile" class="page-layout simple tabbed">
+    <mat-progress-bar *ngIf="isSaving" mode="indeterminate">
+    </mat-progress-bar>
+    <!-- HEADER -->
+    <div [style.background-image]="'url(' +this.profileCoverPhoto+ ')'" *ngIf="showProfile" class="header p-24" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between end">
+
+        <div class="user-info" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center">
+            <img *ngIf="creator.userProfilePicture && !userDetails.userProfilePicture" class="profile-image avatar huge" [src]="creator.userProfilePicture.imageUrl" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+            <img *ngIf="userDetails.userProfilePicture" class="profile-image avatar huge" [src]="userDetails.userProfilePicture.imageUrl" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+            <img *ngIf="!creator.userProfilePicture" class="profile-image avatar huge" src="../../assets/images/avatars/profile.jpg" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+            <!-- <img *ngIf="!imageText" class="profile-image avatar huge" [src]="userProfilePicture.profilePicture" -->
+            <!-- [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"> -->
+
+            <div *ngIf="userName" class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                {{userName }} </div>
+            <div *ngIf="!userName" class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                Artifex user </div>
+
+            <button style="color: aliceblue;margin-left: 6px;" mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+
+            <mat-menu #menu="matMenu" (click)="viewImage()">
+                <!-- <button mat-menu-item>
+            <mat-icon>collections</mat-icon>
+            <span>View image</span>
+          </button> -->
+
+
+
+
+                <button mat-menu-item (click)="openDialog()">
+  
+            <mat-icon>add_a_photo</mat-icon>
+            <span>Change Profile Picture </span>
+          </button>
+                <!-- 
+                     <button mat-menu-item (click)="gettingProfilePicture()">
+                   
+                      <mat-icon>add_a_photo</mat-icon>
+                     <span>Get profile picture </span>
+                   </button> -->
+
+
+            </mat-menu>
+        </div>
+
+
+        <div class="actions" fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'200ms'}}">
+            <!-- <button (click)="getMesage()">Get Message</button> -->
+            <!-- <div > -->
+            <button *ngIf="friendAdditionalButton" (click)="selectFunction()" mat-raised-button color="primary" aria-label="Follow">
+        <mat-icon>{{buttonIcon1}}</mat-icon> 
+        {{friendAdditionalButton}}
+      </button>
+
+            <button style="width: 140%" *ngIf="intialId" (click)="selectFunction()" mat-raised-button color="accent" aria-label="Follow">
+        <mat-icon>{{buttonIcon}}</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         {{sent}}
+      </button>
+
+            <!-- </div> -->
+
+            <button style="width: 100%" (click)="createAd()" mat-raised-button color="primary" aria-label="Send Message">
+        <mat-icon>dashboard</mat-icon>Create Ad
+      </button>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <mat-tab-group dynamicHeight="true" (selectedTabChange)="onLinkClick($event)" [(selectedIndex)]="index">
+
+            <mat-tab label="Timeline">
+                <profile-timeline></profile-timeline>
+            </mat-tab>
+
+            <mat-tab label="About">
+                <profile-about></profile-about>
+            </mat-tab>
+
+            <mat-tab label="Photos & Videos">
+                <profile-photos-videos [index]="index"></profile-photos-videos>
+            </mat-tab>
+
+        </mat-tab-group>
+
+    </div>
+    <!-- / CONTENT -->
+
+
+
+
+</div>

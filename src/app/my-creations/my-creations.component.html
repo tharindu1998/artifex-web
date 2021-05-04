@@ -1,0 +1,127 @@
+<div id="academy-courses" class="page-layout simple">
+
+  <!-- HEADER -->
+  <!-- <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="center center">
+
+    <div class="hero-text">
+      <mat-icon class="hero-icon">school</mat-icon>
+      <h1 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+        WELCOME TO ArtifeX CREATIONS
+      </h1>
+      <h3 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+        Our courses will step you through the process of building a small application, or adding a new feature
+        to an existing application.
+      </h3>
+    </div>
+
+  </div> -->
+  <!-- / HEADER -->
+
+  <!-- CONTENT -->
+  <div class="content p-24">
+
+      <div fxLayout="column" fxLayoutAlign="center">
+  
+        <div class="filters" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+          fxLayoutAlign.gt-xs="space-between center">
+  
+          <!-- <mat-form-field appearance="outline" floatLabel="always" class="course-search">
+            <mat-label>Search for a course</mat-label>
+            <input matInput placeholder="Enter a keyword..."
+                           [(ngModel)]="searchTerm"
+                           (input)="filterCoursesByTerm()">
+            <input matInput placeholder="Enter a keyword...">
+          </mat-form-field>
+   -->
+          <!-- <mat-form-field appearance="outline" class="category-selector">
+            <mat-label>Category</mat-label>
+            <mat-select [(ngModel)]="currentCategory"
+                                (selectionChange)="filterCoursesByCategory()">
+                        <mat-option [value]="'all'">
+                            All
+                        </mat-option>
+                        <mat-option *ngFor="let category of categories" [value]="category.value">
+                            {{ category.label }}
+                        </mat-option>
+                    </mat-select>
+            <mat-select>
+              <mat-option [value]="'all'">
+                All
+              </mat-option>
+              <mat-option>
+                category.label
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+  
+        </div>
+  
+  
+      </div>
+  
+    </div>
+
+
+  <div class="box-container">
+      <div class="box-item">
+        <div class="flip-box">
+          <div class="flip-box-front text-center" style="background-image: url('../../assets/images/defaults/books.jpg');">
+            <div class="inner color-white">
+              <h3 class="flip-box-header">My Writings</h3>
+              <p>A short sentence describing this callout is.</p>
+              <img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+            </div>
+          </div>
+          <div class="flip-box-back text-center" style="background-image: url('../../assets/images/defaults/books2.jpg');">
+            <div class="inner color-white">
+              <h3 class="flip-box-header">My Writings</h3>
+              <p>A short sentence describing this callout is.</p>
+              <button class="flip-box-button" (click)="viewWritingInside()">View Collection</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="box-item">
+        <div class="flip-box">
+          <div class="flip-box-front text-center" style="background-image: url('../../assets/images/defaults/drawing.jpg');">
+            <div class="inner color-white">
+              <h3 class="flip-box-header">My Drawings</h3>
+              <p>A short sentence describing this callout is.</p>
+              <img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+            </div>
+          </div>
+          <div class="flip-box-back text-center" style="background-image: url('https://s25.postimg.cc/hj4c4qnov/cta-3.png');">
+            <div class="inner color-white">
+              <h3 class="flip-box-header">My Drawings</h3>
+              <p>A short sentence describing this callout is.</p>
+              <button class="flip-box-button" (click)="viewDrawingInside()">View Collection</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="box-item">
+        <div class="flip-box">
+          <div class="flip-box-front text-center filter-" style="background-image: url('../../assets/images/defaults/comic2.jpg');">
+            <div class="inner color-white">
+              <h3 class="flip-box-header" style="font-weight: 500">FanFiction</h3>
+              <p>A short sentence describing this callout is.</p>
+              <img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+            </div>
+          </div>
+          <div class="flip-box-back text-center" style="background-image: url('../../assets/images/defaults/comic1.jpg');">
+            <div class="inner color-white">
+              <h3 class="flip-box-header" style="font-weight: 500">Comics</h3>
+              <p>A short sentence describing this callout is.</p>
+              <button class="flip-box-button" (click)="viewComicInside()">View Collection</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- *********************************************************************** -->
+
+  <!-- / CONTENT -->
+
+</div>

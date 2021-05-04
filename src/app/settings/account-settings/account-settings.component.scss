@@ -1,0 +1,29 @@
+.cropper-container{
+    max-height: 300px;
+    height: 100%;
+    min-width: 500px !important;
+    min-height: 300px !important;
+    overflow: hidden;
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    // margin-left: 50px;
+    background-color: #ffffff8f;
+    // padding: 20px
+}
+
+.preview{
+    padding: 40px
+}
+
+.buttons{
+    padding: 16px
+}
+
+.contentAll{
+    padding: 16px
+}
+
+.content{
+   margin: 10px auto
+}

@@ -1,0 +1,151 @@
+<div id="about" class="p-24" fxLayout="row wrap">
+
+        <div class="about-content" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="65">
+    
+            <div class="profile-box info-box general" fxLayout="column">
+    
+                <header class="accent">
+                    <div class="title">General Information</div>
+                </header>
+    
+    
+                <div class="content" *ngIf="aboutUser">
+                    <div class="info-line">
+                        <div class="title">Gender</div>
+                        <div class="info" *ngIf="aboutUser.userProfile">{{aboutUser.userProfile.sex}}</div>
+                    </div>
+                    <div class="info-line">
+                        <div class="title">Other Names</div>
+                        <div class="info"  *ngIf="aboutUser.userProfile">{{aboutUser.userProfile.otherNames}}</div>
+                    </div>
+    
+                    <div class="info-line">
+                        <div class="title">Birthday</div>
+                        <div class="info" *ngIf="aboutUser.userProfile">{{aboutUser.userProfile.dob}}</div>
+                       
+                    </div>
+    
+                    <div class="info-line">
+                        <div class="title">From</div>
+                        <div class="info" *ngIf="aboutUser.userProfile">{{aboutUser.userProfile.country}}</div>
+                    </div>
+    
+                    <div class="info-line">
+                        <div class="title">Lives in</div>
+                        <div class="info" *ngIf="aboutUser.userProfile">{{aboutUser.userProfile.city}}</div>
+                    </div>
+                    <div style="margin-left: 650px">
+                        <button mat-icon-button class="mr-0 mr-sm-16" (click)="goToSettings()">Edit</button>
+                    </div>
+    
+                </div>
+    
+            </div>
+            <div class="profile-box info-box work" fxLayout="column">
+    
+                <header class="accent">
+                    <div class="title">Education</div>
+                </header>
+    
+                <div class="content" *ngIf="aboutUser.userProfile">
+                    <div class="info-line">
+                        <div class="title">Educational Institute</div>
+                        <div class="info">{{aboutUser.userProfile.academy}}</div>
+                    </div>
+    
+                    <div class="info-line">
+                        <div class="title">Type of the Institute</div>
+                        <div class="info">{{aboutUser.userProfile.type}}</div>
+                    </div>
+                    <div style="margin-left: 650px">
+                        <button mat-icon-button class="mr-0 mr-sm-16" (click)="goToSettings()">Edit</button>
+                    </div>
+    
+                </div>
+            </div>
+    
+            <div class="profile-box info-box work" fxLayout="column">
+    
+                <header class="accent">
+                    <div class="title">Work</div>
+                </header>
+    
+                <div class="content" *ngIf="aboutUser.userProfile">
+                    <div class="info-line">
+                        <div class="title">Organization</div>
+                        <div class="info">{{aboutUser.userProfile.organization}}</div>
+                    </div>
+    
+                    <div class="info-line">
+                        <div class="title">Designation</div>
+                        <div class="info">{{aboutUser.userProfile.designation}}</div>
+                    </div>
+    
+                    <div class="info-line">
+                        <div class="title">Achievements</div>
+                        <div class="info">{{aboutUser.userProfile.achievements}}</div>
+                    </div>
+                    <div style="margin-left: 650px">
+                        <button mat-icon-button class="mr-0 mr-sm-16" (click)="goToSettings()">Edit</button>
+                    </div>
+                </div>
+            </div>
+    
+    
+        </div>
+    
+        <div class="about-sidebar" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="35">
+            <div class="profile-box info-box contact" fxLayout="column">
+    
+                <header class="accent">
+                    <div class="title">Contact</div>
+                </header>
+    
+                <div class="content" *ngIf="aboutUser.userProfile">
+                    <div class="info-line">
+                        <div class="title">Address</div>
+                        <div class="info">
+                            {{aboutUser.userProfile.address1+", "+aboutUser.userProfile.address2+", "+aboutUser.userProfile.city+", "+aboutUser.userProfile.country}}
+                        </div>
+                    </div>
+                    <div class="info-line">
+                        <div class="title">Mobile Number</div>
+                        <div class="info">{{aboutUser.userProfile.mobile}}</div>
+                    </div>
+                    <div class="info-line">
+                        <div class="title">Land Number</div>
+                        <div class="info">{{aboutUser.userProfile.landNo}}</div>
+                    </div>
+    
+                    <div class="info-line">
+                        <div class="title">Email</div>
+                        <div class="info">{{aboutUser.userProfile.email}}</div>
+                    </div>
+                    <div style="margin-left: 300px">
+                        <button mat-icon-button class="mr-0 mr-sm-16" (click)="goToSettings()">Edit</button>
+                    </div>
+                </div>
+            </div>
+    
+    
+            <div class="profile-box friends" fxLayout="column">
+    
+                <header class="accent" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="title">Friends</div>
+                    <div class="more secondary-text">
+                        <span>{{friendCount}} friends</span>
+                    </div>
+                </header>
+    
+                <div class="content" fxLayout="row wrap">
+                    <div class="friend" fxFlex="20" *ngFor="let friend of friends  | keyvalue">
+                        <img [src]="friend.value.profilePicture">
+                    </div>
+                </div>
+    
+            </div>
+    
+    
+        </div>
+    
+    </div>

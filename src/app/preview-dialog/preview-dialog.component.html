@@ -1,0 +1,164 @@
+<div class="content" fxLayout="row" fxLayoutAlign="start start">
+
+    <div fxFlex="40" class="pubHolder" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx" fusePerfectScrollbar>
+
+        <div class="profileDetails" fxLayout="column">
+            <header fxLayout="row" fxLayoutAlign="space-between start">
+                <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                    <img class="avatar" [src]="data.ownerImage">
+
+                    <div fxLayout="column">
+                        <div class="title">
+                            <span class="username">{{data.ownerName}}</span>
+                            <span *ngIf="post.category === 'UPLOAD' || post.catagory === 'UPLOAD'">posted {{post.type}} on
+                timeline</span>
+                            <span *ngIf="post.category === 'SHARED' || post.catagory === 'SHARED'">shared {{post.type}} on
+                timeline</span>
+                        </div>
+                        <div *ngIf="post.createDate" class="time">{{post.createDate | timeago:live}}</div>
+                        <div *ngIf="post.createDateTime" class="time">{{post.createDateTime | timeago:live}}</div>
+
+                        <div fxLayout="row" class="visibility primary-200-fg">
+                            <div style="padding-top: 1px;">
+                                <mat-icon class="s-14 " *ngIf="post.visible==='PUBLIC'">public</mat-icon>
+                                <mat-icon class="s-14 " *ngIf="post.visible==='ONLY_FRIENDS'">public</mat-icon>
+                                <mat-icon class="s-14 " *ngIf="post.visible==='ONLY_ME'">person_outline</mat-icon>
+                            </div>
+                            <div style="margin-left: 6px">
+                                <span>{{post.visible | titlecase}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <button mat-icon-button aria-label="More">
+          <mat-icon>more_vert</mat-icon>
+        </button> -->
+            </header>
+
+            <div class="description" fxLayout="column">
+                <p *ngIf="amount === 'Less'" align="justify">{{post.message | words:50}}</p>
+                <p *ngIf="amount === 'More'" align="justify">{{post.message}}</p>
+                <span><a  style="cursor: pointer " *ngIf="amount === 'Less'" (click)="LessOrMore('More')">More...</a></span>
+                <span><a style="cursor: pointer" *ngIf="amount === 'More'" (click)="LessOrMore('Less')">Less...</a> </span>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="publicityButtons" fxLayout="row" fxFlex='100'>
+                <button class="pubButton" mat-button (click)="likeIndividual()">
+          <mat-icon class="s-16" *ngIf="!liked">favorite</mat-icon>
+          <mat-icon *ngIf="liked" style="color: red" class="s-16">favorite</mat-icon> Like {{(LikesAmount)}}
+        </button>
+                <button class="pubButton" mat-button (click)="getComments()">Comment {{CommentsAmount}}</button>
+                <button class="pubButton" mat-button>Share (0)</button>
+
+            </div>
+            <mat-divider></mat-divider>
+
+            <div style="width: 100%; max-height: 280px;" class="commentViewer">
+                <form name="comment">
+                    <footer class="commentViewer" fxLayout="column" fxLayoutAlign="start start">
+                        <div class="comment-count" fxLayout="row" fxLayoutAlign="start center">
+                            {{CommentsAmount}} comments
+                            <mat-icon class="s-16">keyboard_arrow_down</mat-icon>
+                        </div>
+                        <div *ngIf="ImagePost.id">
+                            <div class="comment" fxLayout="row" fxFlexFill *ngFor="let comment of mapPostComments[ImagePost.id]">
+
+                                <img *ngIf="mapCommentUsers[comment.commentedUserId].profilePicture" [src]="mapCommentUsers[comment.commentedUserId].profilePicture" class="avatar" />
+
+
+
+                                <img *ngIf="!mapCommentUsers[comment.commentedUserId].profilePicture" src="../../../../../../assets/images/avatars/profile.jpg" class="avatar" />
+
+
+
+
+                                <div fxLayout="column" fxFlex>
+                                    <div fxLayout="row" fxLayoutAlign="start center">
+                                        <span *ngIf="mapCommentUsers[comment.commentedUserId]" class="username">{{mapCommentUsers[comment.commentedUserId].profileName}}</span>
+                                        <span *ngIf="!mapCommentUsers[comment.commentedUserId]" class="username">Artifex
+                      User</span>
+                                        <span class="time">{{comment.commentDateTime | timeago:live}}</span>
+
+                                    </div>
+                                    <div class="message">
+                                        {{comment.comment}}
+                                    </div>
+                                    <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+                                        <a style="cursor: pointer" *ngIf="comment.commentedUserId===user.id" (click)="editComment(comment)" class="reply-button">Edit</a>
+                                        <a style="cursor: pointer" *ngIf="comment.commentedUserId===user.id" (click)="warningMessagePopup(comment,'comment')" class="reply-button">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </footer>
+                </form>
+            </div>
+
+
+            <div class="reply" fxLayout="row" fxFlexFill style="padding: 15px;">
+                <img *ngIf="userFullDetails" style="margin-left: 5px;" [src]="userFullDetails.userProfilePicture.imageUrl" class="avatar" />
+
+                <form fxFlex fxLayout="column">
+
+                    <textarea [(ngModel)]="postCommentDetails.comment" name="comment" placeholder="Add a comment..."></textarea>
+                    <button (click)="putComment()" mat-raised-button color="accent" class="post-comment-button" aria-label="Post Comment">
+            {{CommentOperator}} Comment
+          </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <mat-divider class="m-12" [vertical]="true">
+    </mat-divider>
+
+    <div class="imageHolder primary-50" fxFlex="60">
+        <div *ngIf="post.subType==='ARTICLE'" fxFlex="100" class="article">
+            <div>
+                <div [froalaView]="post.imageUrl"></div>
+            </div>
+        </div>
+
+
+
+
+        <div *ngIf="post.subType!=='ARTICLE'" fxFlex="100" class="imageContainer" [style.background-image]="ImagePreview">
+            <div *ngIf="post.subType!=='ARTICLE'" class="imagepost">
+                <div *ngIf="post.type==='IMAGE_POST'">
+                    <img [src]="post.imageUrl" alt="">
+                </div>
+            </div>
+            <div class="step-navigation">
+
+                <button mat-fab class="previous mat-accent fuse-white-fg" (click)="getPreviousImage()" [disabled]="controlPrevious" [fxHide]="controlPrevious === true">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+
+                <button mat-fab class="next mat-accent fuse-white-fg" (click)="getNextImage()" [disabled]="control" [fxHide]="control">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+
+
+
+            </div>
+
+        </div>
+        <!-- <img *ngIf="ImagePreview" class="imagePreview" [src]="ImagePreview" />
+      <img *ngIf="!ImagePreview" src="../../assets/images/defaults/default-image.png" /> -->
+
+
+    </div>
+
+    <div>
+        <mat-dialog-actions class="close">
+            <button class="closeButton" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+        </mat-dialog-actions>
+    </div>
+</div>

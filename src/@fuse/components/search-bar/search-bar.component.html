@@ -1,0 +1,58 @@
+<div class="fuse-search-bar" [ngClass]="{'expanded':!collapsed}">
+
+    <div class="fuse-search-bar-content">
+
+        <label for="fuse-search-bar-input">
+            <button mat-icon-button class="fuse-search-bar-expander" aria-label="Expand Search Bar" (click)="expand()"
+                    *ngIf="collapsed">
+                <mat-icon class="s-24 secondary-text">search</mat-icon>
+            </button>
+        </label>
+
+        <input id="fuse-search-bar-input" style="color: gray" class="ml-24" type="text" placeholder="Search" (input)="search($event.target.value)"
+               fxFlex>
+
+        <button mat-icon-button class="fuse-search-bar-collapser" (click)="collapse()"
+                aria-label="Collapse Search Bar">
+            <mat-icon class="s-24 secondary-text">close</mat-icon>
+        </button>
+
+        
+        
+
+    </div>
+    <div  style="margin-top: 60px; padding-left: 10px;padding-top:2px;padding-bottom: 10px;padding-right: 10px;
+    margin-bottom: 12px;z-index: 1000;width: 45vw; position: absolute;margin-left: 6px;" *ngIf="searchClick && !chat" class="card accent-700">
+        <p style="padding: 3px;padding-left:30px ;">Search Results....</p>
+            <div *ngFor="let detail of searchResult | keyvalue" class="card" style=" background-color: accent ;margin-bottom: 6px;">
+                    <div class="profileImage">
+                      <div class="searchRes accent-A400" style="width: 100%;;padding:10px; border-radius: 10px;
+                      cursor: pointer;" (click)=sendDetail(detail.value)>
+                          <img *ngIf="detail.value.profilePicture" class="avatar" [src]="detail.value.profilePicture" alt="">
+                          <img *ngIf="!detail.value.profilePicture" class="avatar" [src]="friendProfilePicture" alt="">
+                          <span class="mat-subheading-2 p-20">{{detail.value.profileName}} </span>
+                         
+                      </div>
+                      <mat-divider></mat-divider>
+                    </div>
+                </div>
+    
+    </div>
+
+</div>
+
+
+
+
+<!-- <div class="fuse-search-bar" [ngClass]="{'expanded':!collapsed}">
+        <form class="search" method="post" action="index.html" >
+            <input type="text" name="q" placeholder="Search..." />
+            <ul class="results" >
+                <li><a href="index.html">Search Result #1<br /><span>Description...</span></a></li>
+                <li><a href="index.html">Search Result #2<br /><span>Description...</span></a></li>
+                <li><a href="index.html">Search Result #3<br /><span>Description...</span></a></li>
+                <li><a href="index.html">Search Result #4</a></li>
+            </ul>
+        </form> -->
+
+    <!-- </div> -->

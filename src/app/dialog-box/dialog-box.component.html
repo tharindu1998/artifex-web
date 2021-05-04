@@ -1,0 +1,41 @@
+<div class="messageDisplay" *ngIf="data.error1">
+  <p>
+    {{data.error1}}
+
+  </p>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</div>
+
+<div class="Display" *ngIf="data.imagePath">
+
+  <div class="ImagePreview">
+    <img [src]="data.imagePath" />
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+
+</div>
+
+<div *ngIf="data.warningMessage" fxLayout="row">
+  
+      <img width="15%" src="https://d2v9ipibika81v.cloudfront.net/uploads/sites/240/2017/04/warning750.png" alt="">
+  
+  <div>
+      <h5>{{data.warningMessage}}</h5>
+  </div>
+ 
+
+     
+      <mat-dialog-actions align="end" style="margin-top: 50px;">
+        <span> <button mat-button  style="background-color: rgba(243, 10, 10, 0.925);color:black" (click)="deletePost()">Delete</button> <button mat-button (click)="closeDialog()" style="background-color: rgba(189, 188, 188, 0.253)">Cancel</button></span>
+    
+    
+      </mat-dialog-actions>
+
+ 
+</div>

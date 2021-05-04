@@ -1,0 +1,275 @@
+<!-- <div class="container fluid">
+  <div>
+    <mat-toolbar>Comic Templates
+      <div class="actions" [@animate]="{value:'*',params:{delay:'200ms'}}">
+      </div>
+    </mat-toolbar>
+
+    <div>
+      <mat-tab-group dynamicHeight>
+
+        <mat-tab label="Single Carded">
+
+          <div fxLayout="row" fxLayoutAlign="start space-between" fxLayoutGap="gappx">
+              <div class="one">
+                  <img src="../../assets/images/templates/1.jpeg" alt="">
+                </div>
+          </div>
+       
+        </mat-tab>
+
+        <mat-tab label="Two Images">
+          <div>
+            <div class="wrapper" fxFlex='row'>
+              <div class="card" (click)="makePageWithTemplate('2A')">
+                <mat-grid-list cols="2" rowHeight="2:3">
+                  <mat-grid-tile>1</mat-grid-tile>
+                  <mat-grid-tile>2</mat-grid-tile>
+
+                </mat-grid-list>
+              </div>
+
+              <div class="card" (click)="makePageWithTemplate('2B')">
+
+                <mat-grid-list class="cell1" cols="3" rowHeight="6:2">
+                  <mat-grid-tile colspan="3" rowspan="3">1</mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list class="cell2" cols="3" rowHeight="6:2">
+                  <mat-grid-tile colspan="3" rowspan="3">1</mat-grid-tile>
+                </mat-grid-list>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+
+        </mat-tab>
+
+        <mat-tab label="Three Images">
+          <div class="tempcontent">
+
+            <div class="wrapper">
+              <div class="card" style="display: inline-block; " (click)="makePageWithTemplate('3A')">
+                <div class="threeA " style="margin-left: 10px"></div>
+                <div class="threeA"></div>
+                <div class="threeA"></div>
+              </div>
+
+              <div class="card" style="display: inline-block; " (click)="makePageWithTemplate('3B')">
+                <div class="threeA"></div>
+                <div class="threeA"></div>
+                <div class="threeA"></div>
+              </div>
+
+            </div>
+
+
+          
+
+          </div>
+
+
+        </mat-tab>
+
+        <mat-tab label="Four Images">
+
+          <div class="4B">
+            <div class="wrapper" fxFlex='row'>
+              <div class="card" (click)="makePageWithTemplate('4A')">
+                <b>4A</b>
+              </div>
+              <div class="card" (click)="makePageWithTemplate('4B')">
+                <b>4B</b>
+              </div>
+
+
+            </div>
+          </div>
+        </mat-tab>
+
+
+
+        <mat-tab label="Five Images">
+          <div>
+            <div class="wrapper" fxFlex='row'>
+              <div class="card">
+
+              </div>
+
+
+            </div>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Six Images">
+          <div>
+            <div class="wrapper" fxFlex='row'>
+              <div class="card">
+
+              </div>
+
+
+            </div>
+          </div>
+        </mat-tab>
+
+
+      </mat-tab-group>
+
+      <button mat-raised-button (click)="sendId()">Add to editor</button>
+    </div>
+
+
+  </div>
+</div> -->
+
+<mat-toolbar>
+  <span>Templates</span>
+</mat-toolbar>
+
+<div class="content">
+<div class="selected h1" *ngIf="templateId" >
+   <h1>Template Selected : {{templateId}}</h1>  <button style=" width: 100% " mat-raised-button (click)="sendId()">Add to editor</button>
+  
+</div>
+
+  <div class="category one">
+    <div class="tempList" fxLayout="row wrap" fxLayoutAlign="center">
+
+      <mat-card (click)="makePageWithTemplate('1A')">
+
+        <mat-card-content >
+         
+          <img style="object-fit: cover" src="../../assets/images/templates/1.jpg" alt="">
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card (click)="makePageWithTemplate('2A')">
+
+        <mat-card-content fxLayoutAlign="center">
+          <div>
+            <img style="object-fit: cover" src="../../assets/images/templates/2A.jpg" alt="">
+          </div>
+          
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card (click)="makePageWithTemplate('2B')">
+
+        <mat-card-content fxLayoutAlign="center">
+          <div>
+            <img style="object-fit: cover" src="../../assets/images/templates/2B.jpg" alt="">
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card (click)="makePageWithTemplate('3A')">
+
+        <mat-card-content fxLayoutAlign="center">
+          <div>
+            <img style="object-fit: cover" src="../../assets/images/templates/3A.jpg" alt="">
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card (click)="makePageWithTemplate('3B')">
+
+        <mat-card-content fxLayoutAlign="center">
+          <div>
+            <img style="object-fit: cover" src="../../assets/images/templates/3B.jpg" alt="">
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card (click)="makePageWithTemplate('4A')">
+
+          <mat-card-content fxLayoutAlign="center">
+            <div>
+              <img style="object-fit: cover" src="../../assets/images/templates/4A.jpg" alt="">
+            </div>
+          </mat-card-content>
+  
+        </mat-card>
+
+        <mat-card (click)="makePageWithTemplate('4B')">
+
+            <mat-card-content fxLayoutAlign="center">
+              <div>
+                <img style="object-fit: cover" src="../../assets/images/templates/4B.jpg" alt="">
+              </div>
+            </mat-card-content>
+    
+          </mat-card>
+
+          <mat-card (click)="makePageWithTemplate('4C')">
+
+              <mat-card-content fxLayoutAlign="center">
+                <div>
+                  <img style="object-fit: cover" src="../../assets/images/templates/4C.jpg" alt="">
+                </div>
+              </mat-card-content>
+      
+            </mat-card>
+
+            <mat-card (click)="makePageWithTemplate('4D')">
+
+                <mat-card-content fxLayoutAlign="center">
+                  <div>
+                    <img style="object-fit: cover" src="../../assets/images/templates/4D.jpg" alt="">
+                  </div>
+                </mat-card-content>
+        
+              </mat-card>
+
+              <mat-card (click)="makePageWithTemplate('5A')">
+
+                  <mat-card-content fxLayoutAlign="center">
+                    <div>
+                      <img style="object-fit: cover" src="../../assets/images/templates/5A.jpg" alt="">
+                    </div>
+                  </mat-card-content>
+          
+                </mat-card>
+
+                <mat-card (click)="makePageWithTemplate('5B')">
+
+                    <mat-card-content fxLayoutAlign="center">
+                      <div>
+                        <img style="object-fit: cover" src="../../assets/images/templates/5B.jpg" alt="">
+                      </div>
+                    </mat-card-content>
+            
+                  </mat-card>
+
+                  <mat-card (click)="makePageWithTemplate('6A')">
+
+                      <mat-card-content fxLayoutAlign="center">
+                        <div>
+                          <img style="object-fit: cover" src="../../assets/images/templates/6A.jpg" alt="">
+                        </div>
+                      </mat-card-content>
+              
+                    </mat-card>
+
+                  
+
+    </div>
+
+
+  </div>
+
+
+
+  <mat-divider></mat-divider>
+
+
+</div>

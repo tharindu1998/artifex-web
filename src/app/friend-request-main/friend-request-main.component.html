@@ -1,0 +1,117 @@
+<div id="products" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          face
+        </mat-icon>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          Friend Request
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+     
+      <!-- / SEARCH -->
+
+      <!-- ADD BUTTON -->
+      <!-- <button mat-raised-button
+                    [routerLink]="'/apps/e-commerce/products/new'"
+                    class="add-product-button fuse-white mt-24 mt-md-0">
+                <span>ADD NEW PRODUCT</span>
+            </button> -->
+      <!-- / ADD BUTTON -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+
+      <h4
+        style="padding: 5px;padding-left: 20px; border-top-right-radius:2px; border-top-left-radius: 2px;border-bottom: 1px solid black ">
+        Friend Requests</h4>
+      <div class="content-card" style="max-height: 500px;overflow-y: scroll" fusePerfectScrollbar>
+
+        <div *ngFor="let detail of requestPersonDetailsMap | keyvalue" class="card"
+          style="background-color: accent ;padding: 10px;margin-bottom: 12px;">
+          <div class="profileImage" fxLayout="row">
+            <div fxFlex=80 style=" margin-left: 30px; margin: 8px;" fxLayout="row">
+              <div>
+                  <img *ngIf="detail.value.profilePicture" class="avatar" [src]="detail.value.profilePicture" alt="">
+                  <img *ngIf="!detail.value.profilePicture" class="avatar" [src]="friendProfilePic" alt="">
+              </div>
+              <div>
+                  <span class="mat-subheading-2 p-12">{{detail.value.profileName}} </span>
+                 
+              </div>
+             
+
+            </div>
+
+            <div>
+              <span>
+                  <button *ngIf="!accept" mat-button class="accent-300" (click)="acceptRequest(detail.value)">Accept</button>
+                  <button [disabled]="accept" *ngIf="accept" mat-button class="accent-300" >Friends</button>
+              </span>
+              <span>
+                <button *ngIf="!accept" mat-button style="background-color: rgba(221, 20, 20, 0.486); margin-left: 10px"
+                  (click)="deleteFriendRequest(detail.value)">Cancel</button>
+              </span>
+
+            </div>
+          </div>
+          <mat-divider>
+          </mat-divider>
+
+        </div>
+
+        <!-- <table mat-table [dataSource]="dataSource" style="width: 100%" >
+                 
+                   
+                    <ng-container matColumnDef="position">
+                      <td style="padding: 20px;width: 60px" mat-cell *matCellDef="let element"> <img  height="100%" class="avatar mr-0 mr-sm-16" [src]="friendProfilePic"> </td>
+                    </ng-container>
+                  
+                  
+                    <ng-container matColumnDef="name">
+                      <td mat-cell *matCellDef="let element">  {{element.name}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="accept">
+                        <td mat-cell *matCellDef="let element"> <button mat-button>Accept Request</button> </td>
+                      </ng-container>
+                  
+                    
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table> -->
+
+
+      </div>
+
+
+
+      <!-- <mat-paginator #paginator
+                           [length]="dataSource.filteredData.length"
+                           [pageIndex]="0"
+                           [pageSize]="10"
+                           [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator> -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

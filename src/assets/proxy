@@ -1,0 +1,102 @@
+{
+    "/api/**": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/uaa/api/register": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/auth/login": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/auth/logout": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/uaa/api/account/reset-password/init": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/uaa/api/account/reset-password/finish": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/uaa/api/account": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/userprofile/api/user-profile-pictures": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/userprofile/api/main-user-profile-pictures": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/userprofile/api/user-profile-pictures1": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/userprofile/api/complete-user-profile": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+  
+    "/userprofile/api/user-profile-pictures-artden": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+   
+    "/usersettings/api/security-settings-by-userId": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/usersettings/api/security-settings": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+   
+    "/post/api/**": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    },
+    "/novelcomics/api/**": {
+        "target": "http://192.168.1.9:8080",
+        "secure": false,
+        "loglevel": "debug",
+        "changeOrigin": true
+    }
+
+}

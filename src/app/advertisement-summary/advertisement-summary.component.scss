@@ -1,0 +1,36 @@
+.adGraphic{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 10px;
+    height: 100%
+}
+
+
+
+.uploadAmount{
+    padding: 16px;
+    
+}
+
+.parent{
+    display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+    display: flex;
+    width: 100%;
+}
+
+.topics{
+    display: flex;
+    padding: 16px;
+    margin: auto;
+    // border-right: 1px solid gray
+}
+
+.ttopic{
+    display: flex;
+    padding: 12px;
+    margin: auto;
+    border-right: 1px solid gray
+}

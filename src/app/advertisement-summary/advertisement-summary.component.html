@@ -1,0 +1,94 @@
+<div class="parent" fxFlex=100 fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx">
+  <mat-toolbar class="primary-50">
+    <span>Advertisement Summary</span>
+  </mat-toolbar>
+  <div class="topics" fxLayout="row" fxFlex=100>
+      <div fxFlex=20 class="ttopic">
+          <h3  fxLayoutAlign="center center"  >Advertisement</h3>
+      </div>
+     <div fxFlex=20 class="ttopic">
+        <h3  fxLayoutAlign="center center" >Advertised Date</h3>
+     </div>
+     <div fxFlex=20 class="ttopic">
+        <h3 fxLayoutAlign="center center" >Expiry Date</h3>
+     </div>
+     <div fxFlex=20 class="ttopic">
+        <h3 fxLayoutAlign="center center" >Amount</h3>
+     </div>
+     <div fxFlex=20 class="ttopic">
+        <h3  fxLayoutAlign="center center">Payment Status</h3>
+     </div>
+     
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- <div  class="advertisement" style="width:'100vw';" fxFlex=100 fxLayout="column">
+    <div>
+      <mat-toolbar fxFlex=100 class="primary-50" fxLayoutAlign="center center">
+        <span>Advertisement Summary</span>
+      </mat-toolbar>
+
+      <div  fxLayout="row" fxFlex=100>
+          <div>
+              <h3  fxLayoutAlign="center center"  class="subTopic">Advertisement</h3>
+          </div>
+         <div>
+            <h3  fxLayoutAlign="center center" class="subTopic">Advertised Date</h3>
+         </div>
+         
+          <h3 fxLayoutAlign="center center" class="subTopic">Expiry Date</h3>
+          <h3 fxLayoutAlign="center center" class="subTopic">Amount</h3>
+          <h3  fxLayoutAlign="center center" class="subTopic">Payment Status</h3>
+
+        </div>
+
+      <div fxLayout="column">
+        
+        <mat-divider>
+        </mat-divider>
+
+        <div fxLayout="column">
+          <div fxLayout="row" fxFlex=100 style="height: 150px" *ngFor="let ad of advertisementDetails">
+            <div fxFlex=20 class="adGraphic" [style.background-image]="'url(' +ad.adGraphic + ')'">
+
+            </div>
+            <div fxFlex=20 fxLayoutAlign="center center">
+                {{ad.createdDateTime | date}}
+              </div>
+            <div fxLayout="column" fxFlex=20 fxLayoutAlign="center center">
+              <p>{{ad.expireDate | date}}</p>
+              <p>( {{ad.expireDate | timeago}} )</p>
+            </div>
+
+            <div fxFlex=20 fxLayoutAlign="center center">
+                <h2>{{ad.amount | currency:'$'}}</h2> 
+              </div>
+
+              <div fxLayout="column" fxFlex=20 fxLayoutAlign="center center" >
+                <div>
+                  <h3 *ngIf="ad.paid">Paid</h3>
+                  <h3 *ngIf="!ad.paid">Pending ...</h3>
+                </div>
+                <div *ngIf="!ad.paid" (click)="payNow(ad)">
+                    <form action="https://sandbox.payhere.lk/pay/o407b3080" method="get"><input name="submit" type="image" src="https://www.payhere.lk/downloads/images/pay_with_payhere.png" style="width:200px;" value="Buy Now"></form>
+                </div>
+                 
+              </div>
+
+              <mat-divider class="m-12">
+              </mat-divider>
+          </div>
+        </div>
+        <div>
+
+        </div>
+      </div>
+
+    </div>
+</div> -->

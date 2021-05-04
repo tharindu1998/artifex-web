@@ -1,0 +1,129 @@
+@import "src/@fuse/scss/fuse";
+
+profile-photos-videos {
+  #photos-videos {
+    .actions {
+      button {
+        text-transform: none;
+        padding: 0 16px;
+        margin: 0 0 0 8px;
+      }
+
+      mat-button-toggle-group {
+        float: left;
+      }
+    }
+  }
+}
+
+.period {
+  .period-title {
+    margin-bottom: 24px;
+
+    .name {
+      font-size: 20px;
+    }
+
+    .info {
+      margin-left: 16px;
+      font-size: 15px;
+    }
+  }
+
+  .period-media {
+    margin-bottom: 20px;
+
+    .media {
+      position: relative;
+      margin: 0 16px 16px 0;
+      border-radius: 4px;
+      overflow: hidden;
+
+      .preview {
+        display: block;
+        width: 256px;
+        height: 256px;
+      }
+
+      .title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        padding: 0 16px;
+        height: 66px;
+        line-height: 48px;
+        font-size: 15px;
+
+        background-color: rgba(0, 0, 0, 0.445);
+      }
+
+      .menu-button {
+        position: relative;
+        //margin-top: 100px;
+        margin-left: 210px;
+        z-index: 50;
+        height: 8px;
+      }
+      .reactions {
+        position: relative;
+        height: 40px;
+        bottom: 3px;
+        background-color: rgba(0, 0, 0, 0.699);
+        margin-top: -30px;
+
+        .side-menu {
+          position: absolute;
+          margin-top: -5px;
+          //background-color: rgba(0, 0, 0, 0.411);
+          margin-left: 230px;
+          padding: 0;
+        }
+
+        .like-button {
+          position: absolute;
+          margin-top: 5px;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 10;
+          height: 8px;
+        }
+        .share-button {
+          position: absolute;
+          margin-top: 5px;
+          top: 0;
+          margin-left: -15px;
+          right: 0;
+          z-index: 10;
+          height: 8px;
+        }
+      }
+    }
+  }
+}
+
+mat-tab-group {
+  height: 100%;
+
+  .mat-tab-body-wrapper {
+    flex-grow: 1;
+  }
+}
+
+.divider {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar.toolbar-color {
+  background: rgba(0, 0, 0, 0);
+  > mat-toolbar-row {
+    background: rgba(0, 0, 0, 0);
+  }
+}

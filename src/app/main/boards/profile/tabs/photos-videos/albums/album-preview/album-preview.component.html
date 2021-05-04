@@ -1,0 +1,139 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" (click)="goBack()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+
+
+                    <div class="subtitle secondary-text">
+                        <span>{{PictureType}}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <form name="productForm" class="product w-100-p" fxLayout="column" fxFlex>
+
+
+
+                    <div class="period">
+
+
+                        <div class="period-media " fxLayout="row wrap">
+
+
+
+                            <div  class="media" *ngFor="let CatImage of CategorizedImageSetDetails">
+
+                                <img (click)="viewImage(CatImage)" class="preview" src="{{CatImage.imageUrl}}">
+                                <div class="reactions">
+                                    <!-- <button mat-button class="like-button">
+                                        <span fxLayout="row">
+                                            <mat-icon>favorite</mat-icon>
+
+                                        </span>
+                                    </button>
+                                    <button mat-button class="share-button">
+                                        <span fxLayout="row">
+                                            <mat-icon>comment</mat-icon>
+
+                                        </span>
+                                    </button> -->
+
+
+
+                                    <button fxLayout="row" fxLayoutAlign="  end" class="side-menu" mat-icon-button
+                                        [matMenuTriggerFor]="menu">
+                                        <mat-icon style="color: white;">more_vert</mat-icon>
+                                    </button>
+
+                                    <mat-menu #menu="matMenu">
+                                        <button mat-menu-item (click)="viewImage(CatImage)">
+                                            <mat-icon>collections</mat-icon>
+                                            <span>View image</span>
+                                        </button>
+
+
+                                        <!-- <button mat-menu-item (click)="setAsProfilePic(CatImage)">
+
+                                            <mat-icon>add_a_photo</mat-icon>
+                                            <span>Set as profile picture </span>
+                                        </button> -->
+
+
+
+                                        <button mat-menu-item (click)="delete(CatImage.id)">
+                                            <mat-icon>delete</mat-icon>
+                                            <span>Delete</span>
+                                        </button>
+                                    </mat-menu>
+                                </div>
+                                <!-- 
+                <div class="reactions">
+    
+    
+                    <button mat-button class="like-button">
+                        <span fxLayout="row" fxLayoutAlign="  center">
+                            <mat-icon class="s-16">favorite</mat-icon>
+                            <span></span>&nbsp;<span>{{media.likes}}</span>
+                        </span>
+                    </button>
+                    <button mat-button class="share-button">
+                        <span fxLayout="row" fxLayoutAlign="  center">
+                            <mat-icon class="s-16">comment</mat-icon>
+                            <span></span>&nbsp;<span>{{media.comments}}</span>
+                        </span>
+                    </button>
+    
+                  
+    
+                </div> -->
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

@@ -1,0 +1,320 @@
+<div id="academy-course" class="page-layout simple left-sidebar inner-scroll">
+
+  <!-- SIDEBAR -->
+  <fuse-sidebar class="sidebar" name="academy-course-left-sidebar-1" position="left" lockedOpen="gt-md">
+
+    <!-- SIDEBAR CONTENT -->
+    <div class="content" fusePerfectScrollbar>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Create Chapter
+            </mat-panel-title>
+
+          </mat-expansion-panel-header>
+          <form>
+            <mat-form-field>
+              <input matInput [(ngModel)]="chapterHeading.chapter" name="chapter" placeholder="Chapter Name" required>
+            </mat-form-field>
+
+            <button type="submit" [disabled]="enableCreateChapter" mat-raised-button (click)="createChapter()">Create
+              New Chapter</button>
+
+          </form>
+
+
+        </mat-expansion-panel>
+
+
+      </mat-accordion>
+
+
+      <div class="steps">
+        <mat-accordion>
+
+          <h3 class="accent-600" style="text-align: center;padding:5px">Select Chapter to edit
+          </h3>
+          <mat-expansion-panel style="border-top: 1px solid black" (opened)="getPages(step.id)"
+            (closed)="panelOpenState = false" *ngFor="let step of stepperDetails;let i = index">
+            <mat-expansion-panel-header class="accent-100" style="color: black">
+              <mat-panel-title class="accent-100">
+                {{i+1}}
+              </mat-panel-title>
+              <mat-panel-description class="accent-100" style="font-size: 13px;">
+                {{step.chapter}}
+
+              </mat-panel-description>
+
+            </mat-expansion-panel-header>
+
+            <!-- <p *ngIf="!page.id">No Pages Yet</p>
+             -->
+            <mat-divider></mat-divider>
+
+
+
+            <div *ngIf="actionType!=='view'" style="margin-top: 6px; margin-bottom: 5px;">
+              <button mat-raised-button class="accent-900 " data-placement="bottom" title="Add new page"
+                style="margin-left: 10px; height: 30px; padding: 4px; height:50px;border-radius: 100%;border: none; cursor: pointer">
+                <mat-icon style="font-size: 20px" (click)="createPage(step)">library_books</mat-icon>
+              </button>
+              <button mat-raised-button class="accent-900" data-placement="bottom" title="Delete Chapter"
+                style="margin-left: 10px; height: 30px; padding: 4px;height:50px;border-radius: 100%;border: none; cursor: pointer">
+                <mat-icon style="font-size: 20px" (click)="permissonMessage(step,'chapter')">delete</mat-icon>
+              </button>
+
+            </div>
+
+
+
+
+
+
+            <div class="subPages" style="margin-top: 10px;" flex="row"
+              *ngFor="let mapDetails of mapPages[step.id];let i=index">
+              <mat-divider></mat-divider>
+
+              <span></span>
+              <div *ngIf="actionType!=='view'" style="display: inline;position:absolute">
+
+                <p>Page {{i+1}} </p>
+
+
+              </div>
+              <div *ngIf="actionType==='view'" (click)="viewPage(mapDetails)"
+                style="display: inline;position:absolute; cursor: pointer; padding: 3px ">
+
+                <p>Page {{i+1}} </p>
+
+              </div>
+
+
+              <div style="margin-top: 6px; margin-bottom: 5px">
+                <button *ngIf="actionType!=='view'" data-placement="bottom" title="Edit page" (click)="edit(mapDetails)"
+                  style="margin-left: 70px; height: 30px; color: white;background-color: rgb(97, 96, 96);padding: 4px;border-radius: 100%;border: none; cursor: pointer">
+                  <mat-icon style="font-size: 20px">edit</mat-icon>
+                </button>
+                <button *ngIf="actionType!=='view'" data-placement="bottom" title="View page"
+                  (click)="viewPage(mapDetails)"
+                  style="margin-left: 10px; height: 30px; background-color: rgb(97, 96, 96);padding: 4px;border-radius: 100%;color: white;border: none; cursor: pointer">
+                  <mat-icon style="font-size: 20px">pageview</mat-icon>
+                </button>
+                <button *ngIf="actionType!=='view'" data-placement="bottom" title="Delete page"
+                  (click)="permissonMessage(mapDetails,'page')"
+                  style="margin-left: 10px; height: 30px; background-color: rgb(97, 96, 96);padding: 4px;border-radius: 100%;color: white;border: none; cursor: pointer">
+                  <mat-icon style="font-size: 20px">delete</mat-icon>
+                </button>
+
+                <button *ngIf="actionType==='view'" data-placement="bottom" title="comment Page"
+                  (click)="viewPage(mapDetails)"
+                  style="margin-left: 80px; height: 30px; background-color: rgb(97, 96, 96);padding: 4px;border-radius: 100%;color: white;border: none; cursor: pointer">
+                  <mat-icon style="font-size: 20px">pageview</mat-icon>
+                </button>
+              </div>
+
+
+
+
+
+              <!-- <button class="btn third" mat-raised-button><mat-icon>edit</mat-icon></button> -->
+
+
+            </div>
+
+            <mat-divider></mat-divider>
+          </mat-expansion-panel>
+
+
+        </mat-accordion>
+
+        <!-- <div class="step" *ngFor="let step of stepperDetails ; let i = index; let last = last; let first = first"
+          (click)="gotoStep(i)"
+          [ngClass]="{'current': currentStep === i, 'completed': currentStep > i, 'last': last, 'first': first}"> -->
+        <!-- <div class="step"*ngFor="let step of stepperDetails;let i = index" >
+            <div class="index"> -->
+        <!-- <span>{{i + 1}}</span> -->
+        <!-- <span>{{i+1}}</span> -->
+
+        <!-- </div> -->
+        <!-- <div class="title">{{step.title}}</div> -->
+        <!-- <div class="title">{{step.chapter}} </div>
+              <button style="float: right; position:absolute; margin-left: %;" mat-icon-button aria-label="more" [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)='editWriting(thumbnail)'>
+                  <mat-icon>dialpad</mat-icon>
+                  <span>Add new page</span>
+                </button>
+                <button mat-menu-item (click)="viewWriting()">
+                  <mat-icon>voicemail</mat-icon>
+                  <span>View Writing</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>notifications_off</mat-icon>
+                  <span>Disable alerts</span>
+                </button>
+              </mat-menu>
+           
+           
+          </div> -->
+
+      </div>
+
+    </div>
+    <!-- / SIDEBAR CONTENT -->
+
+  </fuse-sidebar>
+  <!-- / SIDEBAR -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
+
+      <!-- <button mat-icon-button class="sidebar-toggle mr-16" fxHide.gt-md
+        (click)="toggleSidebar('academy-course-left-sidebar-1')"> -->
+      <button mat-icon-button class="sidebar-toggle mr-16" fxHide.gt-md>
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <button mat-icon-button class="mr-16" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <span>
+        <h2 *ngIf="novelDetails">{{novelDetails.novelName}}</h2>
+      </span> &nbsp;&nbsp;<span *ngIf="novelDetails"> by {{novelDetails.author}}</span>
+
+      <div class="publicity" style="float: right;position: relative;">
+        <div class="likeButton" (click)="likeWriting(this.parameter)">
+
+          <span *ngIf="this.mapPublicity[this.parameter]">
+            <mat-icon class="toolbarButtons" *ngIf="this.mapPublicity[this.parameter].liked" style="color: red">favorite
+            </mat-icon>
+            <mat-icon class="toolbarButtons" *ngIf="!this.mapPublicity[this.parameter].liked">favorite</mat-icon>
+          </span> <span>({{likes}})</span>
+
+
+        </div>
+        <div class="likeButton " (click)="commentWriting()" style="display: inline-block">
+          <span>
+            <mat-icon class="toolbarButtons">message</mat-icon>
+          </span> <span>({{comments}})</span>
+        </div>
+        <div *ngIf="openedPageId" (click)="shareWriting()" class="likeButton" style="display: inline-block">
+          <span>
+            <mat-icon class="toolbarButtons">share</mat-icon>
+          </span> <span>({{shares}})</span>
+        </div>
+      </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <mat-toolbar>
+      <div *ngIf="novelDetails">
+
+        <button class="accent-100" *ngIf="type==='edit' || actionType==='edit' && type!=='initial' && type!=='view'"
+          mat-raised-button style="margin-right: 6px;padding: 0 10px" (click)="cancelPage()">Close without
+          saving</button>
+
+        <button class="accent-100" *ngIf="type==='initial'" mat-raised-button style="margin-right: 6px;padding: 0 10px"
+          (click)="updateNovelDetails()">Change Novel Details</button>
+
+        <button *ngIf="type!=='initial'" class="accent-100" mat-raised-button style="margin-right: 6px;padding: 0 10px"
+          (click)="viewWritingDetails()">View Writing Details</button>
+
+        <!-- <h2>{{fullChapterDetails.}}</h2> -->
+        <button class="accent-100" *ngIf="type==='edit'|| type==='new' && saved " mat-raised-button
+          style="margin-right: 6px;padding: 0 10px" (click)="saveContent()">Save Changes</button>
+
+
+        <button class="accent-100" *ngIf="type==='view' && novelDetails.postOwnerId===user.id" mat-raised-button
+          style="margin-right: 6px;padding: 0 10px" (click)="publish()">Publish</button>
+        <!-- <h2>{{novelDetails.novelName}}</h2> -->
+      </div>
+    </mat-toolbar>
+
+    <!-- CONTENT -->
+    <div id="course-content" class="content">
+
+      <!-- <ng-container *ngFor="let step of course.steps; let i = index;"> -->
+      <ng-container>
+        <!-- <div class="course-step" fusePerfectScrollbar *ngIf="currentStep === i" [@slideIn]="animationDirection"> -->
+        <div class="course-step" fusePerfectScrollbar>
+          <div *ngIf=" type==='initial' ">
+
+            <div *ngIf="novelDetails" class="bookDetails" fxFlex=100 fxLayout="row">
+              <div fxLayoutAlign="center" class="bookCover" fxFlex="45"
+                [style.background-image]="'url(' +novelDetails.imageUrl + ')'"></div>
+              <div class="detail" fxLayout="column" fxFlex="55" fxLayoutAlign="start center">
+                <div fxLayoutAlign="">
+                  <h1 align="center">{{novelDetails.novelName}}</h1>
+                </div>
+
+                <div>
+                  <h3>Author : {{novelDetails.author}}</h3>
+                </div>
+
+                <div style="max-height: 350px;" fusePerfectScrollbar>
+                  <p style="padding: 10px" align="justify">{{novelDetails.message}}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="type==='view'" id="course-step-content" class="course-step-content" style="color: black">
+
+            <div [froalaView]="pageDetails.content"></div>
+
+          </div>
+
+          <div *ngIf="type==='edit'|| type==='new'" class="sample">
+            <!-- <h2>Sample 2: Full Editor</h2> -->
+            <div style="width: 100%" id="sample2" [froalaEditor]="imgOptions" [(froalaModel)]="content">
+
+            </div>
+            <!-- <h4>Rendered Content:</h4> -->
+            <!-- <div [froalaView]="content"></div> -->
+            <!-- <button  (click)="view()">View</button> -->
+          </div>
+
+        </div>
+
+      </ng-container>
+
+    </div>
+    <!-- / CONTENT -->
+
+    <div class="step-navigation">
+
+      <!-- <button mat-fab class="previous mat-accent fuse-white-fg" (click)="gotoPreviousStep()"
+        [disabled]="currentStep === 0" [fxHide]="currentStep === 0">
+        <mat-icon>chevron_left</mat-icon>
+      </button> -->
+      <!-- <button mat-fab class="previous mat-accent fuse-white-fg">
+        <mat-icon>chevron_left</mat-icon>
+      </button> -->
+
+      <!-- <button mat-fab class="next mat-accent fuse-white-fg" (click)="gotoNextStep()"
+        [disabled]="currentStep === course.totalSteps - 1" [fxHide]="currentStep === course.totalSteps - 1">
+        <mat-icon>chevron_right</mat-icon>
+      </button> -->
+
+      <!-- <button mat-fab class="next mat-accent fuse-white-fg">
+        <mat-icon>chevron_right</mat-icon>
+      </button> -->
+
+      <!-- <button mat-fab class="done green-600" routerLink="/apps/academy/courses"
+        [disabled]="currentStep !== course.totalSteps - 1" [fxShow]="currentStep === course.totalSteps - 1">
+        <mat-icon>check</mat-icon>
+      </button> -->
+
+    </div>
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

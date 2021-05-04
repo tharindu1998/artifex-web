@@ -1,0 +1,124 @@
+<div>
+  <mat-progress-bar *ngIf="creating" mode="indeterminate">
+  </mat-progress-bar>
+  <mat-toolbar class="primary-50" style="width: 100vw">
+    <button mat-icon-button class="mr-0 mr-sm-16" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    Comic Book Details
+    <div class="actions" [@animate]="{value:'*',params:{delay:'200ms'}}">
+
+    </div>
+  </mat-toolbar>
+
+  <div class="contents" fxLayout="row">
+
+    <div class="card" fxFlex="55">
+
+      <mat-tab-group>
+
+        <mat-tab label="Create Comic Book">
+
+          <div class="tab-content p-24" fxFlex="1 0 auto" fxLayout="column" fusePerfectScrollbar>
+            <mat-form-field appearance="outline" fxFlex="100">
+              <mat-label>Comic Book Name : </mat-label>
+              <input [(ngModel)]="comicDetails.comicName" matInput type="text" required>
+              <mat-error>Comic book name is required!</mat-error>
+            </mat-form-field>
+            <article class="c-article">
+              <header class="c-article__header c-header">
+                <img *ngIf="coverPhoto" [src]="coverPhoto" style="width: 500vw; height: 500vh" class="c-header__image"
+                  alt="Lonely man watching montain">
+                <img *ngIf="!coverPhoto" src="coverPhoto" style="width: 50vw" class="c-header__image"
+                  alt="Lonely man watching montain">
+                <div class="c-header__content">
+                  <!-- <button class="c-title" (click)="uploadCover($event)" >Upload the cover</button> -->
+                  <label style="cursor: pointer" for="imageUpload" class="c-title">Upload Cover Photo</label>
+                  <input type="file" id="imageUpload" style="display: none" (change)="onSelectFile($event)">
+                </div>
+              </header>
+
+
+            </article>
+            <mat-form-field appearance="outline" fxFlex="100">
+              <mat-label>Author : </mat-label>
+              <input [(ngModel)]="comicDetails.author" matInput type="text" required>
+              <mat-error>Author is required!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="100">
+              <mat-label>Brief description : </mat-label>
+              <textarea [(ngModel)]="comicDetails.description" matInput name="description" id="description" cols="30"
+                rows="10"></textarea>
+              <!-- <input matInput type="text" required> -->
+              <!-- <mat-error>Author is required!</mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="100">
+              <mat-label>Who can see your comic book when published</mat-label>
+              <mat-select [(value)]="selected">
+                <!-- <mat-option>None</mat-option> -->
+                <mat-option value="PUBLIC">Public</mat-option>
+                <mat-option value="ONLY_FRIENDS">Friends only</mat-option>
+                <mat-option value="ONLY_ME">Only me</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-raised-button color="accent" (click)="createComicBook()"
+              style="float: right;margin-right:20px; width: 20vw;margin-bottom: 16px;;">Create Comic</button>
+          </div>
+
+        </mat-tab>
+
+
+
+      </mat-tab-group>
+
+
+    </div>
+
+    <!-- adsssss -->
+    <div class="timeline-sidebar" fxLayout="column" fxFlex="20">
+
+      <div class="advertisementCages " fxLayout="column" style="position:-webkit-sticky ;position: sticky;top: 0">
+        <div class="landscape primary-50" fxLayout="column" [style.background-image]="land1"
+          style="  background-size: contain;background-position: center;background-repeat: no-repeat">
+
+
+
+
+
+        </div>
+        <div>
+          <a style="font-size: 11px" (click)="getAllAdevrtisements()">Create ad</a>
+        </div>
+        <div class="portrait primary-50" [style.background-image]="ads"
+          style="background-size: contain;background-position: center;background-repeat: no-repeat">
+          <!-- <div>
+                  <img *ngIf="ads" [src]="ads" alt="">
+              </div> -->
+
+        </div>
+        <div>
+          <a style="font-size: 11px" (click)="getAllAdevrtisements()">Create ad</a>
+        </div>
+        <div class="landscape primary-50" fxLayout="column" [style.background-image]="land2"
+          style="background-size: contain;background-position: center;background-repeat: no-repeat">
+
+
+        </div>
+        <div>
+          <a style="font-size: 11px" (click)="getAllAdevrtisements()">Create ad</a>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+
+</div>

@@ -1,0 +1,770 @@
+<!-- <div  style="background-image: url('https://secure.static.tumblr.com/a6ac69b8d14cf89b15ab4604e0428db4/zzrji88/4Sfmuw6nz/tumblr_static_spawn_desktop_1920x1080_hd-wallpaper-1007310.jpg'); opacity: 0.5;z-index: 0;width: 100vw;height:100vh;position: absolute"></div> -->
+<div class="container" style="z-index: 20">
+  <mat-toolbar class="toolbar">
+    <button mat-icon-button class="sidebar-toggle  " (click)="toggleSidebar('academy-course-left-sidebar-1')"
+      fxHide.gt-md>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button mat-icon-button class="mr-16" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>Comic Creator <h5 class="primary-400-fg" style="margin-left: 20px;;">({{comicDetails.comicName}})
+    </h5>
+
+    <div class="publicity" style="float: right;position: relative; margin-left: 15px;">
+      <div class="likeButton" (click)="likeComic(comicDetails.id)">
+
+        <span *ngIf="this.mapPublicity[comicDetails.id]">
+          <mat-icon class="toolbarButtons" *ngIf="this.mapPublicity[comicDetails.id].liked" style="color: red">favorite
+          </mat-icon>
+          <mat-icon class="toolbarButtons" *ngIf="!this.mapPublicity[comicDetails.id].liked">favorite</mat-icon>
+        </span> <span>({{likes}})</span>
+
+
+      </div>
+      <div class="likeButton " (click)="commentComic()" style="display: inline-block">
+        <span>
+          <mat-icon class="toolbarButtons">message</mat-icon>
+        </span> <span>({{comments}})</span>
+      </div>
+      <div class="likeButton" style="display: inline-block" (click)="showShareDialog(comicDetails)">
+        <span>
+          <mat-icon class="toolbarButtons">share</mat-icon>
+        </span> <span>({{shares}})</span>
+      </div>
+    </div>
+    <div style="margin-left: 25px; float: right;" class="actions" [@animate]="{value:'*',params:{delay:'200ms'}}">
+      <button *ngIf="actionType==='create' && !artdenComicId" mat-raised-button aria-label="Follow"
+        style="margin-right: 6px;float: right" (click)="createComic()">
+        <mat-icon class="s-24">view_quilt</mat-icon> Create Comic
+      </button>
+      <button *ngIf="actionType==='view' && !artdenComicId" mat-raised-button aria-label="Follow"
+        style="margin-right: 6px;float: right" (click)="editMode()">
+        <mat-icon class="s-24">edit</mat-icon> Edit
+      </button>
+      <button class="accent-100" *ngIf="type==='initial' && !artdenComicId" mat-raised-button
+        style="margin-right: 6px;padding: 0 10px" (click)="updateComicDetails()">Change Comic Details</button>
+
+      <!-- <button title="add another template page" style="margin-right: 6px;padding: 0 10px" mat-raised-button
+        aria-label="Follow" (click)="createComic()">
+        <mat-icon class="s-24">view_quilt</mat-icon> Add another page
+      </button> -->
+
+      <!-- <button title="add another template page" style="margin-right: 6px;padding: 0 10px" mat-raised-button
+      aria-label="Follow" (click)="createComic()">
+      <mat-icon>photo_album</mat-icon> Add photos
+    </button> -->
+      <button mat-raised-button style="margin-right: 6px;padding: 0 10px" *ngIf="actionType==='edit' && !artdenComicId"
+        (click)="CancelTemplate()">
+        <mat-icon>save</mat-icon> Cancel Template
+      </button>
+
+      <!-- <h2>{{fullChapterDetails.}}</h2> -->
+      <button *ngIf="actionType ==='edit' && !artdenComicId" mat-raised-button style="margin-right: 6px;padding: 0 10px"
+        (click)="saveComicImages()">
+        <mat-icon>save</mat-icon> Save
+      </button>
+
+
+      <button *ngIf="actionType==='view' && !artdenComicId" mat-raised-button style="margin-right: 6px;padding: 0 10px"
+        (click)="publish()">Publish</button>
+      <!-- <h2>{{novelDetails.novelName}}</h2> -->
+
+      <button *ngIf="type!=='initial'" mat-raised-button style="margin-right: 6px;padding: 0 10px"
+        (click)="viewInitial()">
+        <mat-icon>save</mat-icon> View Comic Details
+      </button>
+
+
+    </div>
+  </mat-toolbar>
+  <mat-progress-bar mode="indeterminate" *ngIf="saved"></mat-progress-bar>
+
+
+
+
+
+
+  <div class="pages">
+    <!-- <div style="width: 75vw; text-align: center; margin-top: 50px;" *ngIf="comicPageDetails.length===0 && !templateId">
+      <mat-icon class="s-256 fade-text " style="opacity: 0.7">dashboard</mat-icon>
+      <h3>No any comic pages available</h3>
+
+    </div> -->
+
+    <div>
+      <div id="academy-course" class="page-layout simple left-sidebar inner-scroll">
+
+        <!-- SIDEBAR -->
+        <fuse-sidebar class="sidebar" name="academy-course-left-sidebar-1" position="left" lockedOpen="gt-md"
+          fusePerfectScrollBar>
+
+          <!-- SIDEBAR CONTENT -->
+          <div class="sidebarContent" fusePerfectScrollbar>
+            <div class="topic accent-900">
+              <h2 style="padding-left: 10px; ">Comics Pages</h2>
+            </div>
+
+
+            <div class="pageTab " *ngFor="let page of comicPageDetails;let i=index">
+              <div>
+                <span>
+                  <p style="width: 160px;font-size: 16px;">Page {{i+1}} <mat-icon class="s-30" style="float: right"
+                      *ngIf='page.published'>how_to_reg</mat-icon>
+                  </p>
+                </span>
+              </div>
+
+
+              <div style="margin-bottom: 5px">
+                <button mat-button data-placement="bottom" title="Edit page" class="operation-buttons"
+                  *ngIf="!otherPerson && !artdenComicId" (click)="controlMode(page,'edit')" style="margin-left: 10px;">
+                  <mat-icon style="font-size: 20px">edit</mat-icon>
+                </button>
+                <button mat-button data-placement="bottom" title="View page" class="operation-buttons"
+                  (click)="controlMode(page,'view')" style="margin-left: 10px;">
+                  <mat-icon style="font-size: 20px">pageview</mat-icon>
+                </button>
+                <button mat-button data-placement="bottom" title="Delete page" class="operation-buttons"
+                  *ngIf="!otherPerson && !artdenComicId" (click)="deletePermission(page.id)"
+                  style="margin-left: 10px; ">
+                  <mat-icon style="font-size: 20px">delete</mat-icon>
+                </button>
+
+              </div>
+              <mat-divider></mat-divider>
+            </div>
+
+            <div class="steps">
+
+
+            </div>
+
+          </div>
+          <!-- / SIDEBAR CONTENT -->
+
+        </fuse-sidebar>
+        <!-- / SIDEBAR -->
+
+        <!-- CENTER -->
+        <div class="center">
+
+          <!-- HEADER -->
+
+          <!-- / HEADER -->
+
+          <!-- CONTENT -->
+          <div id="course-content" class="content">
+
+            <!-- <ng-container *ngFor="let step of course.steps; let i = index;"> -->
+            <ng-container>
+              <!-- <div class="course-step" fusePerfectScrollbar *ngIf="currentStep === i" [@slideIn]="animationDirection"> -->
+              <div class="course-step" fusePerfectScrollbar [@slideIn]="animationDirection">
+
+                <div *ngIf=" type==='initial'  ">
+
+                  <div *ngIf="comicDetails" class="bookDetails" fxFlex=100 fxLayout="row">
+                    <div fxLayoutAlign="center" class="bookCover" fxFlex="45"
+                      [style.background-image]="'url(' +comicDetails.coverPhoto + ')'"></div>
+                    <div class="detail" fxLayout="column" fxFlex="55" fxLayoutAlign="start center">
+                      <div fxLayoutAlign="">
+                        <h1 align="center">{{comicDetails.comicName}}</h1>
+                      </div>
+
+                      <div>
+                        <h3>Author : {{comicDetails.author}}</h3>
+                      </div>
+
+                      <div style="max-height: 350px;" fusePerfectScrollbar>
+                        <p style="padding: 10px" align="justify">{{comicDetails.description}}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+
+
+                <div *ngIf="templateId" id="course-step-content" class="course-step-content">
+                  <!-- Single image comic template -->
+                  <div class="single" *ngIf="templateId==='1A'">
+                    <div class="grid-layout">
+                      <div class="grid-item grid-item-1" style="height: 842px; width:595px;border:1px solid white"
+                        *ngIf='!comicImage1'>
+                        <div style="text-align: center; margin-top: 50%;">
+                          <label for="imageUpload" style="cursor: pointer">
+                            <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon> <br> Add image 01
+                          </label>
+
+                          <input type="file" id="imageUpload" style="display: none"
+                            (change)="onSelectFile($event,'comicImage1')">
+                        </div>
+                      </div>
+
+                      <div class="grid-item grid-item-1"
+                        style="height: 842px; width:595px;border:1px solid white;text-align: center;  align-items: center; background-size: contain;background-repeat: no-repeat; background-position: center"
+                        *ngIf='comicImage1' [style.background-image]="comicImage1">
+
+                        <!-- <img style=" object-fit: contain;overflow: hidden;margin: auto" [src]="comicImage1" alt=""> -->
+
+                        <mat-spinner style="margin-top: 50%;text-align: center;margin-left: 50%;" *ngIf="saving">
+                        </mat-spinner>
+
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage1')">
+                        <button style="margin-top: 50%" class="controlButtons1" *ngIf="actionType==='edit'" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="twoImageTemplate" *ngIf="templateId==='2A'">
+                    <mat-grid-list cols="2" rowHeight="7:12">
+                      <mat-grid-tile class="accent-50" *ngIf="!comicImage1">
+                        <label for="imageUpload2A1" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 01</h3>
+                        </label>
+                        <input type="file" id="imageUpload2A1" style="display: none"
+                          (change)="onSelectFile($event,'comicImage1')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile class="accent-50" *ngIf="comicImage1" [style.background-image]="comicImage1">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage1')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+
+
+
+
+
+                      <mat-grid-tile class="accent-50" *ngIf="!comicImage2">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <label for="imageUpload2A2" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 02</h3>
+                        </label>
+
+                        <input type="file" id="imageUpload2A2" style="display: none"
+                          (change)="onSelectFile($event,'comicImage2')">
+
+
+                      </mat-grid-tile>
+
+                      <mat-grid-tile class="accent-50" *ngIf="comicImage2" [style.background-image]="comicImage2">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage2')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+                    </mat-grid-list>
+                  </div>
+
+                  <div class="twoImageTemplate" *ngIf="templateId==='2B'">
+                    <mat-grid-list cols="1" rowHeight="23:10">
+                      <mat-grid-tile class="accent-50" *ngIf="!comicImage1">
+                        <label for="imageUpload2B1" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 01</h3>
+                        </label>
+                        <input type="file" id="imageUpload2B1" style="display: none"
+                          (change)="onSelectFile($event,'comicImage1')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile
+                        style="background-size: cover; background-position: center; background-repeat: no-repeat"
+                        class="accent-50 twoB" *ngIf="comicImage1" [style.background-image]="comicImage1">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage1')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+
+
+
+
+
+                      <mat-grid-tile class="accent-50" *ngIf="!comicImage2">
+
+
+                        <label for="imageUpload2B2" style="cursor: pointer" *ngIf="!saving">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 02</h3>
+                        </label>
+
+                        <input type="file" id="imageUpload2B2" style="display: none"
+                          (change)="onSelectFile($event,'comicImage2')">
+
+
+                      </mat-grid-tile>
+
+                      <mat-grid-tile class="accent-50 twoB" *ngIf="comicImage2"
+                        style="background-size: cover; background-position: center; background-repeat: no-repeat;"
+                        [style.background-image]="comicImage2">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage2')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+                    </mat-grid-list>
+                  </div>
+
+
+                  <!-- Three image template -->
+
+                  <div class="threeImgComic" *ngIf="templateId==='3A'">
+
+                    <mat-grid-list cols="2" rowHeight="3:1">
+
+                      <mat-grid-tile rowspan="4" class="primary-50" *ngIf="!comicImage1">
+                        <label for="imageUpload3A1" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 01</h3>
+                        </label>
+                        <input type="file" id="imageUpload3A1" style="display: none"
+                          (change)="onSelectFile($event,'comicImage1')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile rowspan="4" class="primary-50" *ngIf="comicImage1"
+                        [style.background-image]="comicImage1">
+
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage1')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile rowspan="2" class="primary-50" *ngIf="!comicImage2">
+
+                        <label for="imageUpload3A2" style="cursor: pointer" *ngIf="!saving">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 02</h3>
+                        </label>
+                        <input type="file" id="imageUpload3A2" style="display: none"
+                          (change)="onSelectFile($event,'comicImage2')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile rowspan="2" class="primary-50" *ngIf="comicImage2"
+                        [style.background-image]="comicImage2">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage2')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile rowspan="2" class="primary-50" *ngIf="!comicImage3">
+
+
+                        <label for="imageUpload3A3" style="cursor: pointer" *ngIf="!saving">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 03</h3>
+                        </label>
+                        <input type="file" id="imageUpload3A3" style="display: none"
+                          (change)="onSelectFile($event,'comicImage3')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile rowspan="2" class="primary-50" *ngIf="comicImage3"
+                        [style.background-image]="comicImage3">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage3')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+                    </mat-grid-list>
+
+
+
+                  </div>
+
+                  <!-- 3BBBBB -->
+
+                  <div class="threeHorizontal" *ngIf="templateId==='3B'">
+                    <mat-grid-list cols="1" rowHeight="4:1">
+                      <mat-grid-tile rowspan="2" class="accent-50" *ngIf="!comicImage1">
+                        <label for="imageUpload3B1" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 01</h3>
+                        </label>
+                        <input type="file" id="imageUpload3B1" style="display: none"
+                          (change)="onSelectFile($event,'comicImage1')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile rowspan="2" class="accent-50" *ngIf="comicImage1"
+                        [style.background-image]="comicImage1">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage1')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile rowspan="2" class="accent-50" *ngIf="!comicImage2">
+                        <label for="imageUpload3B2" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 02</h3>
+                        </label>
+                        <input type="file" id="imageUpload3B2" style="display: none"
+                          (change)="onSelectFile($event,'comicImage2')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile rowspan="2" class="accent-50" *ngIf="comicImage2"
+                        [style.background-image]="comicImage2">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage2')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile rowspan="2" class="accent-50" *ngIf="!comicImage3">
+                        <label for="imageUpload3B3" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 03</h3>
+                        </label>
+                        <input type="file" id="imageUpload3B3" style="display: none"
+                          (change)="onSelectFile($event,'comicImage3')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile rowspan="2" class="accent-50" *ngIf="comicImage3"
+                        [style.background-image]="comicImage3">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage3')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+                    </mat-grid-list>
+                  </div>
+
+                  <!-- Four image template -->
+
+                  <div class="fourImageA" *ngIf="templateId==='4A'">
+                    <mat-grid-list cols="2" rowHeight="1:1">
+                      <mat-grid-tile class="accent-50" *ngIf="!comicImage1">
+                        <label for="imageUpload4A1" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 01</h3>
+                        </label>
+                        <input type="file" id="imageUpload4A1" style="display: none"
+                          (change)="onSelectFile($event,'comicImage1')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile class="accent-50" *ngIf="comicImage1" [style.background-image]="comicImage1">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage1')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile class="accent-50" *ngIf="!comicImage2">
+                        <label for="imageUpload4A2" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 02</h3>
+                        </label>
+                        <input type="file" id="imageUpload4A2" style="display: none"
+                          (change)="onSelectFile($event,'comicImage2')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile class="accent-50" *ngIf="comicImage2" [style.background-image]="comicImage2">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage2')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile class="accent-50" *ngIf="!comicImage3">
+                        <label for="imageUpload4A3" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 03</h3>
+                        </label>
+                        <input type="file" id="imageUpload4A3" style="display: none"
+                          (change)="onSelectFile($event,'comicImage3')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile class="accent-50" *ngIf="comicImage3" [style.background-image]="comicImage3">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage3')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+
+                      <mat-grid-tile class="accent-50" *ngIf="!comicImage4">
+                        <label for="imageUpload4A4" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 04</h3>
+                        </label>
+                        <input type="file" id="imageUpload4A4" style="display: none"
+                          (change)="onSelectFile($event,'comicImage4')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile class="accent-50" *ngIf="comicImage4" [style.background-image]="comicImage4">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage4')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </mat-grid-tile>
+
+                    </mat-grid-list>
+                  </div>
+
+                  <div class="fourImageSquare" *ngIf="templateId==='4B'">
+                    <div class="wrapper1">
+                      <div class="news-item hero-item" *ngIf="!comicImage1"
+                        style="background-color: rgba(187, 187, 185, 0.507)">
+                        <div style="text-align: center; margin-top: 30%;z-index: 100; color: #929796">
+                          <label for="imageUpload4B1" style="cursor: pointer">
+                            <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                            <h3>Add image 01</h3>
+                          </label>
+                          <input type="file" id="imageUpload4B1" style="display: none"
+                            (change)="onSelectFile($event,'comicImage1')">
+                        </div>
+                      </div>
+
+                      <div *ngIf="comicImage1" class="news-item hero-item" [style.background-image]="this.comicImage1">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage1')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </div>
+
+
+                      <div class="news-item standard-item" *ngIf='!comicImage2'
+                        style="background-color: rgba(187, 187, 185, 0.507)">
+                        <div style="text-align: center; margin-top: 50%;z-index: 100; color: #929796">
+                          <label for="imageUpload4B2" style="cursor: pointer">
+                            <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                            <h3>Add image 02</h3>
+                          </label>
+
+                          <input type="file" id="imageUpload4B2" style="display: none"
+                            (change)="onSelectFile($event,'comicImage2')">
+                        </div>
+                      </div>
+                      <div *ngIf="comicImage2" class="news-item standard-item"
+                        [style.background-image]="this.comicImage2">
+
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage2')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </div>
+
+                      <div class="news-item standard-item" *ngIf='!comicImage3'
+                        style="background-color: rgba(187, 187, 185, 0.507)">
+                        <div style="text-align: center; margin-top: 50%;z-index: 100; color: #929796">
+                          <label for="imageUpload4B3" style="cursor: pointer">
+                            <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                            <h3>Add image 03</h3>
+                          </label>
+
+                          <input type="file" id="imageUpload4B3" style="display: none"
+                            (change)="onSelectFile($event,'comicImage3')">
+                        </div>
+                      </div>
+                      <div *ngIf="comicImage3" class="news-item standard-item"
+                        [style.background-image]="this.comicImage3">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage3')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </div>
+
+
+                      <div class="news-item standard-item" *ngIf='!comicImage4'
+                        style="background-color: rgba(187, 187, 185, 0.507);">
+                        <div style="text-align: center; margin-top: 50%;z-index: 100; color: #929796">
+                          <label for="imageUpload4B4" style="cursor: pointer">
+                            <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                            <h3>Add image 04</h3>
+                          </label>
+
+                          <input type="file" id="imageUpload4B4" style="display: none"
+                            (change)="onSelectFile($event,'comicImage4')">
+                        </div>
+                      </div>
+                      <div *ngIf="comicImage4" class="news-item standard-item"
+                        [style.background-image]="this.comicImage4">
+                        <mat-spinner *ngIf="saving"></mat-spinner>
+                        <input type="file" id="imageUpload" style="display: none" #fileInput
+                          (change)="onSelectFile($event,'comicImage4')">
+                        <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                          mat-raised-button (click)="fileInput.click()">Change
+                          Image</button>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+                  <!-- five image templates -->
+
+                  <div class="fiveImage" *ngIf="templateId==='5A'">
+                    <mat-grid-list cols="2" rowHeight="3:1">
+
+                      <mat-grid-tile rowspan="2" *ngIf="!comicImage1">
+                        <label for="imageUpload5A1" style="cursor: pointer">
+                          <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                          <h3>Add image 01</h3>
+                        </label>
+                        <input type="file" id="imageUpload5A1" style="display: none"
+                          (change)="onSelectFile($event,'comicImage1')">
+                      </mat-grid-tile>
+
+                      <mat-grid-tile rowspan="2" class="accent-50" *ngIf="comicImage1"
+                      [style.background-image]="comicImage1">
+                      <mat-spinner *ngIf="saving"></mat-spinner>
+                      <input type="file" id="imageUpload" style="display: none" #fileInput
+                        (change)="onSelectFile($event,'comicImage1')">
+                      <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                        mat-raised-button (click)="fileInput.click()">Change
+                        Image</button>
+                    </mat-grid-tile> 
+
+                    <mat-grid-tile rowspan="3" *ngIf="!comicImage2">
+                      <label for="imageUpload5A2" style="cursor: pointer">
+                        <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                        <h3>Add image 01</h3>
+                      </label>
+                      <input type="file" id="imageUpload5A2" style="display: none"
+                        (change)="onSelectFile($event,'comicImage2')">
+                    </mat-grid-tile>
+
+                    <mat-grid-tile rowspan="3" class="accent-50" *ngIf="comicImage2"
+                    [style.background-image]="comicImage2">
+                    <mat-spinner *ngIf="saving"></mat-spinner>
+                    <input type="file" id="imageUpload" style="display: none" #fileInput
+                      (change)="onSelectFile($event,'comicImage2')">
+                    <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                      mat-raised-button (click)="fileInput.click()">Change
+                      Image</button>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile rowspan="2" *ngIf="!comicImage3">
+                    <label for="imageUpload5A3" style="cursor: pointer">
+                      <mat-icon class="s-64" style="z-index: 100; ">perm_media</mat-icon>
+                      <h3>Add image 01</h3>
+                    </label>
+                    <input type="file" id="imageUpload5A3" style="display: none"
+                      (change)="onSelectFile($event,'comicImage3')">
+                  </mat-grid-tile>
+
+                  <mat-grid-tile rowspan="2" class="accent-50" *ngIf="comicImage3"
+                  [style.background-image]="comicImage3">
+                  <mat-spinner *ngIf="saving"></mat-spinner>
+                  <input type="file" id="imageUpload" style="display: none" #fileInput
+                    (change)="onSelectFile($event,'comicImage3')">
+                  <button class="controlButtons1" *ngIf="actionType==='edit' && !saving" mat-button
+                    mat-raised-button (click)="fileInput.click()">Change
+                    Image</button>
+                </mat-grid-tile>
+
+
+
+                     
+                      <mat-grid-tile rowspan="2">3</mat-grid-tile>
+                      <mat-grid-tile rowspan="3">4</mat-grid-tile>
+                      <mat-grid-tile rowspan="2">5</mat-grid-tile>
+                    </mat-grid-list>
+
+                  </div>
+
+                  <div class="fiveImageB" *ngIf="templateId==='5B'">
+                    <mat-grid-list cols="2" rowHeight="1:1">
+                      <mat-grid-tile>1</mat-grid-tile>
+                      <mat-grid-tile>2</mat-grid-tile>
+                      <mat-grid-tile colspan="2">3</mat-grid-tile>
+                      <mat-grid-tile>2</mat-grid-tile>
+                      <mat-grid-tile>2</mat-grid-tile>
+                    </mat-grid-list>
+
+                  </div>
+
+                  <div class="fiveImageC" *ngIf="templateId==='5C'">
+                    <mat-grid-list cols="2" rowHeight="1:1">
+                      <mat-grid-tile>1</mat-grid-tile>
+                      <mat-grid-tile>2</mat-grid-tile>
+                      <mat-grid-tile colspan="2">3</mat-grid-tile>
+                      <mat-grid-tile>2</mat-grid-tile>
+                      <mat-grid-tile>2</mat-grid-tile>
+                    </mat-grid-list>
+                  </div>
+
+                  <div class="sixImageA" *ngIf="templateId==='6A'">
+                    <mat-grid-list cols="2" rowHeight="1:1">
+                      <mat-grid-tile>1</mat-grid-tile>
+                      <mat-grid-tile>2</mat-grid-tile>
+                      <mat-grid-tile>3</mat-grid-tile>
+                      <mat-grid-tile>2</mat-grid-tile>
+                      <mat-grid-tile>2</mat-grid-tile>
+                      <mat-grid-tile>2</mat-grid-tile>
+                    </mat-grid-list>
+                  </div>
+
+                  <div class="sixImageB" *ngIf="templateId==='6B'">
+
+                  </div>
+
+
+                </div>
+
+
+
+              </div>
+
+            </ng-container>
+
+          </div>
+          <!-- / CONTENT -->
+
+
+        </div>
+        <!-- / CENTER -->
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<h4 class="primary-100" style="padding: 5px;padding-left: 6px; border-top-right-radius:2px; border-top-left-radius: 2px;border-bottom: 1px solid white ">Friend Requests</h4>
+<div class="content-card" style="max-height: 500px;overflow-y: scroll" fusePerfectScrollbar>
+
+  <div *ngFor="let detail of requestPersonDetailsMap | keyvalue" class="card" style="padding: 10px;margin-bottom: 12px;">
+    <div class="profileImage " style="padding: 6px;">
+      <div style="display: inline; ">
+          <img *ngIf="detail.value.profilePicture" class="avatar" [src]="detail.value.profilePicture" alt="">
+          <img *ngIf="!detail.value.profilePicture" class="avatar" [src]="friendProfilePic" alt="">
+          <span class="mat-subheading-2 p-20">{{detail.value.profileName}} </span>
+         
+      </div>
+      
+      <div style="display: inline; margin-top: 0px;float: right;">
+        <span>
+          <!-- <span><mat-icon>{{}}</mat-icon></span> -->
+          <button *ngIf="!accept" mat-button class="accent-300" (click)="acceptRequest(detail.value)">Accept</button>
+          <button [disabled]="accept" *ngIf="accept" mat-button class="accent-300" >Friends</button>
+        </span>
+        <span>
+          <button *ngIf="!accept" class="red-600" mat-button style="margin-left: 10px" (click)="deleteRequest(detail.value)">Cancel</button>
+        </span>
+       
+      </div>
+     
+    </div>
+    <mat-divider></mat-divider>
+  
+  </div>
+ 
+ </div>
+
+<div >
+  <button style="background-color: rgb(97, 96, 96);text-align: center;align-content: center; cursor: pointer" (click)="viewAllRequests()" mat-dialog-close >View More...</button>
+</div>

@@ -1,0 +1,61 @@
+<div class="main">
+
+    <ul class="cards1" >
+        <li class="cards_item1" *ngFor="let post of ImagePostList">
+
+            <div class="media"  *ngIf="post.imageUrl">
+                <div class="card1">
+                    <div class="card_image1" (click)="showImage(post)"><img [src]="post.imageUrl"
+                            title="{{post.message}}"></div>
+                    <!-- <div class="title">{{post.message}}</div> -->
+
+                </div>
+            </div>
+        </li>
+
+
+
+    </ul>
+</div>
+
+<button *ngIf="!othersID " (click)="getAllPictures()" mat-button>Load More</button>
+<button *ngIf="othersID" (click)="getFriendStatus()" mat-button>Others</button>
+
+<!-- <div id="photos-videos" class="p-24">
+    <div class="period">
+
+        <div class="period-media" fxLayout="row wrap">
+            <div class="media">
+                <button class="titleButton" (click)="albumView('profilePicture')"> <img class="preview"
+                        [src]="imageText" title="Profile Pictures">
+                    <div class="title">Profile Pictures</div>
+                </button>
+
+            </div>
+
+            <div class="media">
+                <button class="titleButton" (click)="albumPreview('timelinePics')">
+                    <img class="preview" [src]="ablumPicList[1].src" title="Timeline Pictures">
+                    <div class="title">Timeline Pictures</div>
+                </button>
+            </div>
+
+            <div class="media" *ngFor="let media of albumThumbnails">
+                <button class="titleButton" (click)="albumPreview('timelinePics')">
+                    <img class="preview" [src]="media.imageUrls[0]" title="{{media.albumName}}">
+                    <div class="title">{{media.albumName}}</div>
+                </button>
+            </div>
+        </div>
+ -->
+
+
+
+<!-- <div class="period-media" fxLayout="row wrap">
+            <div class="media" *ngFor="let media of period.media">
+                <img class="preview" [src]="media.preview" title="{{media.title}}">
+                <div class="title">{{media.title}}</div>
+            </div>
+        </div> -->
+<!-- </div>
+</div> -->

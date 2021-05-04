@@ -1,0 +1,94 @@
+<div class="page-layout carded fullwidth tabbed inner-scroll">
+
+    <div class="top-bg accent"></div>
+
+    <div class="center">
+        <mat-progress-bar *ngIf="isSaving"
+            mode="indeterminate">
+        </mat-progress-bar>
+
+        <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
+            <button mat-icon-button class="mr-0 mr-sm-16" (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+
+            <h2 class="m-0">Account Settings</h2>
+
+            <button (click)="goToProfile()" mat-raised-button style="margin-left:750px;margin-bottom: 10px"
+                id="primary-100" class=" pr-20 pl-20 " aria-label="Post Comment">About</button>
+
+        </div>
+
+        <div class="content-card">
+            <mat-toolbar>
+                <span>Profile Picture</span>
+            </mat-toolbar>
+            <div class="content" fusePerfectScrollbar>
+
+
+                <div class="content">
+
+
+                    <div fxLayout="row">
+
+                        <div  class="p-24 contentAll "  fxFlex="70" fxLayout="row">
+
+                            <div style="border: 1px solid black" class="cropper-container" fxLayoutAlign="start start">
+                                <image-cropper [roundCropper]="true" [imageChangedEvent]="imageChangedEvent"
+                                    [maintainAspectRatio]="true" [aspectRatio]="1/1" [resizeToWidth]="200" format="png"
+                                    (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                                    (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+                                </image-cropper>
+                            </div>
+
+
+                            <div class="preview" fxFlex=30>
+                                    <div style="width: 200px; height:200px">
+                                        <img width="200px" height="200px" style="border-radius: 100%" [src]="croppedImage"
+                                            alt="">
+                                    </div>
+                                </div>
+
+
+                        </div>
+
+                        
+
+
+                    </div>
+
+
+
+                    <div class="buttons" align="end" fxLayout="row">
+                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                            <input #fileInput style="display: none" type="file" id="pic1"
+                                (change)="fileChangeEvent($event)" />
+                            <button class="primary-50" (click)="fileInput.click()" mat-raised-button>Change Profile
+                                Picture</button>
+                        </div>
+
+                        <button style="width: 50%; margin-left: 10px;" mat-raised-button (click)="save(fileUploader)"
+                            cdkFocusInitial>Update</button>
+
+                        <button style="width: 50%; margin-left: 10px;" mat-raised-button (click)="goBack()"
+                         >Cancel</button>
+
+                    </div>
+
+
+
+
+
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>

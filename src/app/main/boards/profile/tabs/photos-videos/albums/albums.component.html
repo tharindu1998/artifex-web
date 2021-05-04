@@ -1,0 +1,40 @@
+<div id="photos-videos" class="p-24">
+    <div class="period">
+
+        <div class="period-media" fxLayout="row wrap">
+            <div class="media">
+                <button class="titleButton" (click)="albumView('Profile Pictures',null)"> <img class="preview"
+                        [src]="imageText" title="Profile Pictures">
+                    <div class="title">Profile Pictures</div>
+                </button>
+
+            </div>
+
+          
+            <div class="media" *ngFor="let media of albumThumbnails">
+                <button class="titleButton" (click)="albumView('other',media,media.albumName)">
+                    <img class="preview" [src]="media.imageUrls[0]" title="{{media.albumName}}">
+                    <div class="title">{{media.albumName}}</div>
+                </button>
+            </div>
+
+            <!-- <div class="media" *ngFor="let media of period.media">
+                <img class="preview" [src]="media.preview" title="{{media.title}}">
+                <div class="title">{{media.title}}</div>
+            </div> -->
+        </div>
+
+
+
+
+        <!-- <div class="period-media" fxLayout="row wrap">
+            <div class="media" *ngFor="let media of period.media">
+                <img class="preview" [src]="media.preview" title="{{media.title}}">
+                <div class="title">{{media.title}}</div>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+
+<button mat-button (click)="getOtherALbumThumbs(friendState)">Load More...</button>

@@ -1,0 +1,179 @@
+<mat-toolbar *ngIf="data.postData" class="accent-900">SHARE {{data.postData.type}}</mat-toolbar>
+<mat-toolbar *ngIf="data.type==='NOVEL'" class="accent-900">SHARE {{data.type}}</mat-toolbar>
+<mat-progress-bar *ngIf="onProgress" mode="indeterminate"></mat-progress-bar>
+<br>
+
+
+<div class="row">
+  <div class="column">
+
+
+    <mat-form-field appearance="outline" style="width: 100%;" fxFlex=100>
+      <mat-label>Share your idea here</mat-label>
+      <textarea [(ngModel)]="sharePostDetails.sharedMassege" name="message" id="message" cols="30" rows="10" matInput
+        placeholder="Textarea"></textarea>
+
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label *ngIf="data.postData">Who can see your {{data.postData.type}} when published</mat-label>
+      <mat-label *ngIf="data.type">Who can see your {{data.type}} when published</mat-label>
+      <mat-select [(value)]="selected">
+        <mat-option>None</mat-option>
+        <mat-option value="PUBLIC">Public</mat-option>
+        <mat-option value="ONLY_FRIENDS">Friends only</mat-option>
+        <mat-option value="ONLY_ME">Only me</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button *ngIf="data.postData" mat-raised-button class="primary" (click)="sharePost()">Share
+      {{data.postData.type}}</button>
+    <button *ngIf="data.type" mat-raised-button class="primary" (click)="sharePost()">Share {{data.type}}</button>
+
+  </div>
+
+
+
+
+  <div class="column" style="background-color:#bbb;">
+
+
+    <div style="width: 450px;" class="image primary-50" *ngIf="data.shareType==='shareWriting'"
+    [style.background-image]="coverImage"></div>
+
+
+  <div  style="width: 100%;height: 100%;" fxFlex="40" *ngIf="data.comicTitle" class="image "
+    [style.background-image]="'url(' +data.coverPhoto + ')'">
+  </div>
+
+
+
+
+
+  <div style="width: 100%; height: 100%;" *ngIf="data.postData.type==='NOVEL' " class="image "
+    [style.background-image]="'url(' +data.coverPhoto + ')'"></div>
+
+
+
+  <div style="height: 100%;object-fit: contain;" *ngIf="data.postData.subType==='image' " class="image primary-50"
+    [style.background-image]="'url(' +data.coverPhoto + ')'"></div>
+
+
+
+  <div *ngIf="data.coverPhoto && data.postData.type==='NOVEL' " class="image primary-50"
+    [style.background-image]="'url(' +data.coverPhoto + ')'"></div>
+
+  <div *ngIf="data.postData.imageUrls && data.postData.type==='ALBUM' " class="image primary-50"
+    [style.background-image]="'url(' +data.postData.imageUrls[0] + ')'"></div>
+
+<div style="overflow: hidden;">
+  <div class="artcile fuse-white" *ngIf=" data.postData.subType==='ARTICLE'  && !data.writingDetail"
+  [froalaView]="data.postData.imageUrl"></div>
+</div>
+ 
+
+
+  <div class="video primary-50" fxLayoutAlign="center" *ngIf="data.postData.subType==='video'"> <video
+      fxLayoutAlign="center" width="100%" height="420" [src]="data.postData.imageUrl" controls></video></div>
+  </div>
+</div>
+
+<!-- <div class="content" fxLayout="row">
+
+    <div class="details" fxFlex="50"  fxLayout="column">
+
+     
+          <mat-form-field appearance="outline" style="width: 100%;" fxFlex=100>
+            <mat-label>Share your idea here</mat-label>
+            <textarea [(ngModel)]="sharePostDetails.sharedMassege" name="message" id="message" cols="30" rows="10" matInput
+              placeholder="Textarea"></textarea>
+    
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+      
+    
+      
+        <div>
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label *ngIf="data.postData">Who can see your {{data.postData.type}} when published</mat-label>
+            <mat-label *ngIf="data.type">Who can see your {{data.type}} when published</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option value="PUBLIC">Public</mat-option>
+              <mat-option value="ONLY_FRIENDS">Friends only</mat-option>
+              <mat-option value="ONLY_ME">Only me</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+    
+        <div>
+          <button *ngIf="data.postData" mat-raised-button class="primary" (click)="sharePost()">Share
+            {{data.postData.type}}</button>
+          <button *ngIf="data.type" mat-raised-button class="primary" (click)="sharePost()">Share {{data.type}}</button>
+        </div>
+    
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div fxFlex="40" class="preview" fxLayout="row">
+
+
+    <div style="width: 450px;" class="image primary-50" *ngIf="data.shareType==='shareWriting'"
+      [style.background-image]="coverImage"></div>
+
+
+    <div  style="width: 100%;" fxFlex="40" *ngIf="data.comicTitle" class="image primary-50"
+      [style.background-image]="'url(' +data.coverPhoto + ')'">
+    </div>
+
+
+
+
+
+    <div style="width: 100%;" *ngIf="data.postData.type==='NOVEL' " class="image primary-50"
+      [style.background-image]="'url(' +data.coverPhoto + ')'"></div>
+
+    <div style="width: 100%;" *ngIf="data.postData.subType==='image' " class="image primary-50"
+      [style.background-image]="'url(' +data.coverPhoto + ')'"></div>
+
+
+
+    <div *ngIf="data.coverPhoto && data.postData.type==='NOVEL' " class="image primary-50"
+      [style.background-image]="'url(' +data.coverPhoto + ')'"></div>
+
+    <div *ngIf="data.postData.imageUrls && data.postData.type==='ALBUM' " class="image primary-50"
+      [style.background-image]="'url(' +data.postData.imageUrls[0] + ')'"></div>
+
+
+    <div class="artcile fuse-white" *ngIf=" data.postData.subType==='ARTICLE'  && !data.writingDetail"
+      [froalaView]="data.postData.imageUrl"></div>
+
+
+    <div class="video primary-50" fxLayoutAlign="center" *ngIf="data.postData.subType==='video'"> <video
+        fxLayoutAlign="center" width="100%" height="420" [src]="data.postData.imageUrl" controls></video></div>
+
+
+
+  </div>
+
+
+
+  
+</div> -->

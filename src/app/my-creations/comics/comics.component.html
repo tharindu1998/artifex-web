@@ -1,0 +1,100 @@
+<div id="dashboard-project" class="page-layout simple right-sidebar" fxLayout="row">
+
+  <!-- CENTER -->
+  <div class="center" fusePerfectScrollbar>
+
+    <!-- HEADER -->
+    <div class="header accent p-24 pb-0" fxLayout="column" fxLayoutAlign="space-between">
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <button mat-icon-button class="mr-0 mr-sm-16" (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+
+
+        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+
+
+          <div class="mat-display-1 my-0 my-sm-24 welcome-message">
+            <span>My Comic Collection</span>
+          </div>
+
+        </div>
+
+        
+        <div class="actions" [@animate]="{value:'*',params:{delay:'200ms'}}">
+            <button style="margin-left: 50%;" mat-raised-button aria-label="Follow" (click)="createComic()">
+              <mat-icon class="s-16">photo_album</mat-icon> Create Comic
+            </button>
+            <!-- <button mat-raised-button aria-label="Send Message">
+              <mat-icon class="s-16">perm_media</mat-icon> Upload Novel
+            </button> -->
+          </div>
+      </div>
+      <!-- <div fxLayout="row" fxLayoutAlign="space-between start">
+        <button (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+        </button> 
+        <span class="mat-display-1 my-0 my-sm-24 welcome-message" [@animate]="{value:'*',params:{x:'50px'}}">Welcome
+          back, Charlie!
+        </span>
+
+      
+      </div> -->
+
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+          <div class="cards" fxLayout="row wrap">
+            <div class="card" style="margin: 20px" *ngFor="let comic of comicDetails">
+              <div class="card-preview">
+
+                <div class="fuse-card">
+
+                  <img *ngIf="!comic.coverPhoto" src="assets/images/cards/card3.jpg">
+                  <img style="max-height: 400px; overflow: hidden; width: 100%; height: 100% " *ngIf="comic.coverPhoto"
+                    [src]="comic.coverPhoto">
+
+                  <div class="p-16">
+                    <div class="h1">{{comic.comicName}}</div>
+                    <div class="h4 secondary-text">Author : {{comic.author}}</div>
+                  </div>
+
+                
+                  
+                  <div class="p-8 pt-0" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                      <button *ngIf="!otherProfileID" mat-button mat-raised-button color="accent" (click)="goToEditor(comic,'create')">EDIT</button>
+                      <button mat-button mat-raised-button color="accent" style="margin-left: 6px" (click)="goToEditor(comic,'view')">VIEW</button>
+                      <button  *ngIf="!otherProfileID" mat-button mat-raised-button color="accent" style="margin-left: 6px" (click)="deleteComicSpecific(comic)">DELETE</button>
+                    </div>
+
+
+                  </div>
+
+
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+    </div>
+    <!-- / CONTENT -->
+
+  </div>
+  <!-- / CENTER -->
+
+
+
+</div>

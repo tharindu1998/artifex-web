@@ -1,0 +1,138 @@
+
+
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+   
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg primary"></div>
+    <!-- / TOP BACKGROUND -->
+   
+    <!-- CENTER -->
+    <div class="center">
+        <mat-progress-bar *ngIf="creating" class="primary" width="100%"  mode="indeterminate"></mat-progress-bar>
+        <!-- HEADER -->
+        <div class="header primary" fxLayout="row" fxLayoutAlign="space-between center">
+           
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" (click)="goBack()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+
+
+                    <div class="mat-display-1 my-0 my-sm-24 welcome-message" style="margin-left: -100px;;">
+                        <span>Create new novel</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <!-- <div class="loader" style="position: absolute;z-index: 8888;">
+                    <div class="loader-inner">
+                      <div class="dot-container"><span></span></div>
+                      <div class="dot-container"><span></span></div>
+                      <div class="dot-container"><span></span></div>
+                      <div class="dot-container"><span></span></div>
+                      <div class="dot-container"><span></span></div>
+                    </div>  
+                  </div> -->
+
+                <form name="newWriting" class="product w-100-p" fxLayout="column" fxFlex>
+
+                    <mat-card class="form1">
+
+                        <div class="cont">
+                            <div class="form sign-in">
+
+                                <label>
+                                    <span>Title of the book</span>
+                                    <input name="bookName" [(ngModel)]="WritingDetails.novelName" type="text" required />
+                                </label>
+                                <label>
+                                    <span>Author</span>
+                                    <input name="author" [(ngModel)]="WritingDetails.author" type="text" required />
+                                </label>
+                                <label>
+                                    <span>Description</span>
+                                    <textarea maxlength="650" name="message" [(ngModel)]="WritingDetails.message" id="message" cols="30"
+                                        rows="5"></textarea>
+                                    <!-- <input name="message"  type="text" /> -->
+                                    <!-- <textarea name="message" id="message" cols="30" rows="10"></textarea> -->
+                                </label>
+                                <label>
+                                    <span>Audience</span>
+                                    <mat-select class="selection" id="visibility" [(value)]="selected" 
+                                        placeholder="who can view your post" [(ngModel)]="WritingDetails.visible"
+                                        name="visibility" aria-required="PUBLIC">
+                                        <mat-option value="PUBLIC">Public</mat-option>
+
+                                        <mat-option value="ONLY_FRIENDS">Friends Only</mat-option>
+                                        <mat-option value="ONLY_ME">Only me</mat-option>
+                                    </mat-select>
+                                </label>
+
+                                <button class="button" mat-raised-button type="button" class="submit"
+                                    (click)="saveDetails()">Create
+                                    New Writing</button>
+
+                            </div>
+                            <div class="sub-cont">
+                                <div class="img" [style.background-image]="bookCover">
+                                    <div class="img__text m--up">
+                                        <h2 *ngIf="!WritingDetails.novelName">Book Cover</h2>
+                                        <h2 *ngIf="WritingDetails.novelName">{{WritingDetails.novelName}}</h2>
+                                        <p>Upload your book cover here</p>
+                                    </div>
+
+                                    <label
+                                        style="z-index: 2000; background-color: rgba(0, 0, 0, 0.336);border:1px solid white; height: 36px;text-align: center;vertical-align: middle; font-size: 14px;font-weight: 300;text-transform: uppercase; cursor: pointer;"
+                                        matRipple class="label" for="imageUpload" mat-icon-button aria-label="Add photo"
+                                        matTooltip="Add Photo">
+                                        Upload Cover Photo
+                                    </label>
+                                    <input type="file" id="imageUpload" style="display: none"
+                                        (change)="onSelectFile($event)">
+
+
+                                    <!-- <label class="m--up" style="z-index: 2000;">Upload cover photo</label> -->
+                                    <!-- <button style="background: rgba(0, 0, 0, 0.39);z-index: 1000;" mat-raised-button
+                                        type="button" class="submit" for="imageUpload">Upload Cover Photo</button> -->
+                                    <!-- <input style="z-index: 2000" type="file" id="imageUpload"
+                                            (change)="onSelectFile($event)"> -->
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </mat-card>
+
+                </form>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

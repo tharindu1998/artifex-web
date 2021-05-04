@@ -1,0 +1,97 @@
+<mat-toolbar class="priamry-50">
+    <span>Set Profile Picture</span>
+</mat-toolbar>
+<mat-progress-bar *ngIf="isSaving"
+    mode="indeterminate">
+</mat-progress-bar>
+
+
+<mat-dialog-content >
+
+    <div  id="boxContent" class="p-24  " fxLayout="column" fxFlex="100" fxFlex.gt-sm="55" fxFlex.gt-md="65">
+
+        <div style="border: 1px solid black" class="cropper-container"  fxLayoutAlign="space-between center"   >
+            <image-cropper [roundCropper]="true" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                [aspectRatio]="1/1" [resizeToWidth]="200" format="png" (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+            </image-cropper>
+        </div>
+
+        <div fxLayout="row"    fxLayoutAlign="space-between center" >
+            <input #fileInput style="display: none" type="file"  id="pic1" (change)="fileChangeEvent($event)" />
+            <button (click)="fileInput.click()" mat-button>Change Profile Picture</button>
+<!--    
+         <input type="hidden" id="pic1" name="pic1" [(ngModel)]="userProfilePicture.profilePicture">  -->
+        </div>
+    </div>
+    <!--  
+    <div class="p-24 myContent" fxLayout="row wrap">
+        <div class="timeline-content myContent" fxLayout="column" fxFlex="65" fxFlex.gt-sm="55" fxFlex.gt-md="65">
+
+            <div class="profile-box add-post">
+
+                <div class="form" fxFlex>
+                   
+                    <div id="photosAndvideos" class="p-24">
+                        <div class="period">
+
+
+                            <div class="period-media" fxLayout="row wrap">
+                              
+
+
+
+                                <div class="media">
+                                    <div class="image">
+
+                                        <image-cropper [roundCropper]="true" [imageChangedEvent]="imageChangedEvent"
+                                            [maintainAspectRatio]="true" [aspectRatio]="1/1" [resizeToWidth]="200"
+                                            format="png" (imageCropped)="imageCropped($event)"
+                                            (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                                            (loadImageFailed)="loadImageFailed()"></image-cropper>
+                                    </div>
+                                    <textarea class="textArea" [(ngModel)]="userProfilePicture.caption"
+                                        placeholder="Place caption here..."></textarea>
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="end" fxLayout="colomn" fxLayoutAlign="space-between center">
+
+                        <div fxLayout="row" fxLayoutAlign="start center">
+ 
+                            <input type="file" (change)="fileChangeEvent($event)" />
+ 
+                            <input type="hidden" id="pic1" name="pic1" [(ngModel)]="userProfilePicture.profilePicture">
+
+             
+                        </div>
+                    </footer>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <img id="previewCropped" [src]="croppedImage" />
+
+ -->
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button  (click)="save(fileUploader)" cdkFocusInitial>Update</button>
+</mat-dialog-actions>

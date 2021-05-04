@@ -1,0 +1,1865 @@
+<mat-progress-bar *ngIf="creating"
+    mode="indeterminate">
+</mat-progress-bar>
+<div id="timeline" class="p-24" fxLayout="row wrap">
+
+
+
+
+    <div class="timeline-content" fxLayout="column" fxFlex="65" fxFlex.gt-sm="55" fxFlex.gt-md="65">
+
+
+        <form name="postUpload">
+            <div *ngIf="!intialId" class="profile-box add-post">
+
+                <!-- <div *ngIf="matController" class="form spinner profile-box add-post"
+                    style="flex-direction: row; box-sizing: border-box; display: flex;" fxFlex>
+                    <mat-spinner></mat-spinner>
+                </div> -->
+                <div class="form" fxFlex>
+
+                    <textarea placeholder="Write something.." [(ngModel)]="imagePost.message" name="message"></textarea>
+                    <div *ngIf="uploadedFileType==='ARTICLE'" style="width: 100%" id="sample2" [froalaEditor]="false"
+                        [(froalaModel)]="content">
+
+                    </div>
+                    <div class="uploadedImages row" style=" overflow-x: scroll; height: auto;" *ngIf="urls"
+                        fxLayoutAlign=" center">
+                        <div class="imgsclass row">
+                            <span>
+                                <div *ngIf="uploadedFileType==='image'">
+                                    <img class="imgs row" *ngFor='let url of urls' [src]="url" height="100px"
+                                        width="100px">
+                                </div>
+
+                                <div *ngIf="uploadedFileType==='video'">
+                                    <video class="imgs row video" controls="" *ngFor='let url of urls' class=""
+                                        style="width: 100%; height:auto" [src]="url"></video>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+
+                    <footer class="" fxLayout="row" fxLayoutAlign="start center">
+
+                        <div class="iconsSet" fxLayout="row" fxLayoutAlign="start center">
+
+
+                            <label *ngIf="uploadedFileType!=='ARTICLE'" matRipple class="label" for="imageUpload"
+                                mat-icon-button aria-label="Add photo" matTooltip="Add Photo">
+                                <mat-icon>photo</mat-icon>
+                            </label>
+                            <input type="file" style="display: none" id="imageUpload" (change)="onSelectFile($event)"
+                                multiple>
+
+
+                            <label *ngIf="uploadedFileType!=='ARTICLE'" matRipple class="label" for="videoUpload"
+                                mat-icon-button aria-label="Add video" matTooltip="Add video">
+                                <mat-icon>camera_roll</mat-icon>
+                            </label>
+                            <input type="file" accept="video/mp4" style="display: none" id="videoUpload"
+                                (change)="onSelectVideoFile($event)">
+
+                            <button class="menu" mat-icon-button aria-label="More" (click)="writeArticle('ARTICLE')">
+                                <mat-icon>assignment</mat-icon>
+                            </button>
+                            <!-- <button mat-icon-button aria-label="Mention somebody" for="visibility" matTooltip="Mention somebody">
+                                <mat-icon>person</mat-icon>
+                            </button> -->
+
+                            <!-- <label matRipple class="label"  mat-icon-button  aria-label="Mention somebody" for="visibility" matTooltip="Mention somebody">
+                            <mat-icon>person</mat-icon>
+                            </label> -->
+
+                            <button class="menu" [matMenuTriggerFor]="beforeMenu" mat-icon-button aria-label="More">
+                                <mat-icon>insert_emoticon</mat-icon>
+                            </button>
+                            <mat-menu #beforeMenu="matMenu" yPosition="above">
+                                <div style="width: 500px; padding: 10px;">
+                                    <emoji-mart *ngIf="show" (emojiSelect)="select($event,'post_upload')"></emoji-mart>
+                                </div>
+
+                            </mat-menu>
+
+
+
+                            <button mat-icon-button aria-label="Add location" matTooltip="Add location">
+                                <mat-icon>location_on</mat-icon>
+                            </button>
+
+
+
+                            <mat-select class="selection" id="visibility" [(value)]="selected"
+                                placeholder="who can view your post" [(ngModel)]="imagePost.visible" name="visibility"
+                                aria-required="PUBLIC">
+                                <mat-option value="PUBLIC">Public</mat-option>
+
+                                <mat-option value="ONLY_FRIENDS">Friends Only</mat-option>
+                                <mat-option value="ONLY_ME">Only me</mat-option>
+                            </mat-select>
+
+
+                        </div>
+
+                        <div class="footerButtons">
+                            <button class="clearButton" *ngIf="urls[0]" mat-raised-button color="accent" type="reset"
+                                name="clear" id="clear" (click)="clearImages()">CLEAR</button>
+                            <button *ngIf="!matController" mat-raised-button color="accent" class="postButton"
+                                aria-label="POST" (click)="uploadFiles(uploadedFileType)">POST</button>
+
+                        </div>
+
+                        <!-- <button mat-raised-button color="accent" class="postButton" aria-label="POST"
+                            (click)="getAllNewPosts()">get</button> -->
+
+
+
+
+                    </footer>
+
+
+
+
+                </div>
+
+            </div>
+        </form>
+
+        <div class="cards-list">
+
+            <div class="card 1" (click)="goToCreations('writings')">
+                <div class="card_image"> <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Digital_rain_animation_medium_letters_shine.gif" />
+                </div>
+                <div class="card_title title-white">
+                    <p>Writings</p>
+                </div>
+            </div>
+
+            <div class="card 2" (click)="goToCreations('comics')">
+                <div class="card_image">
+                    <img
+                        src="https://imgc.allpostersimages.com/img/print/posters/justice-league-of-america-generations-group-team-comic-poster_a-G-12925533-0.jpg?w=936&h=640" />
+                </div>
+                <div class="card_title title-white">
+                    <p>Comics</p>
+                </div>
+            </div>
+
+            <!-- <div class="card 3" (click)="goToCreations('drawings')">
+                <div class="card_image">
+                    <img src="https://media.giphy.com/media/10SvWCbt1ytWCc/giphy.gif" />
+                </div>
+                <div class="card_title">
+                    <p>Drawings</p>
+                </div>
+            </div> -->
+
+
+        </div>
+
+
+
+
+        <mat-divider></mat-divider>
+
+        <!-- <div class="test" ></div> -->
+        <div class="timeline-item" *ngIf="matController">
+            <div class="timeline-wrapper1">
+                <div class="timeline-item1">
+                    <div class="animated-background facebook">
+                        <div class="background-masker header-top"></div>
+                        <div class="background-masker header-left"></div>
+                        <div class="background-masker header-right"></div>
+                        <div class="background-masker header-bottom"></div>
+                        <div class="background-masker subheader-left"></div>
+                        <div class="background-masker subheader-right"></div>
+                        <div class="background-masker subheader-bottom"></div>
+                        <div class="background-masker content-top"></div>
+                        <div class="background-masker content-first-end"></div>
+                        <div class="background-masker content-second-line"></div>
+                        <div class="background-masker content-second-end"></div>
+                        <div class="background-masker content-third-line"></div>
+                        <div class="background-masker content-third-end"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 
+        <div id="overlay-1" class="overlay">
+            <a href="#" class="menu fa fa-close fa-2x"></a>
+            <div class="contentZoom content-narrowZoom">
+                <a href="#"> <img src="../../../../../../assets/wallpaper/cards/Origins_of_Marvel_Comics_Vol_1_1.jpg"
+                        alt="five orange birds"></a>
+            </div>
+        </div> -->
+
+        <div class="disable" *ngIf="cont">
+
+
+
+            <div class="full " *ngFor="let post of postDetails.listPostDetails">
+                <!-- Comic Handling -->
+
+                <div *ngIf="post.type==='COMIC'  && mapCreations[post.firstReferencePostId]">
+                    <div class="timeline-item">
+                        <header *ngIf="post.catagory!=='SHARED'" fxLayout="row" fxLayoutAlign="space-between start">
+                            <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                                <img class="avatar" *ngIf="map[post.postOwnerId]"
+                                    [src]="map[post.postOwnerId].profilePicture">
+
+                                <div fxLayout="column">
+                                    <div class="title" style="width: 300px;">
+                                        <!-- {{post.imagePost.postOwnerId}} -->
+
+                                        <span class="username"
+                                            *ngIf="map[post.postOwnerId]">{{map[post.postOwnerId].profileName}}
+                                        </span>
+
+                                        <!-- IIIIDDDD {{mapCreations[post.firstReferencePostId]}} -->
+                                        <!-- <span *ngIf="postType === 'own'">uploaded on timeline</span> -->
+                                        <span
+                                            *ngIf="post.catagory === 'UPLOAD' && mapCreations[post.firstReferencePostId]">published
+                                            the
+                                            a comic <a style="cursor: pointer"
+                                                (click)="viewPublishedComicPage(post.id,post.firstReferencePostId)">
+                                                {{mapCreations[post.firstReferencePostId].post.comicName}}</a> on
+                                            timeline</span>
+
+                                        <!-- <span *ngIf="post.type === 'something'">shared something with you</span>
+                <span *ngIf="post.type === 'video'">shared a video with you</span>
+                <span *ngIf="post.type === 'article'">shared an article with you</span> -->
+                                    </div>
+                                    <div class="time">{{post.createDate | timeago:live}}</div>
+                                    <div style="margin-top: 3px" class="visibilityState primary-300-fg" fxLayout="row">
+                                        <div>
+                                            <mat-icon class="s-12" *ngIf="post.visible==='PUBLIC'">public </mat-icon>
+                                            <mat-icon class="s-12" *ngIf="post.visible==='ONLY_FRIENDS'">
+                                                supervisor_account</mat-icon>
+                                            <mat-icon class="s-12" *ngIf="post.visible==='ONLY_ME'">lock </mat-icon>
+                                        </div>
+
+                                        <div style="margin-left: 5px;">
+                                            {{post.visible | titlecase}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="menu" [matMenuTriggerFor]="beforeMenu" mat-icon-button aria-label="More">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                <button mat-menu-item (click)="permissonMessage(post)">
+                                    <mat-icon>delete</mat-icon> Delete Post
+                                </button>
+
+
+
+                               
+                            </mat-menu>
+
+                        </header>
+
+                        <header *ngIf="post.catagory==='SHARED'" fxLayout="row" fxLayoutAlign="space-between start">
+                            <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                                <img class="avatar" *ngIf="map[post.postOwnerId]"
+                                    [src]="map[post.postOwnerId].profilePicture">
+
+                                <div fxLayout="column">
+                                    <div class="title">
+                                        <!-- {{post.imagePost.postOwnerId}} -->
+
+                                        <span class="username"
+                                            *ngIf="map[post.postOwnerId]">{{map[post.postOwnerId].profileName}}
+                                        </span>
+
+                                        <span *ngIf="post.catagory === 'SHARED'">Shared <a style="cursor: pointer"
+                                                (click)="viewPublishedComicPage(post,post.id,post.firstReferencePostId)">
+                                                {{mapCreations[post.firstReferencePostId].post.comicName}}</a> on
+                                            timeline</span>
+                                        <!-- <span *ngIf="post.type === 'something'">shared something with you</span>
+                <span *ngIf="post.type === 'video'">shared a video with you</span>
+                <span *ngIf="post.type === 'article'">shared an article with you</span> -->
+                                    </div>
+                                    <div class="time">{{post.sharedDateTime | timeago:live}}</div>
+
+                                </div>
+                            </div>
+
+                            <button class="menu" [matMenuTriggerFor]="beforeMenu" mat-icon-button aria-label="More">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                <button mat-menu-item (click)="deletePostShared(post)">
+                                    <mat-icon>delete</mat-icon> Delete Post
+                                </button>
+                               
+                            </mat-menu>
+
+                        </header>
+
+                        <div class="content">
+
+                            <div *ngIf="post.sharedMassege" class="message">
+                                {{post.sharedMassege}}
+
+                            </div>
+
+                            <div *ngIf="!post.sharedMassege" class="message">
+                                {{post.message}}
+
+                            </div>
+
+                            <div class="media">
+                                <div class="categorizing">
+                                    <div class="catgorizeAmount"
+                                        (click)="viewPublishedComicPage(post,post.id,post.firstReferencePostId)">
+                                        <div class="grid ">
+                                            <div class="grid__item_comic  primary-50"
+                                                *ngIf="mapCreations[post.firstReferencePostId].referencePost.comicImage1"
+                                                [style.background-image]="'url(' + mapCreations[post.firstReferencePostId].referencePost.comicImage1 + ')'">
+                                                <!-- Image is {{mapCreations[post.firstReferencePostId].post.comicImage1}} -->
+                                            </div>
+                                            <!-- Image is {{mapCreations[post.id].post.coverPhoto}} -->
+                                            <div class="grid__item_comic  primary-50"
+                                                *ngIf="mapCreations[post.firstReferencePostId].referencePost.comicImage2"
+                                                [style.background-image]="'url(' + mapCreations[post.firstReferencePostId].referencePost.comicImage2 + ')'">
+                                            </div>
+                                            <div class="grid__item_comic  primary-50"
+                                                *ngIf="mapCreations[post.firstReferencePostId].referencePost.comicImage3"
+                                                [style.background-image]="'url(' + mapCreations[post.firstReferencePostId].referencePost.comicImage3 + ')'">
+                                            </div>
+
+
+                                            <div class="grid__item_comic  primary-50"
+                                                *ngIf="mapCreations[post.firstReferencePostId].referencePost.comicImage4"
+                                                [style.background-image]="'url(' +mapCreations[post.firstReferencePostId].referencePost.comicImage4 + ')'">
+                                                <div class="textWrapper"
+                                                    *ngIf="mapCreations[post.firstReferencePostId].referencePost.comicImage5">
+                                                    <b>
+                                                        <h1>Read Comic...</h1>
+                                                    </b>
+                                                    <!-- <h2>{{post.numberOfImages}} Photos</h2> -->
+                                                </div>
+                                            </div>
+
+
+
+                                            <!-- <div *ngIf="mapCreations[post.id]">
+                                                <div class="grid__item_comic accent-200" *ngIf="mapCreations[post.id]"
+                                                    [style.background-image]="'url(' +mapCreations[post.id].referencePost.comicImage4 + ')'">
+                                                    <div class="textWrapper" *ngIf="mapCreations[post.id]">
+                                                        <h1>Read Comic...</h1>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="bookDetails">
+                                    <mat-grid-list class="bookInfo" cols="2" rowHeight="7:1">
+                                        <mat-grid-tile rowspan="5"
+                                            [style.background-image]="'url(' +mapCreations[post.firstReferencePostId].post.coverPhoto + ')'">
+
+                                        </mat-grid-tile>
+                                        <mat-grid-tile class="bookTitles">
+                                            <b>{{mapCreations[post.firstReferencePostId].post.comicName}}</b>
+                                        </mat-grid-tile>
+                                        <mat-grid-tile class="authorNovel">
+                                            {{mapCreations[post.firstReferencePostId].post.author}} </mat-grid-tile>
+
+                                        <mat-grid-tile rowspan="3">
+                                            {{mapCreations[post.firstReferencePostId].post.message}} </mat-grid-tile>
+                                    </mat-grid-list>
+
+                                </div>
+                                <!-- <div *ngIf="post.media.type === 'video'" [innerHtml]="post.media.embed"></div> -->
+
+                            </div>
+
+                            <!-- 
+                            <div *ngIf="post.category==='SHARED'" fxLayout="column" class="article">
+                                <div class="media">
+                                    <div class="categorizing">
+
+
+                                        <div class="catgorizeAmount" (click)="showImage(post)">
+                                            <div class="grid ">
+                                                <div class="grid__item_comic accent-200" *ngIf="mapCreations[post.id]"
+                                                    [style.background-image]="'url(' + mapCreations[post.id].referencePost.comicImage1 + ')'">
+
+                                                </div>
+
+                                                <div class="grid__item_comic accent-200" *ngIf="mapCreations[post.id]"
+                                                    [style.background-image]="'url(' + mapCreations[post.id].referencePost.comicImage2 + ')'">
+                                                </div>
+                                                <div class="grid__item_comic accent-200" *ngIf="mapCreations[post.id]"
+                                                    [style.background-image]="'url(' + mapCreations[post.id].referencePost.comicImage3 + ')'">
+                                                </div>
+
+
+                                                <div class="grid__item_comic accent-200" *ngIf="mapCreations[post.id]"
+                                                    [style.background-image]="'url(' +mapCreations[post.id].referencePost.comicImage4 + ')'">
+                                                    <div class="textWrapper"
+                                                        *ngIf="mapCreations[post.id].referencePost.comicImage4">
+                                                        <b>
+                                                            <h1>Read Comic...</h1>
+                                                        </b>
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div *ngIf="mapCreations[post.id]">
+                                                    <div class="grid__item_comic accent-200"
+                                                        *ngIf="mapCreations[post.id]"
+                                                        [style.background-image]="'url(' +mapCreations[post.id].referencePost.comicImage4 + ')'">
+                                                        <div class="textWrapper"
+                                                            *ngIf="mapCreations[post.id].referencePost.comicImage4">
+                                                            <h1>Read Comic...</h1>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+                                    </div>
+                                </div>
+
+                                <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                                    <img class="avatar" *ngIf="map[post.sharedPersonId]"
+                                        [src]="map[post.sharedPersonId].profilePicture">
+
+                                    <div fxLayout="column">
+                                        <div class="title">
+                                           
+
+                                            <span class="username"
+                                                *ngIf="map[post.sharedPersonId]">{{map[post.sharedPersonId].profileName}}
+                                            </span>
+
+
+                                        </div>
+                                        <div class="time">{{post.createDate | timeago:live}}</div>
+                                        <div class="subtitle">{{post.message}}</div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="title">{{post.article.title}}</div>
+
+                                <div class="excerpt">{{post.article.excerpt}}</div>
+                            </div> -->
+
+
+
+
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <button mat-button class="like-button" (click)="like(post.id)">
+                                    <span *ngIf="!post.liked" fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16">favorite</mat-icon>
+                                        <span>Like</span>&nbsp;<span>({{post.numberOfLikes}})</span>
+                                    </span>
+                                    <span *ngIf="post.liked" fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16" style="color: red">favorite</mat-icon>
+                                        <span>Like</span>&nbsp;<span>({{post.numberOfLikes}})</span>
+                                    </span>
+                                </button>
+                                <button mat-button class="share-button" (click)="getAllCommentsWithPagination(post.id)">
+                                    <span fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16">message</mat-icon>
+                                        <span>Comments</span>&nbsp;<span>({{post.numberOfComments}})</span>
+                                    </span>
+                                </button>
+
+                                <button mat-button class="share-button"
+                                    (click)="showShareDialog(post,mapCreations[post.firstReferencePostId].post.comicName,mapCreations[post.firstReferencePostId].post.coverPhoto)">
+                                    <span fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16">share</mat-icon>
+                                        <span>Share</span>&nbsp;<span>({{post.numberOfShares}})</span>
+                                    </span>
+                                </button>
+
+                               
+
+                            </div>
+                        </div>
+                        <form name="comment">
+                            <footer class="" fxLayout="column" fxLayoutAlign="start start">
+                                <div *ngIf="post.comments" class="comment-count" fxLayout="row"
+                                    fxLayoutAlign="start center">
+                                    {{post.numberOfComments}} comments
+                                    <mat-icon class="s-16">keyboard_arrow_down</mat-icon>
+                                </div>
+                                <div *ngIf="mapComment[post.id]">
+                                    <div class="comment" fxLayout="row" fxFlexFill
+                                        *ngFor="let comment of mapComment[post.id]">
+
+
+                                        <img *ngIf="mapCommentUsers[comment.commentedUserId].profilePicture"
+                                            [src]="mapCommentUsers[comment.commentedUserId].profilePicture"
+                                            class="avatar" />
+
+
+
+                                        <img *ngIf="!mapCommentUsers[comment.commentedUserId].profilePicture"
+                                            src="../../../../../../assets/images/avatars/profile.jpg" class="avatar" />
+
+
+
+
+                                        <div fxLayout="column" fxFlex>
+                                            <div fxLayout="row" fxLayoutAlign="start center">
+                                                <span *ngIf="mapCommentUsers[comment.commentedUserId]"
+                                                    class="username">{{mapCommentUsers[comment.commentedUserId].profileName}}</span>
+                                                <span *ngIf="!mapCommentUsers[comment.commentedUserId]"
+                                                    class="username">ArtifeX
+                                                    User</span>
+                                                <span class="time">{{comment.commentDateTime | timeago:live}}</span>
+                                            </div>
+                                            <div class="message">
+                                                {{comment.comment}}
+                                            </div>
+                                            <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+                                                <a *ngIf="comment.commentedUserId===user.id"
+                                                    (click)="editComment(comment)" class="reply-button">Edit</a>
+                                                <a class="reply-button" *ngIf="comment.commentedUserId===user.id"
+                                                    (click)="permissonMessage(comment,'comment')">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="reply" fxLayout="row" fxFlexFill>
+                                    <img *ngIf="commentUser.userProfilePicture"
+                                        [src]="commentUser.userProfilePicture.imageUrl" class="avatar" />
+
+                                    <form fxFlex>
+
+                                        <textarea [(ngModel)]="postCommentDetails.comment" name="comment"
+                                            placeholder="Add a comment..."></textarea>
+
+
+                                        <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+                                            <!-- <a href="#" class="reply-button">Reply</a>
+                                            <mat-icon fxFlex class="report-button s-16">flag</mat-icon> -->
+
+                                            <button class="menu1" [matMenuTriggerFor]="beforeMenu" mat-icon-button
+                                                aria-label="More">
+                                                <mat-icon>insert_emoticon</mat-icon>
+                                            </button>
+                                            <mat-menu #beforeMenu="matMenu" yPosition="above">
+                                                <div style="width: 500px; padding: 10px;">
+                                                    <emoji-mart *ngIf="show" (emojiSelect)="select($event,post.type)">
+                                                    </emoji-mart>
+
+                                                </div>
+
+                                            </mat-menu>
+                                        </div>
+
+                                        <button (click)="savePostComment(post)" mat-raised-button color="accent"
+                                            class="post-comment-button" aria-label="Post Comment">
+                                            Post Comment
+                                        </button>
+                                    </form>
+                                </div>
+                            </footer>
+                        </form>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+
+
+
+                <!-- Novel Handling -->
+
+                <div *ngIf="post.type==='NOVEL' && mapCreations[post.firstReferencePostId]">
+
+                    <div class="timeline-item">
+
+                        <header fxLayout="row" fxLayoutAlign="space-between start">
+                            <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                                <img class="avatar" *ngIf="map[post.postOwnerId]"
+                                    [src]="map[post.postOwnerId].profilePicture">
+
+                                <div fxLayout="column">
+                                    <div class="title">
+                                        <!-- {{post.imagePost.postOwnerId}} -->
+
+                                        <span class="username"
+                                            *ngIf="map[post.postOwnerId]">{{map[post.postOwnerId].profileName}}
+                                        </span>
+                                        <!-- <span *ngIf="postType === 'own'">uploaded on timeline</span> -->
+                                        <span
+                                            *ngIf="post.catagory === 'UPLOAD' && mapCreations[post.firstReferencePostId]">published
+                                            the writing <a style="cursor: pointer"
+                                                (click)="viewPublishedPage(post.id,post.firstReferencePostId)">
+                                                {{mapCreations[post.firstReferencePostId].post.novelName}}</a> on
+                                            timeline</span>
+                                        <span *ngIf="post.catagory === 'SHARED'">shared the writing <a
+                                                style="cursor: pointer"
+                                                (click)="viewPublishedPage(post.id,post.firstReferencePostId)">
+                                                {{mapCreations[post.firstReferencePostId].post.novelName}} </a> on
+                                            timeline</span>
+                                        <!-- <span *ngIf="post.type === 'something'">shared something with you</span>
+                                                <span *ngIf="post.type === 'video'">shared a video with you</span>
+                                                <span *ngIf="post.type === 'article'">shared an article with you</span> -->
+                                    </div>
+                                    <div class="time" *ngIf="post.createDate">{{post.createDate | timeago:live}}</div>
+                                    <div style="margin-top: 3px" class="visibilityState primary-300-fg" fxLayout="row">
+                                        <div>
+                                            <mat-icon class="s-12" *ngIf="post.visible==='PUBLIC'">public </mat-icon>
+                                            <mat-icon class="s-12" *ngIf="post.visible==='ONLY_FRIENDS'">
+                                                supervisor_account</mat-icon>
+                                            <mat-icon class="s-12" *ngIf="post.visible==='ONLY_ME'">lock </mat-icon>
+                                        </div>
+
+                                        <div style="margin-left: 5px;">
+                                            {{post.visible | titlecase}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="menu" [matMenuTriggerFor]="beforeMenu" mat-icon-button aria-label="More">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                <!-- <button mat-menu-item (click)="deletePost(post.imagePost)">
+                                        <mat-icon>delete</mat-icon> Delete Post
+                                    </button> -->
+                                <button mat-menu-item (click)="permissonMessage(post)">
+                                    <mat-icon>delete</mat-icon> Delete Post
+                                </button>
+
+
+
+                               
+                            </mat-menu>
+                        </header>
+
+                        <div class="content" >
+                            <!-- <div *ngIf="post.message" class="message">
+                                        {{post.message}}
+                                    </div> -->
+                            <div *ngIf="post.sharedMassege" class="message">
+                                {{post.sharedMassege}}
+
+                            </div>
+
+                            <div *ngIf="!post.sharedMassege" class="message">
+                                {{post.message}}
+
+                            </div>
+
+
+                            <div class="primary-50" style="border: 1px solid gray" *ngIf="post.catagory==='SHARED'" fxLayout="row">
+                                <div class="bookCOver" fxFlex='30'
+                                    [style.background-image]="'url(' +mapCreations[post.firstReferencePostId].post.imageUrl + ')'">
+
+                                </div>
+                               
+                                <div class="detailsBook" fxFlex='60' fxLayout="column">
+                                    <div class="bookName" fxLayoutAlign="center">
+                                        <b>{{mapCreations[post.firstReferencePostId].post.novelName}}</b>
+                                    </div>
+
+                                    <div class="author" fxLayoutAlign="center">
+                                        {{mapCreations[post.firstReferencePostId].post.author}}
+                                    </div>
+
+                                    <div class="descBook" fxLayoutAlign="center">
+                                        <p align="justify"> {{mapCreations[post.firstReferencePostId].post.message}}
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div *ngIf="post.catagory!=='SHARED'" fxLayout="row">
+                                <div class="bookCOver" fxFlex='30'
+                                    [style.background-image]="'url(' +mapCreations[post.firstReferencePostId].post.imageUrl + ')'">
+
+                                </div>
+                                <div class="detailsBook" fxFlex='60' fxLayout="column">
+                                    <div class="bookName" fxLayoutAlign="center">
+                                        <b>{{mapCreations[post.firstReferencePostId].post.novelName}}</b>
+                                    </div>
+
+                                    <div class="author" fxLayoutAlign="center">
+                                        {{mapCreations[post.firstReferencePostId].post.author}}
+                                    </div>
+
+                                    <div class="descBook" fxLayoutAlign="center">
+                                        <p align="justify"> {{mapCreations[post.firstReferencePostId].post.message}}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- <div title="Click to view writing" class="contentView" style="overflow: hidden"
+                                    (click)="viewPublishedPage(post,post.id,post.firstReferencePostId)">
+                                    <div *ngIf="mapCreations[post.firstReferencePostId]"
+                                        [froalaView]="mapCreations[post.firstReferencePostId].referencePost.content">
+                                    </div>
+
+                                </div> -->
+                            </div>
+
+                            <div title="Click to view writing" class="contentView profile-box" style="overflow: hidden"
+                                (click)="viewPublishedPage(post,post.id,post.firstReferencePostId)">
+                                <div *ngIf="mapCreations[post.firstReferencePostId]"
+                                    [froalaView]="mapCreations[post.firstReferencePostId].referencePost.content">
+                                </div>
+
+                            </div>
+
+
+
+
+
+                            <!-- <div *ngIf="post.article" fxLayout="column" class="article">
+                                        <div class="media">
+                                            <img [src]="post.article.media.preview">
+                                        </div>
+                                        <div class="title">{{post.article.title}}</div>
+                                        <div class="subtitle">{{post.article.subtitle}}</div>
+                                        <div class="excerpt">{{post.article.excerpt}}</div>
+                                    </div> -->
+
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <button mat-button class="like-button" (click)="like(post.id)">
+                                    <span *ngIf="!post.liked" fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16">favorite</mat-icon>
+                                        <span>Like</span>&nbsp;<span>({{post.numberOfLikes}})</span>
+                                    </span>
+                                    <span *ngIf="post.liked" fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16" style="color: red">favorite</mat-icon>
+                                        <span>Like</span>&nbsp;<span>({{post.numberOfLikes}})</span>
+                                    </span>
+                                </button>
+                                <button mat-button class="share-button" (click)="getAllCommentsWithPagination(post.id)">
+                                    <span fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16">message</mat-icon>
+                                        <span>Comments</span>&nbsp;<span>({{post.numberOfComments}})</span>
+                                    </span>
+                                </button>
+
+                                <button mat-button class="share-button"
+                                    (click)="showNormalPostShare(post,mapCreations[post.firstReferencePostId].post.imageUrl)">
+                                    <span fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16">share</mat-icon>
+                                        <span>Share</span>&nbsp;<span>({{post.numberOfShares}})</span>
+                                    </span>
+                                </button>
+
+                              
+
+                            </div>
+                        </div>
+
+                        <form name="comment">
+                            <footer class="" fxLayout="column" fxLayoutAlign="start start">
+                                <div *ngIf="post.comments" class="comment-count" fxLayout="row"
+                                    fxLayoutAlign="start center">
+                                    {{post.numberOfComments}} comments
+                                    <mat-icon class="s-16">keyboard_arrow_down</mat-icon>
+                                </div>
+                                <div *ngIf="mapComment[post.id]">
+                                    <div class="comment" fxLayout="row" fxFlexFill
+                                        *ngFor="let comment of mapComment[post.id]">
+
+                                        <div>
+
+                                            <img *ngIf="mapCommentUsers[comment.commentedUserId].profilePicture"
+                                                [src]="mapCommentUsers[comment.commentedUserId].profilePicture"
+                                                class="avatar" />
+
+
+
+                                            <img *ngIf="!mapCommentUsers[comment.commentedUserId].profilePicture"
+                                                src="../../../../../../assets/images/avatars/profile.jpg"
+                                                class="avatar" />
+
+
+
+
+                                            <div fxLayout="column" fxFlex>
+                                                <div fxLayout="row" fxLayoutAlign="start center">
+                                                    <span *ngIf="mapCommentUsers[comment.commentedUserId]"
+                                                        class="username">{{mapCommentUsers[comment.commentedUserId].profileName}}</span>
+                                                    <span *ngIf="!mapCommentUsers[comment.commentedUserId]"
+                                                        class="username">ArtifeX
+                                                        User</span>
+                                                    <span class="time">{{comment.commentDateTime | timeago:live}}</span>
+                                                </div>
+                                                <div class="message">
+                                                    {{comment.comment}}
+                                                </div>
+                                                <div class="actions" fxLayout="row"
+                                                    fxLayoutAlign="space-between center">
+                                                    <a *ngIf="comment.commentedUserId===user.id"
+                                                        (click)="editComment(comment)" class="reply-button">Edit</a>
+                                                    <a class="reply-button" *ngIf="comment.commentedUserId===user.id"
+                                                        (click)="permissonMessage(comment,'comment')">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="reply" fxLayout="row" fxFlexFill>
+                                    <img *ngIf="commentUser.userProfilePicture"
+                                        [src]="commentUser.userProfilePicture.imageUrl" class="avatar" />
+
+                                    <form fxFlex>
+
+                                        <textarea [(ngModel)]="postCommentDetails.comment" name="comment"
+                                            placeholder="Add a comment..."></textarea>
+                                        <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+                                            <!-- <a href="#" class="reply-button">Reply</a>
+                                                <mat-icon fxFlex class="report-button s-16">flag</mat-icon> -->
+
+                                            <button class="menu1" [matMenuTriggerFor]="beforeMenu" mat-icon-button
+                                                aria-label="More">
+                                                <mat-icon>insert_emoticon</mat-icon>
+                                            </button>
+                                            <mat-menu #beforeMenu="matMenu" yPosition="above">
+                                                <div style="width: 500px; padding: 10px;">
+                                                    <emoji-mart *ngIf="show" (emojiSelect)="select($event,post.type)">
+                                                    </emoji-mart>
+                                                </div>
+
+                                            </mat-menu>
+                                        </div>
+                                        <button (click)="savePostComment(post)" mat-raised-button color="accent"
+                                            class="post-comment-button" aria-label="Post Comment">
+                                            Post Comment
+                                        </button>
+                                    </form>
+                                </div>
+                            </footer>
+                        </form>
+                    </div>
+
+                    <!-- <h2>{{post.firstReferencePostId}}</h2>
+
+
+                    <p *ngIf="mapCreations[post.firstReferencePostId]">
+                        {{mapCreations[post.firstReferencePostId].post.imageUrl}}</p> -->
+
+
+                    <mat-divider></mat-divider>
+
+
+                </div>
+                <!-- Novel handling ended -->
+                <!-- <div class="full"> -->
+                <div class="imagePost" *ngIf="post.type==='IMAGE_POST'">
+                    <!-- <div class="imagePost"> -->
+                    <div class="timeline-item ">
+
+
+                        <header *ngIf="post.category!=='SHARED'" fxLayout="row" fxLayoutAlign="space-between start">
+                            <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                                <img class="avatar" *ngIf="map[post.postOwnerId]"
+                                    [src]="map[post.postOwnerId].profilePicture">
+
+                                <div fxLayout="column">
+                                    <div class="title">
+                                        <!-- {{post.imagePost.postOwnerId}} -->
+
+                                        <span class="username"
+                                            *ngIf="map[post.postOwnerId]">{{map[post.postOwnerId].profileName}}
+                                        </span>
+                                        <!-- <span *ngIf="postType === 'own'">uploaded on timeline</span> -->
+                                        <span *ngIf="post.category === 'UPLOAD' && post.subType!=='ARTICLE'">uploaded an
+                                            {{post.type | lowercase}} on
+                                            timeline</span>
+
+                                        <span *ngIf="post.category === 'UPLOAD' && post.subType==='ARTICLE'">uploaded an
+                                            {{post.subType | lowercase}} on
+                                            timeline</span>
+                                        <span *ngIf="post.category === 'SHARED'  && post.subType!=='ARTICLE'">shared an
+                                            {{post.type | lowercase}} of {{map[post.sharedPersonId].profileName}} on
+                                            timeline</span>
+                                        <span *ngIf="post.category === 'SHARED'  && post.subType==='ARTICLE'">shared an
+                                            {{post.subType | lowercase}} of {{map[post.sharedPersonId].profileName}} on
+                                            timeline</span>
+                                        <!-- <span *ngIf="post.type === 'something'">shared something with you</span>
+                                <span *ngIf="post.type === 'video'">shared a video with you</span>
+                                <span *ngIf="post.type === 'article'">shared an article with you</span> -->
+                                    </div>
+                                    <div class="time">{{post.createDate | timeago:live:live}}</div>
+                                    <div style="margin-top: 3px" class="visibilityState primary-300-fg" fxLayout="row">
+                                        <div>
+                                            <mat-icon class="s-12" *ngIf="post.visible==='PUBLIC'">public </mat-icon>
+                                            <mat-icon class="s-12" *ngIf="post.visible==='ONLY_FRIENDS'">
+                                                supervisor_account</mat-icon>
+                                            <mat-icon class="s-12" *ngIf="post.visible==='ONLY_ME'">lock </mat-icon>
+                                        </div>
+
+                                        <div style="margin-left: 5px;">
+                                            {{post.visible | titlecase}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="menu" [matMenuTriggerFor]="beforeMenu" mat-icon-button aria-label="More">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                <!-- <button mat-menu-item (click)="deletePost(post.imagePost)">
+                                    <mat-icon>delete</mat-icon> Delete Post
+                                </button> -->
+                                <button *ngIf="post.postOwnerId===user.id" mat-menu-item
+                                    (click)="permissonMessage(post)">
+                                    <mat-icon>delete</mat-icon> Delete Post
+                                </button>
+
+
+
+                           
+                            </mat-menu>
+
+                        </header>
+
+                        <header *ngIf="post.category==='SHARED'" fxLayout="row" fxLayoutAlign="space-between start">
+                            <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                                <img class="avatar" *ngIf="map[post.postOwnerId]"
+                                    [src]="map[post.postOwnerId].profilePicture">
+
+                                <div fxLayout="column">
+                                    <div class="title">
+                                        <!-- {{post.imagePost.postOwnerId}} -->
+
+                                        <span class="username"
+                                            *ngIf="map[post.postOwnerId]">{{map[post.postOwnerId].profileName}}
+                                        </span>
+                                        <!-- <span *ngIf="postType === 'own'">uploaded on timeline</span> -->
+                                        <span *ngIf="post.category === 'UPLOAD' && post.subType!=='ARTICLE'">uploaded an
+                                            {{post.type | lowercase}} on
+                                            timeline</span>
+
+                                        <span *ngIf="post.category === 'UPLOAD' && post.subType==='ARTICLE'">uploaded an
+                                            {{post.subType | lowercase}} on
+                                            timeline</span>
+                                        <span *ngIf="post.category === 'SHARED'  && post.subType!=='ARTICLE'">shared an
+                                            {{post.type | lowercase}} of {{map[post.sharedPersonId].profileName}} on
+                                            timeline</span>
+
+                                        <span *ngIf="post.category === 'SHARED'  && post.subType==='ARTICLE'">shared an
+                                            {{post.subType | lowercase}} of {{map[post.sharedPersonId].profileName}} on
+                                            timeline</span>
+                                        <!-- <span *ngIf="post.type === 'something'">shared something with you</span>
+                                <span *ngIf="post.type === 'video'">shared a video with you</span>
+                                <span *ngIf="post.type === 'article'">shared an article with you</span> -->
+                                    </div>
+                                    <div class="time">{{post.sharedDateTime | timeago:live}}</div>
+
+                                </div>
+                            </div>
+
+                            <button class="menu" [matMenuTriggerFor]="beforeMenu" mat-icon-button aria-label="More">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                <button *ngIf="post.postOwnerId===user.id" mat-menu-item
+                                    (click)="permissonMessage(post)">
+                                    <mat-icon>delete</mat-icon> Delete Post
+                                </button>
+                               
+                            </mat-menu>
+
+                        </header>
+
+
+
+                        <div class="content" fxLayout="column">
+                            <div *ngIf="post.sharedMassage" class="message">
+                                {{post.sharedMassage}}
+
+                            </div>
+
+                            <div *ngIf="!post.sharedMassage" class="message">
+                                {{post.message}}
+
+                            </div>
+
+
+                            <div *ngIf="post.category!=='SHARED' && post.subType==='image'" class="media">
+                                <div class="categorizing">
+
+
+
+                                    <div class="catgorizeAmount" *ngIf="post.numberOfImages===1">
+                                        <!-- <div class="catgorizeAmount"> -->
+                                        <div class="oneImgDivision hover03">
+
+                                            <img class="gotImage" [src]="post.imageUrls[0]" (click)="showImage(post)">
+
+
+                                            <!-- <img class="twoImages"
+                                                src="https://firebasestorage.googleapis.com/v0/b/artifex-c4411.appspot.com/o/posts%2FHigh-Quality-Gaming-Wallpaper-Desktop.jpg?alt=media&token=577aba35-bd16-45d1-853a-70cb53a18c0e"
+                                                (click)="showMessage('https://firebasestorage.googleapis.com/v0/b/artifex-c4411.appspot.com/o/posts%2FHigh-Quality-Gaming-Wallpaper-Desktop.jpg?alt=media&token=577aba35-bd16-45d1-853a-70cb53a18c0e')"> -->
+                                        </div>
+
+                                    </div>
+                                    <div class="catgorizeAmount" *ngIf="post.numberOfImages===2">
+
+                                        <div class="twoImgDivision hover03">
+                                            <img class="twoImages" [src]="post.imageUrls[0]" (click)="showImage(post)">
+
+                                        </div>
+                                        <div class="twoImgDivision hover03">
+                                            <img class="twoImages" [src]="post.imageUrls[1]" (click)="showImage(post)">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="catgorizeAmount" *ngIf="post.numberOfImages===3"
+                                        (click)="showImage(post)">
+                                        <div class="wrapper">
+                                            <div class="nested-wrapper1">
+                                                <div class="1">
+                                                    <img class="imgSide " [src]="post.imageUrls[0]">
+                                                </div>
+                                            </div>
+                                            <div class="nested-wrapper2">
+                                                <div class="2">
+                                                    <img class="imgSide " [src]="post.imageUrls[1]">
+                                                </div>
+                                                <div class="3">
+                                                    <img class="imgSide " [src]="post.imageUrls[2]">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                    </div>
+
+                                    <div class="catgorizeAmount" *ngIf="post.numberOfImages===4"
+                                        (click)="showImage(post)">
+                                        <div class="grid">
+                                            <div *ngFor="let img of post.imageUrls" class="grid__item hover03"
+                                                [style.background-image]="'url(' + img + ')'">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="catgorizeAmount" *ngIf="post.numberOfImages>4"
+                                        (click)="showImage(post)">
+                                        <div class="grid imageGrid">
+                                            <div class="grid__item hover03 "
+                                                [style.background-image]="'url(' + post.imageUrls[0] + ')'">
+                                            </div>
+                                            <div class="grid__item hover03 "
+                                                [style.background-image]="'url(' + post.imageUrls[1] + ')'">
+                                            </div>
+                                            <div class="grid__item hover03 "
+                                                [style.background-image]="'url(' + post.imageUrls[2] + ')'">
+                                            </div>
+                                            <div class="grid__item hover03 tile "
+                                                [style.background-image]="'url(' + post.imageUrls[3] + ')'">
+                                                <div class="textWrapper">
+                                                    <h1>More Images...</h1>
+                                                    <h2>{{post.numberOfImages}} Photos</h2>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- <div *ngIf="post.media.type === 'video'" [innerHtml]="post.media.embed"></div> -->
+
+                            </div>
+
+
+                            <div *ngIf="post.category==='SHARED' && post.subType==='image'" fxLayout="column"
+                                class="article">
+                                <div class="media">
+                                    <div class="categorizing">
+
+
+
+                                        <div class="catgorizeAmount" *ngIf="post.numberOfImages===1">
+                                            <!-- <div class="catgorizeAmount"> -->
+                                            <div class="oneImgDivision hover03">
+
+                                                <img class="gotImage" [src]="post.imageUrls[0]"
+                                                    (click)="showImage(post)">
+
+
+                                                <!-- <img class="twoImages"
+                                                    src="https://firebasestorage.googleapis.com/v0/b/artifex-c4411.appspot.com/o/posts%2FHigh-Quality-Gaming-Wallpaper-Desktop.jpg?alt=media&token=577aba35-bd16-45d1-853a-70cb53a18c0e"
+                                                    (click)="showMessage('https://firebasestorage.googleapis.com/v0/b/artifex-c4411.appspot.com/o/posts%2FHigh-Quality-Gaming-Wallpaper-Desktop.jpg?alt=media&token=577aba35-bd16-45d1-853a-70cb53a18c0e')"> -->
+                                            </div>
+
+                                        </div>
+                                        <div class="catgorizeAmount" *ngIf="post.numberOfImages===2"
+                                            (click)="showImage(post)">
+
+                                            <div class="twoImgDivision hover03">
+                                                <img class="twoImages" [src]="post.imageUrls[0]"
+                                                    (click)="showImage(post.imagePost.imageUrls[0])">
+
+                                            </div>
+                                            <div class="twoImgDivision hover03">
+                                                <img class="twoImages" [src]="post.imageUrls[1]"
+                                                    (click)="showMessage(post.imageUrls[1])">
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="catgorizeAmount" *ngIf="post.numberOfImages===3"
+                                            (click)="showImage(post)">
+                                            <div class="wrapper">
+                                                <div class="nested-wrapper1">
+                                                    <div class="1">
+                                                        <img class="imgSide " [src]="post.imageUrls[0]">
+                                                    </div>
+                                                </div>
+                                                <div class="nested-wrapper2">
+                                                    <div class="2">
+                                                        <img class="imgSide " [src]="post.imageUrls[1]">
+                                                    </div>
+                                                    <div class="3">
+                                                        <img class="imgSide " [src]="post.imageUrls[2]">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+
+                                        <div class="catgorizeAmount" *ngIf="post.numberOfImages===4"
+                                            (click)="showImage(post)">
+                                            <div class="grid">
+                                                <div *ngFor="let img of post.imageUrls" class="grid__item hover03"
+                                                    [style.background-image]="'url(' + img + ')'">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="catgorizeAmount" *ngIf="post.numberOfImages>4"
+                                            (click)="showImage(post.imagePost)">
+                                            <div class="grid imageGrid">
+                                                <div class="grid__item hover03 "
+                                                    [style.background-image]="'url(' + post.imageUrls[0] + ')'">
+                                                </div>
+                                                <div class="grid__item hover03 "
+                                                    [style.background-image]="'url(' + post.imageUrls[1] + ')'">
+                                                </div>
+                                                <div class="grid__item hover03 "
+                                                    [style.background-image]="'url(' + post.imageUrls[2] + ')'">
+                                                </div>
+                                                <div class="grid__item hover03 tile "
+                                                    [style.background-image]="'url(' + post.imageUrls[3] + ')'">
+                                                    <div class="textWrapper">
+                                                        <h1>More Images...</h1>
+                                                        <h2>{{post.numberOfImages}} Photos</h2>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                                    <img class="avatar" *ngIf="map[post.sharedPersonId]"
+                                        [src]="map[post.sharedPersonId].profilePicture">
+
+                                    <div fxLayout="column">
+
+                                        <div class="title">
+                                            <!-- {{post.imagePost.postOwnerId}} -->
+
+                                            <span class="username"
+                                                *ngIf="map[post.sharedPersonId]">{{map[post.sharedPersonId].profileName}}
+                                            </span>
+
+
+                                        </div>
+                                        <div style="margin-left: 15px;" class="time">{{post.createDate | timeago:live}}
+                                        </div>
+                                        <div class="subtitle">{{post.message}}</div>
+                                        <div style="margin-top: 12px; width: 100%"
+                                            class="visibilityState primary-300-fg" fxLayout="row">
+                                            <div>
+                                                <mat-icon class="s-12" *ngIf="post.visible==='PUBLIC'">public
+                                                </mat-icon>
+                                                <mat-icon class="s-12" *ngIf="post.visible==='ONLY_FRIENDS'">
+                                                    supervisor_account</mat-icon>
+                                                <mat-icon class="s-12" *ngIf="post.visible==='ONLY_ME'">lock </mat-icon>
+                                            </div>
+
+                                            <div style="margin-left: 5px;">
+                                                {{post.visible | titlecase}}
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                <!-- <div class="title">{{post.article.title}}</div>
+                                
+                                <div class="excerpt">{{post.article.excerpt}}</div> -->
+                            </div>
+
+                            <div class="fuse-white articleContainer profile-box" *ngIf="post.subType==='ARTICLE'">
+                                <div class="artcileViewer">
+                                    <div [froalaView]="post.imageUrl"></div>
+
+                                </div>
+                            </div>
+
+                            <div class="videoContainer" *ngIf="post.subType==='video'">
+
+
+                                <video width="100%" height="420px" [src]="post.imageUrl" controls></video>
+
+                            </div>
+
+
+
+
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <button mat-button class="like-button" (click)="like(post.id)">
+                                    <span *ngIf="!post.liked" fxLayout="row" fxLayoutAlign="start center">
+                                        <!-- <mat-icon class="s-16">favorite</mat-icon> -->
+                                        <mat-icon class="s-16">favorite</mat-icon>
+                                        <span>Like</span>&nbsp;<span>({{post.numberOfLikes}})</span>
+                                    </span>
+                                    <span *ngIf="post.liked" fxLayout="row" fxLayoutAlign="start center">
+                                        <!-- <mat-icon class="s-16" style="color: red">favorite</mat-icon> -->
+                                        <mat-icon class="s-16" style="color: red">favorite</mat-icon>
+                                        <span>Like</span>&nbsp;<span>({{post.numberOfLikes}})</span>
+                                    </span>
+                                </button>
+                                <button mat-button class="share-button" (click)="getAllCommentsWithPagination(post.id)">
+                                    <span fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16">message</mat-icon>
+                                        <span>Comments</span>&nbsp;<span>({{post.numberOfComments}})</span>
+                                    </span>
+                                </button>
+
+                                <button mat-button class="share-button"
+                                    (click)="showNormalPostShare(post,post.imageUrls[0])">
+                                    <span fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16">share</mat-icon>
+                                        <span>Share</span>&nbsp;<span>({{post.numberOfShares}})</span>
+                                    </span>
+                                </button>
+
+                            </div>
+                        </div>
+                        <form name="comment">
+                            <footer class="" fxLayout="column" fxLayoutAlign="start start">
+                                <div *ngIf="post.comments" class="comment-count" fxLayout="row"
+                                    fxLayoutAlign="start center">
+                                    {{post.numberOfComments}} comments
+                                    <mat-icon class="s-16">keyboard_arrow_down</mat-icon>
+                                </div>
+                                <div *ngIf="mapComment[post.id]">
+                                    <div class="comment" fxLayout="row" fxFlexFill
+                                        *ngFor="let comment of mapComment[post.id]">
+
+                                        <div *ngIf="comment">
+
+                                            <img *ngIf="mapCommentUsers[comment.commentedUserId].profilePicture"
+                                                [src]="mapCommentUsers[comment.commentedUserId].profilePicture"
+                                                class="avatar" />
+
+
+
+                                            <img *ngIf="!mapCommentUsers[comment.commentedUserId].profilePicture"
+                                                src="../../../../../../assets/images/avatars/profile.jpg"
+                                                class="avatar" />
+
+
+
+
+                                            <div fxLayout="column" fxFlex>
+                                                <div fxLayout="row" fxLayoutAlign="start center">
+                                                    <span *ngIf="mapCommentUsers[comment.commentedUserId]"
+                                                        class="username">{{mapCommentUsers[comment.commentedUserId].profileName}}</span>
+                                                    <span *ngIf="!mapCommentUsers[comment.commentedUserId]"
+                                                        class="username">ArtifeX
+                                                        User</span>
+                                                    <span class="time">{{comment.commentDateTime | timeago:live}}</span>
+                                                </div>
+                                                <div class="message">
+                                                    {{comment.comment}}
+                                                </div>
+                                                <div class="actions" fxLayout="row"
+                                                    fxLayoutAlign="space-between center">
+                                                    <a *ngIf="comment.commentedUserId===user.id"
+                                                        (click)="editComment(comment)" class="reply-button">Edit</a>
+                                                    <a class="reply-button" *ngIf="comment.commentedUserId===user.id"
+                                                        (click)="permissonMessage(comment,'comment')">Delete</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="reply" fxLayout="row" fxFlexFill>
+                                    <img *ngIf="commentUser.userProfilePicture"
+                                        [src]="commentUser.userProfilePicture.imageUrl" class="avatar" />
+
+                                    <form fxFlex>
+
+                                        <textarea [(ngModel)]="postCommentDetails.comment" name="comment"
+                                            placeholder="Add a comment...">
+
+                                        </textarea>
+
+                                        <div class="actions" fxLayout="row" fxLayoutAlign="space-between ">
+                                            <!-- <a href="#" class="reply-button">Reply</a>
+                                                <mat-icon fxFlex class="report-button s-16">flag</mat-icon> -->
+
+                                            <button class="menu1" [matMenuTriggerFor]="beforeMenu" mat-icon-button
+                                                aria-label="More">
+                                                <mat-icon>insert_emoticon</mat-icon>
+                                            </button>
+                                            <mat-menu #beforeMenu="matMenu" yPosition="above">
+                                                <div style="width: 500px; padding: 10px;">
+                                                    <emoji-mart *ngIf="show" (emojiSelect)="select($event,post.type)">
+                                                    </emoji-mart>
+                                                </div>
+
+                                            </mat-menu>
+                                        </div>
+                                        <button (click)="savePostComment(post)" mat-raised-button color="accent"
+                                            class="post-comment-button" aria-label="Post Comment">
+                                            Post Comment
+                                        </button>
+                                    </form>
+                                </div>
+                            </footer>
+                        </form>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+                <!-- ALBUM************************************************ -->
+
+                <div class="albumPost" *ngIf="post.type==='ALBUM'">
+
+                    <div class="timeline-item ">
+
+                        <header *ngIf="post.category==='SHARED'" fxLayout="row" fxLayoutAlign="space-between start">
+                            <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                                <img class="avatar" *ngIf="map[post.postOwnerId]"
+                                    [src]="map[post.postOwnerId].profilePicture">
+
+                                <div fxLayout="column">
+                                    <div class="title">
+                                        <span class="username"
+                                            *ngIf="map[post.postOwnerId]">{{map[post.postOwnerId].profileName}} shared an album to the timeline</span>
+                                        <!-- <span *ngIf="post.type === 'post'">posted on your timeline</span>
+                                        <span *ngIf="post.type === 'something'">shared something with you</span>
+                                        <span *ngIf="post.type === 'video'">shared a video with you</span>
+                                        <span *ngIf="post.type === 'article'">shared an article with you</span> -->
+                                    </div>
+                                    <div class="time">{{post.createDateTime | timeago:live}}</div>
+                                </div>
+                            </div>
+
+                            <button class="menu" [matMenuTriggerFor]="beforeMenu" mat-icon-button aria-label="More">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                <button mat-menu-item (click)="permissonMessage(post)">
+                                    <mat-icon>delete</mat-icon> Delete Post
+                                </button>
+
+                                
+                            </mat-menu>
+
+                        </header>
+
+                        <header *ngIf="post.category!=='SHARED'" fxLayout="row" fxLayoutAlign="space-between start">
+                            <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                                <img class="avatar" *ngIf="map[post.postOwnerId]"
+                                    [src]="map[post.postOwnerId].profilePicture">
+
+                                <div fxLayout="column">
+                                    <div class="title">
+                                        <span class="username"
+                                            *ngIf="map[post.postOwnerId]">{{map[post.postOwnerId].profileName}} uploaded an album to the timeline</span>
+                                        <!-- <span *ngIf="post.type === 'post'">posted on your timeline</span>
+                                        <span *ngIf="post.type === 'something'">shared something with you</span>
+                                        <span *ngIf="post.type === 'video'">shared a video with you</span>
+                                        <span *ngIf="post.type === 'article'">shared an article with you</span> -->
+                                    </div>
+                                    <div class="time">{{post.createDateTime | timeago:live}}</div>
+                                </div>
+                            </div>
+
+                            <button class="menu" [matMenuTriggerFor]="beforeMenu" mat-icon-button aria-label="More">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                <button mat-menu-item (click)="permissonMessage(post)">
+                                    <mat-icon>delete</mat-icon> Delete Post
+                                </button>
+
+                             
+                            </mat-menu>
+
+                        </header>
+
+                        <div class="content">
+
+
+                            <div *ngIf="post.sharedMassege" class="message">
+                                {{post.sharedMassege}}
+
+                            </div>
+
+                            <div *ngIf="!post.sharedMassege" class="message">
+                                {{post.message}}
+
+                            </div>
+
+                            <div *ngIf="post.category!=='SHARED'" class="media">
+                                <div class="catgorizeAmount" *ngIf="post.numberOfImages===3" (click)="showImage(post)">
+                                    <div class="wrapper">
+                                        <div class="nested-wrapper1">
+                                            <div class="1">
+                                                <img class="imgSide " [src]="post.imageUrls[0]">
+                                            </div>
+                                        </div>
+                                        <div class="nested-wrapper2">
+                                            <div class="2">
+                                                <img class="imgSide " [src]="post.imageUrls[1]">
+                                            </div>
+                                            <div class="3">
+                                                <img class="imgSide " [src]="post.imageUrls[2]">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="catgorizeAmount" *ngIf="post.numberOfImages===4" (click)="showImage(post)">
+                                    <div class="grid">
+                                        <div *ngFor="let img of post.imageUrls" class="grid__item hover03"
+                                            [style.background-image]="'url(' + img + ')'">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="catgorizeAmount" *ngIf="post.numberOfImages>4" (click)="showImage(post)">
+                                    <div class="grid imageGrid">
+                                        <div class="grid__item hover03 tile1"
+                                            [style.background-image]="'url(' + post.imageUrls[0] + ')'">
+                                        </div>
+                                        <div class="grid__item hover03 tile1"
+                                            [style.background-image]="'url(' + post.imageUrls[1] + ')'">
+                                        </div>
+                                        <div class="grid__item hover03 tile1"
+                                            [style.background-image]="'url(' + post.imageUrls[2] + ')'">
+                                        </div>
+                                        <div class="grid__item hover03 tile "
+                                            [style.background-image]="'url(' + post.imageUrls[3] + ')'">
+                                            <div class="textWrapper">
+                                                <h1 style="font-size: 58px">{{post.albumName}}</h1>
+                                                <!-- <h1>More Images...</h1> -->
+                                                <h2>{{post.numberOfImages}} Photos</h2>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                </div>
+                                <!-- <div *ngIf="post.media.type === 'video'" [innerHtml]="post.media.embed"></div> -->
+                            </div>
+
+                            <div *ngIf="post.category==='SHARED'" fxLayout="column" class="article">
+                                <div class="media">
+                                    <div class="catgorizeAmount" *ngIf="post.numberOfImages===3"
+                                        (click)="showImage(post)">
+                                        <div class="wrapper">
+                                            <div class="nested-wrapper1">
+                                                <div class="1">
+                                                    <img class="imgSide " [src]="post.imageUrls[0]">
+                                                </div>
+                                            </div>
+                                            <div class="nested-wrapper2">
+                                                <div class="2">
+                                                    <img class="imgSide " [src]="post.imageUrls[1]">
+                                                </div>
+                                                <div class="3">
+                                                    <img class="imgSide " [src]="post.imageUrls[2]">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="catgorizeAmount" *ngIf="post.numberOfImages===4"
+                                        (click)="showImage(post)">
+                                        <div class="grid">
+                                            <div *ngFor="let img of post.imageUrls" class="grid__item hover03"
+                                                [style.background-image]="'url(' + img + ')'">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="catgorizeAmount" *ngIf="post.numberOfImages>4"
+                                        (click)="showImage(post)">
+                                        <div class="grid imageGrid">
+                                            <div class="grid__item hover03 tile1"
+                                                [style.background-image]="'url(' + post.imageUrls[0] + ')'">
+                                            </div>
+                                            <div class="grid__item hover03 tile1"
+                                                [style.background-image]="'url(' + post.imageUrls[1] + ')'">
+                                            </div>
+                                            <div class="grid__item hover03 tile1"
+                                                [style.background-image]="'url(' + post.imageUrls[2] + ')'">
+                                            </div>
+                                            <div class="grid__item hover03 tile "
+                                                [style.background-image]="'url(' + post.imageUrls[3] + ')'">
+                                                <div class="textWrapper">
+                                                    <h1 style="font-size: 58px">{{post.albumName}}</h1>
+                                                    <!-- <h1>More Images...</h1> -->
+                                                    <h2>{{post.numberOfImages}} Photos</h2>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                                    <img class="avatar" *ngIf="map[post.sharedPersonId]"
+                                        [src]="map[post.sharedPersonId].profilePicture">
+
+                                    <div fxLayout="column">
+
+                                        <div class="title">
+                                            <!-- {{post.imagePost.postOwnerId}} -->
+
+                                            <span class="username"
+                                                *ngIf="map[post.sharedPersonId]">{{map[post.sharedPersonId].profileName}}
+                                            </span>
+
+
+                                        </div>
+                                        <div style="margin-left: 15px;" class="time primary-300-fg">
+                                            {{post.createDateTime | timeago:live}}</div>
+                                        <div class="subtitle">{{post.message}}</div>
+                                        <div style="margin-top: 12px; width: 100%"
+                                            class="visibilityState primary-300-fg" fxLayout="row">
+                                            <div>
+                                                <mat-icon class="s-12" *ngIf="post.visible==='PUBLIC'">public
+                                                </mat-icon>
+                                                <mat-icon class="s-12" *ngIf="post.visible==='ONLY_FRIENDS'">
+                                                    supervisor_account</mat-icon>
+                                                <mat-icon class="s-12" *ngIf="post.visible==='ONLY_ME'">lock </mat-icon>
+                                            </div>
+
+                                            <div style="margin-left: 5px;">
+                                                {{post.visible | titlecase}}
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <button mat-button class="like-button" (click)='like(post.id)'>
+                                    <span *ngIf="!post.liked" fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16">favorite</mat-icon>
+                                        <span>Like</span>&nbsp;<span>({{post.numberOfLikes}})</span>
+                                    </span>
+                                    <span *ngIf="post.liked" fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16" style="color: red">favorite</mat-icon>
+                                        <span>Like</span>&nbsp;<span>({{post.numberOfLikes}})</span>
+                                    </span>
+                                </button>
+                                <button mat-button class="share-button" (click)="getAllCommentsWithPagination(post.id)">
+                                    <span fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16">message</mat-icon>
+                                        <span>Comments</span>&nbsp;<span>({{post.numberOfComments}})</span>
+                                    </span>
+                                </button>
+                                <button mat-button class="share-button"
+                                    (click)="showNormalPostShare(post,post.imageUrls[0])">
+                                    <span fxLayout="row" fxLayoutAlign="start center">
+                                        <mat-icon class="s-16">share</mat-icon>
+                                        <span>Share</span>&nbsp;
+                                        <span>({{post.numberOfShares}})</span>
+                                    </span>
+                                </button>
+
+                            </div>
+                        </div>
+
+                        <footer class="" fxLayout="column" fxLayoutAlign="start start">
+                            <div *ngIf="post.comments" class="comment-count" fxLayout="row"
+                                fxLayoutAlign="start center">
+                                {{post.numberOfComments}} comments
+                                <mat-icon class="s-16">keyboard_arrow_down</mat-icon>
+                            </div>
+
+
+                            <div *ngIf="mapComment[post.id]">
+                                <div class="comment" fxLayout="row" fxFlexFill
+                                    *ngFor="let comment of mapComment[post.id]">
+
+
+                                    <img *ngIf="mapCommentUsers[comment.commentedUserId].profilePicture"
+                                        [src]="mapCommentUsers[comment.commentedUserId].profilePicture"
+                                        class="avatar" />
+
+
+
+                                    <img *ngIf="!mapCommentUsers[comment.commentedUserId].profilePicture"
+                                        src="../../../../../../assets/images/avatars/profile.jpg" class="avatar" />
+
+
+
+
+                                    <div fxLayout="column" fxFlex>
+                                        <div fxLayout="row" fxLayoutAlign="start center">
+                                            <span *ngIf="mapCommentUsers[comment.commentedUserId]"
+                                                class="username">{{mapCommentUsers[comment.commentedUserId].profileName}}</span>
+                                            <span *ngIf="!mapCommentUsers[comment.commentedUserId]"
+                                                class="username">ArtifeX
+                                                User</span>
+                                            <span class="time">{{comment.commentDateTime | timeago:live}}</span>
+                                        </div>
+                                        <div class="message">
+                                            {{comment.comment}}
+                                        </div>
+                                        <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+                                            <a *ngIf="comment.commentedUserId===user.id" (click)="editComment(comment)"
+                                                class="reply-button">Edit</a>
+                                            <a class="reply-button" *ngIf="comment.commentedUserId===user.id"
+                                                (click)="permissonMessage(comment,'comment')">Delete</a>
+                                            <mat-icon fxFlex class="report-button s-16">flag</mat-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="reply" fxLayout="row" fxFlexFill>
+                                <img *ngIf="commentUser.userProfilePicture"
+                                    [src]="commentUser.userProfilePicture.imageUrl" class="avatar" />
+
+                                <form fxFlex>
+
+                                    <textarea [(ngModel)]="postCommentDetails.comment" name="comment"
+                                        placeholder="Add a comment..."></textarea>
+                                    <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+                                        <!-- <a href="#" class="reply-button">Reply</a>
+                                            <mat-icon fxFlex class="report-button s-16">flag</mat-icon> -->
+
+                                        <button class="menu1" [matMenuTriggerFor]="beforeMenu" mat-icon-button
+                                            aria-label="More">
+                                            <mat-icon>insert_emoticon</mat-icon>
+                                        </button>
+                                        <mat-menu #beforeMenu="matMenu" yPosition="above">
+                                            <div style="width: 500px; padding: 10px;">
+                                                <emoji-mart *ngIf="show" (emojiSelect)="select($event,post.type)">
+                                                </emoji-mart>
+                                            </div>
+
+                                        </mat-menu>
+                                    </div>
+                                    <button (click)="savePostComment(post)" mat-raised-button color="accent"
+                                        class="post-comment-button" aria-label="Post Comment">
+                                        {{CommentOperator}} Comment
+                                    </button>
+                                </form>
+                            </div>
+                        </footer>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+
+            </div>
+
+        </div>
+        <button mat-raised-button (click)="loadMore()">Load More</button>
+    </div>
+    <div class="timeline-sidebar" fxLayout="column" fxFlex="35">
+
+        <div class="advertisementCages " fxLayout="column" style="position:-webkit-sticky ;position: sticky;top: 0">
+            <div class="landscape primary-50" fxLayout="column" [style.background-image]="land1"
+                style="  background-size: contain;background-position: center;background-repeat: no-repeat">
+
+
+
+
+
+            </div>
+            <div>
+                <a style="font-size: 11px" (click)="getAllAdevrtisements()">Create ad</a>
+            </div>
+            <div class="portrait primary-50" [style.background-image]="ads"
+                style="background-size: contain;background-position: center;background-repeat: no-repeat">
+                <!-- <div>
+                    <img *ngIf="ads" [src]="ads" alt="">
+                </div> -->
+
+            </div>
+            <div>
+                <a style="font-size: 11px" (click)="getAllAdevrtisements()">Create ad</a>
+            </div>
+            <div class="landscape primary-50" fxLayout="column" [style.background-image]="land2"
+                style="background-size: contain;background-position: center;background-repeat: no-repeat">
+
+
+            </div>
+            <div>
+                <a style="font-size: 11px" (click)="getAllAdevrtisements()">Create ad</a>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!-- 
+    <div class="timeline-sidebar" fxLayout="column" fxFlex="100" fxFlex.gt-sm="45" fxFlex.gt-md="35">
+
+        <div class="profile-box latest-activity" fxLayout="column">
+
+            <header class="accent" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="title">Latest Activity</div>
+                <div class="more secondary-text">See All</div>
+            </header>
+
+            <div class="content" fxLayout="row wrap">
+                <div class="activities">
+                    <div class="activity" fxLayout="row" fxLayoutAlign="start start"
+                        *ngFor="let activity of timeline.activities">
+                        <img [src]="activity.user.avatar" class="avatar" alt="{{activity.user.name}}" />
+
+                        <div fxLayout="column">
+                            <div>
+                                <span class="username">{{activity.user.name}}</span>
+                                <span class="message"> {{activity.message}}</span>
+                            </div>
+                            <span class="time secondary-text">{{activity.time}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+           
+            <img class="advertisement" style="width: 100%" [src]="imgAd" alt="ad1">
+        </div>
+    </div> -->
+
+</div>
+
+
+
+<!-- ********************************************************** -->
+<!-- <div image-dimensions>
+    <img src="../../../../../../assets/wallpaper/cards/2d-darfting-pressure-vessel.jpg" alt="image" title="image" />
+    <p>Image Dimensions: {{ dimensions }}</p>
+</div> -->
+<!-- <div class="test" *ngIf="postDetails">
+    <div *ngIf="postDetails[0].imagePost">
+        {{postDetails[0].imagePost.id}}
+        {{postDetails[0].imagePost.createDate}}
+
+        <img [src]="postDetails[0].imagePost.imagePosts[0].imageUrl">
+        <img [src]="postDetails[0].imagePost.imagePosts[1].imageUrl">
+    </div>
+</div> -->
+
+<!-- <div class="test" *ngFor="let post of postDetails">
+    {{post.imagePost.id}}
+
+    <div *ngIf="post.imagePost.numberOfImages>1">
+        <div *ngFor="let img of post.imagePost.imagePosts">
+            <img [src]="img.imageUrl">
+        </div>
+    </div>
+
+
+    <div *ngIf="post.imagePost.numberOfImages===1">
+        <div>
+            <img [src]="post.imagePost.imageUrl">
+        </div>
+    </div>
+
+
+</div> -->

@@ -1,0 +1,71 @@
+<mat-toolbar>
+    <span>Say something...</span>
+    <button mat-raised-button mat-dialog-close (click)="close()"><mat-icon style="float: right">close</mat-icon></button>
+</mat-toolbar>
+
+<footer *ngIf="creation" class="" fxLayout="column" fxLayoutAlign="start start">
+    <div *ngIf="mapComment[creation.id]" class="comment-count" fxLayout="row" fxLayoutAlign="start center">
+        {{data.commentCount}} comments
+        <mat-icon (click)="getComments()" style="cursor: pointer" class="s-16">keyboard_arrow_down</mat-icon>
+    </div>
+    <div class="commentViewer" *ngIf="mapComment[creation.id]" fusePerfectScrollbar>
+        <div class="comment" fxLayout="row" fxFlexFill *ngFor="let comment of mapComment[creation.id]">
+
+
+            <img *ngIf="mapCommentUsers[comment.commentedUserId]" [src]="mapCommentUsers[comment.commentedUserId].profilePicture" class="avatar" />
+
+
+
+            <img *ngIf="!mapCommentUsers[comment.commentedUserId]" src="../../../../../../assets/images/avatars/profile.jpg" class="avatar" />
+
+
+
+
+            <div fxLayout="column" fxFlex>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <span *ngIf="mapCommentUsers[comment.commentedUserId]" class="username">{{mapCommentUsers[comment.commentedUserId].profileName}}</span>
+                    <span *ngIf="!mapCommentUsers[comment.commentedUserId]" class="username">Artifex
+                      User</span>
+
+                    <span class="time">{{comment.commentDateTime | timeago:live}}</span>
+                </div>
+                <div class="message">
+                    {{comment.comment}}
+                </div>
+                <div class="actions" fxLayout="row" fxLayoutAlign="start space-between ">
+                    <a style="cursor: pointer" *ngIf="comment.commentedUserId===userId" (click)="editComment(comment)" class="reply-button">Edit</a>
+                    <a style="cursor: pointer;" *ngIf="comment.commentedUserId===userId" (click)="warningMessagePopup(comment,'comment')" class="reply-button">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button *ngIf="nextPageComments!==0" (click)="getComments()" mat-button>Load More...</button>
+
+    <div class="reply" fxLayout="row" fxFlexFill>
+        <!-- <img *ngIf="commentUser.userProfilePicture" [src]="commentUser.userProfilePicture.imageUrl" class="avatar" /> -->
+
+        <form fxFlex>
+
+            <textarea [(ngModel)]="text" name="comment" placeholder="Add a comment..."></textarea>
+            <!-- <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+                  <a href="#" class="reply-button">Reply</a>
+                  <mat-icon fxFlex class="report-button s-16">flag</mat-icon>
+
+                  <button class="menu" [matMenuTriggerFor]="beforeMenu" mat-icon-button
+                      aria-label="More">
+                      <mat-icon>insert_emoticon</mat-icon>
+                  </button>
+                  <mat-menu #beforeMenu="matMenu" yPosition="above">
+                      <div style="width: 500px; padding: 10px;">
+                          <emoji-mart *ngIf="show"
+                              (emojiSelect)="select($event,post.type)"></emoji-mart>
+                      </div>
+
+                  </mat-menu>
+              </div> -->
+            <button (click)="savePostComment()" mat-raised-button color="accent" class="post-comment-button" aria-label="Post Comment">
+              Post Comment
+          </button>
+        </form>
+    </div>
+</footer>

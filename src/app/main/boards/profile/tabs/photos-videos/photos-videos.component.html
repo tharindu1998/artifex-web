@@ -1,0 +1,51 @@
+<div id="photos-videos" class="p-24">
+
+    <mat-toolbar    class="toolbar-color">
+        <mat-toolbar-row class="primary-50">
+
+
+            <div class="actions" [@animate]="{value:'*',params:{delay:'200ms'}}">
+
+                <span class="mat-headline">
+                    <mat-icon>photo_album</mat-icon> Photos
+                </span>
+
+            </div>
+
+            <span class="spacer"></span>
+
+            <div class="actions" [@animate]="{value:'*',params:{delay:'200ms'}}">
+                <button mat-raised-button aria-label="Follow" (click)="createAlbum()">
+                    <mat-icon class="s-16">photo_album</mat-icon> Create Album
+                </button>
+               
+            </div>
+
+
+        </mat-toolbar-row>
+
+    </mat-toolbar>
+
+
+    <mat-divider class="divider"></mat-divider>
+
+
+    <mat-tab-group mat-stretch-tabs *ngIf="index == 2" [selectedIndex]="0">
+
+        <mat-tab label="Pictures">
+            <ng-template matTabContent>
+                <pictures></pictures>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Albums"> <app-albums></app-albums> </mat-tab>
+        <mat-tab label="Videos"> <stories></stories>  </mat-tab>
+        <!-- <mat-tab label="Stories"> Stories </mat-tab>
+        <mat-tab label="Shared Albums "> Shared Albums </mat-tab> -->
+    </mat-tab-group>
+
+
+
+
+
+</div>

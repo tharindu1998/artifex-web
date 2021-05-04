@@ -1,0 +1,97 @@
+[
+    {
+        "id" : "0001",
+        "comic_name": "Spider Man",
+        "comicOwnerId": "0010",
+        "description": "This is a comic series which you can enjoy it as same as watching the TV series. Enjoy and tell your feedbacks",
+        "author": "Stan Lee",
+        "cover_photo": "https://static-ca.ebgames.ca/images/products/725283/3max.jpg"
+
+        
+    },
+    {
+        "id" : "0002",
+        "comic_name": "Bat Man",
+        "comicOwnerId": "0010",
+        "description": "This is a comic series which you can enjoy it as same as watching the TV series. Enjoy and tell your feedbacks",
+        "author": "Stan Lee",
+        "cover_photo": "https://www.sideshow.com/storage/product-images/200518/batman_dc-comics_gallery_5c4bcdd2aea98.jpg"
+
+        
+    },
+    {
+        "id" : "0003",
+        "comic_name": "Flash",
+        "comicOwnerId": "0010",
+        "description": "This is a comic series which you can enjoy it as same as watching the TV series. Enjoy and tell your feedbacks",
+        "author": "Stan Lee",
+        "cover_photo": "https://imgix.ranker.com/user_node_img/50019/1000366858/original/the-flash-blitz-comic-book-series-photo-u1?w=650&q=50&fm=pjpg&fit=crop&crop=faces"
+
+        
+    },
+    {
+        "id" : "0004",
+        "comic_name": "Marvel Comics",
+        "comicOwnerId": "0010",
+        "description": "This is a comic series which you can enjoy it as same as watching the TV series. Enjoy and tell your feedbacks",
+        "author": "Stan Lee",
+        "cover_photo": "https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/Item/697755/697755._SX360_QL80_TTD_.jpg"
+
+        
+    },
+    {
+        "id" : "0005",
+        "comic_name": "Titan",
+        "comicOwnerId": "0010",
+        "description": "This is a comic series which you can enjoy it as same as watching the TV series. Enjoy and tell your feedbacks",
+        "author": "Stan Lee",
+        "cover_photo": "https://i.pinimg.com/474x/3f/b8/5f/3fb85fc60574b6ee482ecfc38a6af9c5--the-titans-comic-covers.jpg"
+
+        
+    },
+    {
+        "id" : "0006",
+        "comic_name": "Flash",
+        "comicOwnerId": "0010",
+        "description": "This is a comic series which you can enjoy it as same as watching the TV series. Enjoy and tell your feedbacks",
+        "author": "Stan Lee",
+        "cover_photo": "http://1.bp.blogspot.com/-P3dscG650CI/U7Ggx8ZDwYI/AAAAAAAAKeE/U-5QwwEahOQ/s1600/091712_ralphazham02+(1).jpg"
+
+        
+    },
+    {
+        "id" : "0007",
+        "comic_name": "Flash",
+        "comicOwnerId": "0010",
+        "description": "This is a comic series which you can enjoy it as same as watching the TV series. Enjoy and tell your feedbacks",
+        "author": "Stan Lee",
+        "cover_photo": "https://imgix.ranker.com/user_node_img/50019/1000366858/original/the-flash-blitz-comic-book-series-photo-u1?w=650&q=50&fm=pjpg&fit=crop&crop=faces"
+
+        
+    },
+    {
+        "id" : "0008",
+        "comic_name": "Flash",
+        "comicOwnerId": "0010",
+        "description": "This is a comic series which you can enjoy it as same as watching the TV series. Enjoy and tell your feedbacks",
+        "author": "Stan Lee",
+        "cover_photo": "https://www.sideshow.com/storage/product-images/200518/batman_dc-comics_gallery_5c4bcdd2aea98.jpg"
+
+        
+    },
+    {
+        "id" : "0009",
+        "comic_name": "Flash",
+        "comicOwnerId": "0010",
+        "description": "This is a comic series which you can enjoy it as same as watching the TV series. Enjoy and tell your feedbacks",
+        "author": "Stan Lee",
+        "cover_photo": "https://imgix.ranker.com/user_node_img/50019/1000366858/original/the-flash-blitz-comic-book-series-photo-u1?w=650&q=50&fm=pjpg&fit=crop&crop=faces"
+
+        
+    }
+
+
+
+
+    
+]

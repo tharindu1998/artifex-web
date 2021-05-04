@@ -1,0 +1,135 @@
+<div id="dashboard-analytics" class="page-layout blank" fxLayout="column">
+    <mat-toolbar>Analytics and Insight</mat-toolbar>
+    <div class="main-widget" style="width:100% ">
+
+        <div class="position-relative p-24 blue-600" fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxLayout="column" fxLayoutAlign="start start">
+                <span class="h2">Total Uploads</span>
+                <span class="h5 secondary-text">Total number of Uploads done through out the year </span>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <div class="py-8 px-12 border-radius-2 line-height-1 mr-8 cursor-pointer" (click)="widget1SelectedYear = '2021'" [ngClass]="{'blue-700': widget1SelectedYear === '2016'}">
+                    2021
+                </div>
+                <!-- <div class="py-8 px-12 border-radius-2 line-height-1 mr-8 cursor-pointer" (click)="widget1SelectedYear = '2017'"
+          [ngClass]="{'blue-700': widget1SelectedYear === '2017'}">
+          2018
+        </div>
+        <div class="py-8 px-12 border-radius-2 line-height-1 cursor-pointer" (click)="widget1SelectedYear = '2018'"
+          [ngClass]="{'blue-700': widget1SelectedYear === '2018'}">
+          2017
+        </div> -->
+            </div>
+        </div>
+
+        <div class="position-relative h-256 pb-16 blue-600" *ngIf="x">
+            <!-- <canvas baseChart [datasets]="widgets.widget1.datasets[widget1SelectedYear]" [labels]="widgets.widget1.labels" -->
+            <canvas baseChart [datasets]="value2021[widget1SelectedYear]" [labels]="widgets.widget1.labels" [colors]="widgets.widget1.colors" [options]="widgets.widget1.options" [chartType]="widgets.widget1.chartType">
+      </canvas>
+        </div>
+
+    </div>
+
+    <div fxLayout="row" fxFlex=100>
+
+        <div fxFlex=100 fxLayout="column" fxLayoutAlign="center">
+
+            <div>
+                <div *ngFor="let year of keys">
+                    <mat-toolbar class="year primary-50"> Creations in {{year}}</mat-toolbar>
+
+                    <div fxLayout="row" fxLayoutAlign="center">
+                        <div class="month primary-100" fxFlex=50>
+                            Month
+                        </div>
+                        <div class="uploadAmount primary-100" fxFlex=50>
+                            Number of Uploads - {{year}}
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div fxLayout="column" *ngFor="let numberOfUploads of dataSet;let i = index">
+                        <div fxLayout="row" fxFlex=50>
+                            <div class="month" fxFlex=50>
+                                {{months[i]}}
+                            </div>
+                            <div fxFlex=50 class="uploadAmount">
+                                {{numberOfUploads}}
+                            </div>
+
+                        </div>
+                        <mat-divider>
+                        </mat-divider>
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="advertisement " fxFlex=100 fxLayout="column">
+        <div>
+            <mat-toolbar class="primary-50" fxLayoutAlign="center center">
+                <span>Advertisement Summary</span>
+            </mat-toolbar>
+
+            <div fxLayout="column">
+                <div fxLayout="row" fxFlex=100>
+                    <h3 fxFlex=20 fxLayoutAlign="center center" class="subTopic">Advertisement</h3>
+                    <h3 fxFlex=20 fxLayoutAlign="center center" class="subTopic">Advertised Date</h3>
+                    <h3 fxFlex=20 fxLayoutAlign="center center" class="subTopic">Expiry Date</h3>
+                    <h3 fxFlex=20 fxLayoutAlign="center center" class="subTopic">Amount</h3>
+                    <h3 fxFlex=20 fxLayoutAlign="center center" class="subTopic">Payment Status</h3>
+
+                </div>
+                <mat-divider>
+                </mat-divider>
+
+                <div fxLayout="column">
+                    <div fxLayout="row" fxFlex=100 style="height: 150px" *ngFor="let ad of advertisementDetails">
+                        <div fxFlex=20 class="adGraphic" [style.background-image]="'url(' +ad.adGraphic + ')'">
+
+                        </div>
+                        <div fxFlex=20 fxLayoutAlign="center center">
+                            {{ad.createdDateTime | date}}
+                        </div>
+                        <div fxLayout="column" fxFlex=20 fxLayoutAlign="center center">
+                            <p>{{ad.expireDate | date}}</p>
+                            <p>( {{ad.expireDate | timeago}} )</p>
+                        </div>
+
+                        <div fxFlex=20 fxLayoutAlign="center center">
+                            <h2>{{ad.amount | currency:'$'}}</h2>
+                        </div>
+
+                        <div fxLayout="column" fxFlex=20 fxLayoutAlign="center center">
+                            <div>
+                                <h3 *ngIf="ad.paid">Paid</h3>
+                                <h3 *ngIf="!ad.paid">Pending ...</h3>
+                            </div>
+                            <div *ngIf="!ad.paid" (click)="payNow(ad)">
+                                <form action="https://sandbox.payhere.lk/pay/o407b3080" method="get"><input name="submit" type="image" src="https://www.payhere.lk/downloads/images/pay_with_payhere.png" style="width:200px;" value="Buy Now"></form>
+                            </div>
+
+                        </div>
+
+                        <mat-divider class="m-12">
+                        </mat-divider>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>

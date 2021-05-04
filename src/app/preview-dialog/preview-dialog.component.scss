@@ -1,0 +1,166 @@
+.reply {
+  form {
+    textarea {
+      width:auto;
+      min-height: 72px;
+      padding: 8px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      border: 1px solid;
+      border-radius: 4px;
+    }
+  }
+}
+
+.imagepost{
+  // background-color: red;
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+  height: 600px
+}
+.close{
+ border-radius: 2%
+//  margin-top: -5%;
+}
+
+
+.commentViewer {
+  overflow: scroll;
+}
+
+
+
+
+.article{
+  height: 600px
+}
+
+.step-navigation {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  bottom: 32px;
+  max-width: 500px;
+  padding: 0 24px;
+  width: 100%;
+  left: 65%;
+  transform: translateX(-50%);
+
+  .previous {
+      margin-right: auto;
+  }
+
+  .next,
+  .done {
+      margin-left: auto;
+  }
+}
+.visibility{
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+}
+
+.closeButton{
+  border-radius: 100%;
+  background-color: transparent;
+  border: none
+}
+
+.closeButton:hover{
+  background-color: rgba(155, 154, 154, 0.507)
+}
+footer {
+  padding: 16px;
+  overflow: scroll;
+  .comment-count {
+    margin-bottom: 16px;
+    cursor: pointer;
+
+    mat-icon {
+      margin-left: 8px;
+    }
+  }
+
+  .comment {
+    margin-bottom: 24px !important;
+    overflow: scroll;
+    .username {
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .actions {
+      margin-top: 8px;
+
+      .reply-button {
+        margin-right: 6px;
+        cursor: pointer;
+      }
+
+      .report-button {
+        margin: 0;
+        cursor: pointer;
+      }
+    }
+  }
+
+  
+}
+
+
+
+content{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.imageHolder{
+ 
+  max-height: 650px;
+
+  // background-color: rgba(255, 0, 0, 0.274)
+
+.imageContainer{
+  // width: 100%;
+  // height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat
+  // background-color: blue;
+}
+
+
+
+}
+
+.pubHolder{
+  // width: 35%;
+  // background-color: rgba(0, 0, 255, 0.295);
+  max-height: 600px;
+  .description{
+    padding: 12px;
+  }
+
+  .pubButton{
+    width: 100%
+  }
+}
+
+
+
+header {
+  padding: 16px 0 8px 16px;
+
+  .title {
+      font-weight: 600;
+
+      .username {
+          margin-right: 2px;
+      }
+  }
+}

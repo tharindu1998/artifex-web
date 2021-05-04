@@ -1,0 +1,151 @@
+<div id="dashboard-project" class="page-layout simple right-sidebar" fxLayout="row">
+
+  <!-- CENTER -->
+  <div class="center" fusePerfectScrollbar>
+
+    <!-- HEADER -->
+    <!-- <div class="header accent p-24 pb-0" fxLayout="column" fxLayoutAlign="space-between">
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <button mat-icon-button class="mr-0 mr-sm-16" (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+
+
+        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+
+
+          <div class="mat-display-1 my-0 my-sm-24 welcome-message">
+            <span *ngIf="!otherProfileId">My Writing Collection</span>
+            <span *ngIf="otherProfileId">Writing Collection</span>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div> -->
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class=" "> 
+      <!-- <mat-tab-group dynamicHeight>
+
+        <mat-tab label="Novels"> -->
+
+
+          <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom [@animateStagger]="{value:'50'}">
+            <mat-toolbar>
+              
+                <button mat-icon-button class="mr-0 mr-sm-16" (click)="goBack()">
+                    <mat-icon>arrow_back</mat-icon>
+                  </button>
+                  <span *ngIf="!otherProfileId">My Writing Collection</span>
+                  <span *ngIf="otherProfileId">Writing Collection</span>
+              <div class="actions" style="float: left;position: absolute;margin-left: 82%;" [@animate]="{value:'*',params:{delay:'200ms'}}">
+                <button mat-raised-button aria-label="Follow" (click)="newWriting()">
+                  <mat-icon class="s-16">photo_album</mat-icon> Create Novel
+                </button>
+                <!-- <button mat-raised-button aria-label="Send Message" style="margin-left: 6px;">
+                  <mat-icon class="s-16">perm_media</mat-icon> Upload Novel
+                </button> -->
+              </div>
+            </mat-toolbar>
+
+            <!-- WIDGET 1 -->
+            <fuse-widget *ngFor="let thumbnail of writingDetails;let i = index"  style=" align-self: flex-start"
+              [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="row wrap" fxFlex="100" fxFlex.gt-xs="50"fxFlex.gt-lg="25"
+              fxFlex.gt-md="25">
+
+              <!-- Front -->
+              <div class="fuse-widget-front" style="border: 2px solid rgba(255, 255, 255, 0.438); border-style: outset">
+                <div class="pl-16 pr-8 py-16 set" fxLayout="row" fxLayoutAlign="space-between center">
+
+                  <h3>{{thumbnail.novelName}}</h3>
+
+                  <button mat-icon-button fuseWidgetToggle aria-label="more">
+                    <mat-icon>swap_horiz</mat-icon>
+                  </button>
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="center center"
+                  style="background-color: rgba(175, 175, 175, 0.473)">
+
+
+                  <a (click)="viewWriting(thumbnail)" style="cursor: pointer"> <img [src]="thumbnail.imageUrl"
+                      alt="thumbnail" style="height: 200px; vertical-align: middle"></a>
+
+
+
+
+
+                </div>
+
+                <div class="p-16 border-top" fxLayout="row" fxLayoutAlign="start center">
+                  <span class="h4 secondary-text text-truncate">
+                    By :
+                  </span>
+                  <span class="h4 ml-8">
+                    {{thumbnail.author}}
+                  </span>
+
+
+                  <br>
+
+
+                </div>
+
+                <div class="operation-buttons">
+                    <button class="accent-100" mat-raised-button (click)='editWriting(thumbnail)'>
+                        <mat-icon>edit</mat-icon>
+    
+                      </button>
+                      <button class="accent-200" mat-raised-button (click)="viewWriting(thumbnail)">
+                        <mat-icon>library_books</mat-icon>
+    
+                      </button>
+                      <button class="accent-300" mat-raised-button (click)="deleteWarning(thumbnail)">
+                        <mat-icon>delete</mat-icon>
+    
+                      </button>
+                </div>
+
+
+              </div>
+              <!-- / Front -->
+
+              <!-- Back -->
+              <div class="fuse-widget-back p-16 pt-32">
+                <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button" aria-label="Flip widget">
+                  <mat-icon class="s-16">close</mat-icon>
+                </button>
+
+                <div>
+                  {{thumbnail.message}}
+                </div>
+              </div>
+              <!-- / Back -->
+
+            </fuse-widget>
+            <!-- / WIDGET 1 -->
+
+
+
+
+          </div>
+          <!-- / WIDGET GROUP -->
+
+        <!-- </mat-tab>
+
+
+      </mat-tab-group> -->
+
+    </div>
+    <!-- / CONTENT -->
+
+  </div>
+  <!-- / CENTER -->
+
+
+
+</div>
